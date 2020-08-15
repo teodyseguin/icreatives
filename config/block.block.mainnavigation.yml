@@ -1,0 +1,30 @@
+uuid: 51e53a9d-fc00-4350-bd55-6066b84aa28d
+langcode: en
+status: true
+dependencies:
+  config:
+    - system.menu.main
+  module:
+    - system
+  theme:
+    - particle
+id: mainnavigation
+theme: particle
+region: sidebar_first
+weight: 0
+provider: null
+plugin: 'system_menu_block:main'
+settings:
+  id: 'system_menu_block:main'
+  label: 'Main navigation'
+  provider: system
+  label_display: '0'
+  level: 1
+  depth: 0
+  expand_all_items: false
+visibility:
+  request_path:
+    id: request_path
+    pages: "/dashboard\r\n/inbox\r\n/invoice\r\n/products"
+    negate: false
+    context_mapping: {  }
