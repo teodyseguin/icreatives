@@ -27,7 +27,7 @@
     {{ breadcrumb }}
     <section class="row flex flex-row">
       <aside class="layout-sidebar-first bg-yelloworange min-h-screen w-1/6 font-sansserif text-white" role="complementary">
-        <h5 class="text-white text-center font-sansserif uppercase mt-10 mb-1 ml-6 mr-6">
+        <h5 class="text-white text-center font-sansserif font-bold uppercase mt-10 mb-1 ml-6 mr-6">
           Imaginarium Creatives
         </h5>
 
@@ -39,13 +39,130 @@
       <div class="layout-content w-5/6">
         <div class="top-details flex w-full justify-end border-b border-gray-400">
           <div class="flex text-right mr-10 align-middle justify-center">
-            <svg class="flex h-8 w-8 mt-4" viewBox="0 0 20 20" fill="currentColor" class="mail w-6 h-6"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path></svg>
+            <svg class="flex h-8 w-8 mt-4" viewBox="0 0 20 20" fill="#ccc" class="mail w-6 h-6"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path></svg>
             <div class="name inline-block ml-4 mr-4 mt-5">Jary Roxas</div>
             <div class="avatar inline-block h-10 w-10 bg-yelloworange rounded-full mt-3"></div>
           </div>
         </div>
 
-        {{ content }}
+        <div class="flex flex-col flex-no-wrap mb-10">
+          <div>
+            <h2 class="p-5">Metrics group 1</h2>
+            <div class="flex flex-row">
+              {% include '@atoms/rounded-box/_rounded-box.twig' with {
+                "title": "Question 1",
+                "count": 35,
+                "shadow": true
+              } %}
+              {% include '@atoms/rounded-box/_rounded-box.twig' with {
+                "title": "Question 2",
+                "count": 15,
+                "shadow": true
+              }%}
+              {% include '@atoms/rounded-box/_rounded-box.twig' with {
+                "title": "Question 3",
+                "count": 8,
+                "shadow": true
+              } %}
+              {% include '@atoms/rounded-box/_rounded-box.twig' with {
+                "title": "Question 4",
+                "count": 3,
+                "shadow": true
+              } %}
+            </div>
+          </div>
+
+          <div>
+            <h2 class="p-5">Metrics group 2</h2>
+            <div class="flex flex-row">
+              {% include '@atoms/rounded-box/_rounded-box.twig' with {
+                "title": "Question 5",
+                "count": 10,
+                "shadow": true
+              } %}
+              {% include '@atoms/rounded-box/_rounded-box.twig' with {
+                "title": "Question 6",
+                "count": 56,
+                "shadow": true
+              } %}
+              {% include '@atoms/rounded-box/_rounded-box.twig' with {
+                "title": "Question 7",
+                "count": 100,
+                "shadow": true
+              } %}
+              {% include '@atoms/rounded-box/_rounded-box.twig' with {
+                "title": "Question 8",
+                "count": 5,
+                "shadow": true
+              } %}
+            </div>
+          </div>
+        </div>
+
+        <div class="flex flex-row">
+          <div class="flex-grow">
+            <h2 class="p-5">Facebook performance</h2>
+            <div class="flex">
+              <div class="flex flex-col flex-grow">
+                {% include '@atoms/rounded-box/_rounded-box.twig' with {
+                  "title": "Total Facebook Followers",
+                  "count": 5
+                } %}
+                {% include '@atoms/rounded-box/_rounded-box.twig' with {
+                  "title": "Total Facebook Reach",
+                  "count": 5
+                } %}
+                {% include '@atoms/rounded-box/_rounded-box.twig' with {
+                  "title": "Total Facebook Impressions",
+                  "count": 5
+                } %}
+                {% include '@atoms/rounded-box/_rounded-box.twig' with {
+                  "title": "Link Clicks",
+                  "count": 5
+                } %}
+              </div>
+
+              <div class="flex flex-col flex-grow">
+                {% include '@atoms/rounded-box/_rounded-box.twig' with {
+                  "title": "Engagement rate",
+                  "count": 5
+                } %}
+                {% include '@atoms/rounded-box/_rounded-box.twig' with {
+                  "title": "Top 5 contents",
+                  "count": 5
+                } %}
+              </div>
+            </div>
+          </div>
+
+          <div class="flex-grow">
+            <h2 class="p-5">Facebook audience</h2>
+            <div class="flex">
+              <div class="flex flex-col flex-grow">
+                {% include '@atoms/rounded-box/_rounded-box.twig' with {
+                  "title": "Gender and Age of Followers",
+                  "count": 5
+                } %}
+                {% include '@atoms/rounded-box/_rounded-box.twig' with {
+                  "title": "Gender and Age of Audience Reached",
+                  "count": 5
+                } %}
+              </div>
+
+              <div class="flex flex-col flex-grow">
+                {% include '@atoms/rounded-box/_rounded-box.twig' with {
+                  "title": "Location of Followers",
+                  "count": 5
+                } %}
+                {% include '@atoms/rounded-box/_rounded-box.twig' with {
+                  "title": "Location of Audience Reached",
+                  "count": 5
+                } %}
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
     </section>
   </main>

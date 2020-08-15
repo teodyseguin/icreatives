@@ -1,0 +1,18 @@
+{#
+/**
+ * @file
+ * rounded-box
+ *
+ * Available variables for rounded-box:
+ *  - rounded_box.variable_name [variable_type]: Description of the variable. Example below.
+ *  - rounded_box.invert [bool]: When set, colors will be inverted for light display on dark background.
+ */
+#}
+{% if shadow == true %}
+  {% set shadow = "shadow-lg" %}
+{% endif %}
+
+<div class="rounded-box flex-grow border rounded m-5 p-5 {{ shadow }}">
+  <div class="title">{{ title }}</div>
+  <div class="count text-3xl">{{ count }}</div>
+</div>
