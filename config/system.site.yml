@@ -1,0 +1,14 @@
+uuid: b03320fa-3af5-4bb7-b148-a60c9fb7de3b
+name: icreatives
+mail: teodyseguin@gmail.com
+slogan: ''
+page:
+  403: ''
+  404: ''
+  front: /node
+admin_compact_mode: false
+weight_select_max: 100
+langcode: en
+default_langcode: en
+_core:
+  default_config_hash: yTxtFqBHnEWxQswuWvkjE8mKw2t8oKuCL1q8KnfHuGE
