@@ -1,0 +1,9 @@
+invoice_demo_block:
+  title: Invoice Component
+  content:
+    lead: Add a quick description here.
+    summary: Add code examples here using <code>html code syntax</code>
+
+invoice:
+  example_var: This is an example var
+

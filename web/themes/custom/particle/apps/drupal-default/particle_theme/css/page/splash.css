@@ -1,0 +1,20 @@
+/**
+ * @file
+ * splash.css
+ */
+
+/**
+ * Splash screen.
+ */
+ html.splash {
+  position: relative;
+  height: 100%;
+  background-color: var(--yelloworange);
+}
+
+html.splash .splash-screen {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

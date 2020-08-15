@@ -1,0 +1,19 @@
+ic_core.splash_screen:
+  path: 'splash'
+  defaults:
+    _controller: '\Drupal\ic_core\Controller\IcCoreController::splash'
+    _title: 'Splash screen'
+  requirements:
+    _role: 'authenticated'
+  options:
+    no_cache: TRUE
+
+ic_core.dashboard:
+  path: 'dashboard'
+  defaults:
+    _controller: '\Drupal\ic_core\Controller\IcCoreController::dashboard'
+    _title: 'Dashboard'
+  requirements:
+    _role: 'authenticated'
+  options:
+    no_cache: TRUE

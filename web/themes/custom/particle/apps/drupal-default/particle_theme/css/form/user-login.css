@@ -1,0 +1,69 @@
+/**
+ * @file
+ * user-login.css
+ */
+
+/**
+ * Login form wrapper default style.
+ */
+.login-form-wrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50%;
+  height: 400px;
+  font-family: var(--font-family-sans-serif);
+}
+
+.login-form-wrapper label {
+  display: none;
+}
+
+.login-form-wrapper .js-form-item-persistent-login {
+  text-align: left;
+}
+
+.login-form-wrapper .js-form-item-persistent-login label {
+  display: inline-block;
+}
+
+.login-form-wrapper .js-form-item-persistent-login .input--checkbox {
+  border: 1px solid #ccc;
+}
+
+.login-form-wrapper .description {
+  display: none;
+}
+
+.login-form-wrapper input[type="text"],
+.login-form-wrapper input[type="password"] {
+  width: 100%;
+  padding: 15px;
+  border: 1px solid #a0aec0;
+  border-radius: 30px;
+  background-color: transparent;
+}
+
+.login-form-wrapper input[type="text"]:focus,
+.login-form-wrapper input[type="password"]:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.login-form-wrapper .form-item {
+  margin: 20px 0;
+}
+
+.login-form-wrapper .input--submit {
+  color: white;
+  cursor: pointer;
+  padding: 10px 35px;
+  border: none;
+  border-radius: 20px;
+  background-color: #bb4d0e;
+}
+
+.login-form-wrapper .input--submit:focus {
+  box-shadow: none;
+}

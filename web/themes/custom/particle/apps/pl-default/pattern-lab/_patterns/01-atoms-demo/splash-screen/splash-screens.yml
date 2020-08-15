@@ -1,0 +1,9 @@
+splash_screen_demo_block:
+  title: Splash Screen Component
+  content:
+    lead: Add a quick description here.
+    summary: Add code examples here using <code>html code syntax</code>
+
+splash_screen:
+  example_var: This is an example var
+

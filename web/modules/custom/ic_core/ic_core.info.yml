@@ -1,0 +1,5 @@
+name: 'Imaginarium Creatives Core'
+type: module
+description: 'Custom module for Imaginarium Creatives'
+core: 8.x
+package: 'Custom'

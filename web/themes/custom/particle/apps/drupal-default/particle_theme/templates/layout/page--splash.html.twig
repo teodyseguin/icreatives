@@ -1,0 +1,44 @@
+{{ attach_library('particle/page.splash') }}
+
+{% if not has_components_module %}
+  {% include '@particle/misc/components--error-message.html.twig' %}
+{% else %}
+  <div class="layout-container">
+    {{ page.primary_menu }}
+
+    {{ page.highlighted }}
+
+    <header role="banner">
+      {{ page.header_branding }}
+      {{ page.secondary_menu }}
+    </header>
+
+    {# Help Region not Included by Default. #}
+    {{ page.help }}
+
+    <main role="main">
+      <a id="main-content" tabindex="-1"></a>{# link is in html.html.twig #}
+      {{ page.breadcrumb }}
+      <section class="row">
+        {% if page.sidebar_first %}
+          <aside class="layout-sidebar-first" role="complementary">
+            {{ page.sidebar_first }}
+          </aside>
+        {% endif %}
+
+        <div class="layout-content">
+          {{ page.content }}
+        </div>
+
+        {% if page.sidebar_second %}
+          <aside class="layout-sidebar-second" role="complementary">
+            {{ page.sidebar_second }}
+          </aside>
+        {% endif %}
+      </section>
+    </main>
+  </div>
+  {# /.layout-container #}
+
+  {{ page.footer }}
+{% endif %}

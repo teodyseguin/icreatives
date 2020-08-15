@@ -1,0 +1,9 @@
+dashboard_demo_block:
+  title: Dashboard Component
+  content:
+    lead: Add a quick description here.
+    summary: Add code examples here using <code>html code syntax</code>
+
+dashboard:
+  example_var: This is an example var
+

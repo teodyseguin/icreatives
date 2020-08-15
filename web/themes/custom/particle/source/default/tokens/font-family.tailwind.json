@@ -1,0 +1,6 @@
+{
+  "sans": ["Open Sans, Helvetica Neue, Helvetica Arial, sans-serif"],
+  "serif": ["Oswald, Times New Roman, serif"],
+  "mono": ["Source Code Pro, Courier New, monospace"],
+  "sansserif": ["Nunito", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "Helvetica Neue", "Arial", "sans-serif", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"]
+}

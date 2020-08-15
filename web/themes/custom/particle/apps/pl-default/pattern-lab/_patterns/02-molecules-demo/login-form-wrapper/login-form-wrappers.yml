@@ -1,0 +1,9 @@
+login_form_wrapper_demo_block:
+  title: Login Form Wrapper Component
+  content:
+    lead: Add a quick description here.
+    summary: Add code examples here using <code>html code syntax</code>
+
+login_form_wrapper:
+  example_var: This is an example var
+

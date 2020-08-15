@@ -1,0 +1,15 @@
+services:
+  ic_core.simple_fb_connect_events:
+    class: Drupal\ic_core\EventSubscriber\SimpleFBConnectEvents
+    arguments:
+      - '@ic_core.ic_core_tools'
+    tags:
+      - { name: event_subscriber }
+
+  ic_core.ic_core_tools:
+    class: Drupal\ic_core\IcCoreTools
+    arguments:
+      - '@session'
+      - '@path.current'
+      - '@path.alias_manager'
+      - '@path.matcher'

@@ -1,0 +1,71 @@
+# Define theme library CSS and JS assets along with dependent libraries.
+# The paths below are set to default DRUPAL_DIST variable. If you change the
+# DRUPAL_DIST path, update here.
+core:
+  css:
+    theme:
+      ../../../dist/app-drupal/assets/app.styles.css:
+        minified: true
+  js:
+    ../../../dist/app-drupal/assets/app.js:
+      preprocess: false
+  # See all in Drupal's `core/core.libraries.yml`
+  dependencies:
+    - particle/jquery
+    - core/drupal
+    - core/drupalSettings
+# Create a custom jQuery library that will override the Drupal core jQuery library
+# See `libraries-override` in particle.info.yml
+jquery:
+  js:
+    ../../../dist/app-drupal/assets/drupal-jquery.js:
+      preprocess: false
+      weight: -20
+
+global:
+  css:
+    theme:
+      css/global.css:
+        minified: true
+
+page.front:
+  css:
+    theme:
+      css/page/front.css:
+        minified: true
+
+page.splash:
+  css:
+    theme:
+      css/page/splash.css:
+        minified: true
+
+page.dashboard:
+  css:
+    theme:
+      css/page/dashboard.css:
+        minified: true
+
+page.inbox:
+  css:
+    theme:
+      css/page/inbox.css:
+        minified: true
+
+page.invoice:
+  css:
+    theme:
+      css/page/invoice.css:
+        minified: true
+
+page.products:
+  css:
+    theme:
+      css/page/products.css:
+        minified: true
+
+form.user_login:
+  css:
+    theme:
+      css/form/user-login.css:
+        minified: true

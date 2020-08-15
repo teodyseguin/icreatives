@@ -1,0 +1,9 @@
+<?php
+
+/**
+ * @file
+ * Specific functionalities for IC Admin.
+ */
+
+include 'includes/form_alter.inc';
+include 'includes/user_login.inc';

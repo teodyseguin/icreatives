@@ -1,0 +1,18 @@
+{{ attach_library('particle/page.products') }}
+
+{% if not has_components_module %}
+  {% include '@particle/misc/components--error-message.html.twig' %}
+{% else %}
+  {% include '@templates/products/_products.twig' with {
+    "primary_menu": page.primary_menu,
+    "highlighted": page.highlighted,
+    "header_branding": page.header_branding,
+    "secondary_menu": page.secondary_menu,
+    "help": page.help,
+    "breadcrumb": page.breadcrumb,
+    "sidebar_first": page.sidebar_first,
+    "content": page.content,
+    "sidebar_second": page.sidebar_second,
+    "footer": page.footer
+  } %}
+{% endif %}

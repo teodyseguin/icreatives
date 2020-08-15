@@ -1,0 +1,25 @@
+{#
+/**
+ * @file
+ * login-form-wrapper
+ *
+ * Available variables for login-form-wrapper:
+ *  - login_form_wrapper.variable_name [variable_type]: Description of the variable. Example below.
+ *  - login_form_wrapper.invert [bool]: When set, colors will be inverted for light display on dark background.
+ */
+#}
+
+<div class="login-form-wrapper flex flex-row rounded-lg overflow-hidden font-sansserif">
+  <div class="w-2/4 p-4 bg-silver-100">
+    <img src="../../../../user-login-art.png">
+  </div>
+  <div class="w-2/4 p-4 bg-white text-center pt-10 pb-10">
+    <h2 class="font-sansserif mb-12 text-silver-200">Welcome back!</h2>
+
+    {% if content %}
+      {{ content }}
+    {% else %}
+      <div>The form goes here...</div>
+    {% endif %}
+  </div>
+</div>

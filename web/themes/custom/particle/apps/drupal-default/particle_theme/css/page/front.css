@@ -1,0 +1,17 @@
+/**
+ * @file
+ * front.css
+ */
+
+/**
+ * Front Page.
+ */
+ html.front {
+  position: relative;
+  height: 100%;
+  background-color: var(--yelloworange);
+}
+
+html.front .nav-tabs {
+  display: none;
+}

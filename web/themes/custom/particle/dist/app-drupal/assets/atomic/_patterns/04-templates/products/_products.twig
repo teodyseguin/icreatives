@@ -1,0 +1,55 @@
+{#
+/**
+ * @file
+ * products
+ *
+ * Available variables for products:
+ *  - products.variable_name [variable_type]: Description of the variable. Example below.
+ *  - products.invert [bool]: When set, colors will be inverted for light display on dark background.
+ */
+#}
+
+<div class="products layout-container">
+  {{ primary_menu }}
+
+  {{ highlighted }}
+
+  <header role="banner">
+    {{ header_branding }}
+    {{ secondary_menu }}
+  </header>
+
+  {# Help Region not Included by Default. #}
+  {{ help }}
+
+  <main role="main">
+    <a id="main-content" tabindex="-1"></a>{# link is in html.html.twig #}
+    {{ breadcrumb }}
+    <section class="row flex flex-row">
+      <aside class="layout-sidebar-first bg-yelloworange min-h-screen w-1/6 font-sansserif text-white" role="complementary">
+        <h5 class="text-white text-center font-sansserif uppercase mt-10 mb-1 ml-6 mr-6">
+          Imaginarium Creatives
+        </h5>
+
+        <div class="ml-5 mr-5 border-b border-white"></div>
+
+        {{ sidebar_first }}
+      </aside>
+
+      <div class="layout-content w-5/6 ">
+        <div class="top-details flex w-full justify-end border-b border-gray-400">
+          <div class="flex text-right mr-10 align-middle justify-center">
+            <svg class="flex h-8 w-8 mt-4" viewBox="0 0 20 20" fill="currentColor" class="mail w-6 h-6"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path></svg>
+            <div class="name inline-block ml-4 mr-4 mt-5">Jary Roxas</div>
+            <div class="avatar inline-block h-10 w-10 bg-yelloworange rounded-full mt-3"></div>
+          </div>
+        </div>
+
+        {{ content }}
+      </div>
+    </section>
+  </main>
+</div>
+{# /.layout-container #}
+
+{{ footer }}
