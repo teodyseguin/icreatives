@@ -1,0 +1,28 @@
+name: icadmin
+recipe: drupal8
+
+config:
+  via: nginx
+  webroot: web
+  database: mariadb:10.2
+  xdebug: true
+
+services:
+  pma:
+    type: phpmyadmin
+    hosts:
+      - database
+  database:
+    type: mariadb
+  node:
+    type: node:11
+
+tooling:
+  npm:
+    service: node
+  node:
+    service: node
+  gulp:
+    service: node
+  yarn:
+    service: node
