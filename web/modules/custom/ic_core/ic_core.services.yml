@@ -13,3 +13,4 @@ services:
       - '@path.current'
       - '@path.alias_manager'
       - '@path.matcher'
+      - '@entity_type.manager'

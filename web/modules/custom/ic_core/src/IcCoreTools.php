@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Drupal\Core\Path\CurrentPathStack;
 use Drupal\Core\Path\AliasManager;
 use Drupal\Core\Path\PathMatcher;
+use Drupal\Core\Entity\EntityTypeManagerInterface;
 
 /**
  * A utility class for various usage and purpose.
@@ -41,16 +42,24 @@ class IcCoreTools {
   protected $pathMatcher;
 
   /**
+   * The Entity Type Manager.
+   *
+   * @var \Drupal\Core\Entity\EntityTypeManagerInterface
+   */
+  protected $entityTypeManager;
+
+  /**
    * Constructor.
    *
    * @param \Symfony\Component\HttpFoundation\Session\SessionInterface $session
    *   Used for reading data from and writing data to session.
    */
-  public function __construct(SessionInterface $session, CurrentPathStack $currentPath, AliasManager $aliasManager, PathMatcher $pathMatcher) {
+  public function __construct(SessionInterface $session, CurrentPathStack $currentPath, AliasManager $aliasManager, PathMatcher $pathMatcher, EntityTypeManagerInterface $entityTypeManager) {
     $this->session = $session;
     $this->currentPath = $currentPath;
     $this->aliasManager = $aliasManager;
     $this->pathMatcher = $pathMatcher;
+    $this->entityTypeManager = $entityTypeManager;
   }
 
   /**
@@ -101,6 +110,16 @@ class IcCoreTools {
    */
   public function isFrontPage() {
     return $this->pathMatcher->isFrontPage();
+  }
+
+  /**
+   * Get the Entity storage.
+   *
+   * @param string $storgae
+   *   The name of the storage.
+   */
+  public function getStorage($storage) {
+    return $this->entityTypeManager->getStorage($storage);
   }
 
 }
