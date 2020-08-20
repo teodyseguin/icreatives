@@ -1,16 +1,16 @@
-uuid: 8760b4ac-48a0-42a0-a789-741ee241c506
+uuid: 16b9aa3f-38d4-47da-8666-01230af2e512
 langcode: en
-status: true
+status: false
 dependencies:
   module:
     - commerce_product
-id: products_page
-label: 'Products page'
+id: products
+label: Products
 module: views
 description: ''
 tag: ''
-base_table: commerce_product_variation_field_data
-base_field: variation_id
+base_table: commerce_product_field_data
+base_field: product_id
 display:
   default:
     display_plugin: default
@@ -63,13 +63,13 @@ display:
       style:
         type: default
       row:
-        type: 'entity:commerce_product_variation'
+        type: 'entity:commerce_product'
         options:
           relationship: none
           view_mode: default
       fields:
         title:
-          table: commerce_product_variation_field_data
+          table: commerce_product_field_data
           field: title
           id: title
           entity_type: null
@@ -135,10 +135,10 @@ display:
       filters:
         status:
           value: '1'
-          table: commerce_product_variation_field_data
+          table: commerce_product_field_data
           field: status
           plugin_id: boolean
-          entity_type: commerce_product_variation
+          entity_type: commerce_product
           entity_field: status
           id: status
           expose:
@@ -147,7 +147,7 @@ display:
             operator_list: {  }
           group: 1
       sorts: {  }
-      title: 'Products page'
+      title: Products
       header: {  }
       footer: {  }
       empty: {  }
@@ -169,12 +169,6 @@ display:
     display_options:
       display_extenders: {  }
       path: products
-      css_class: product-lists
-      defaults:
-        css_class: false
-        header: false
-      header: {  }
-      exposed_block: true
     cache_metadata:
       max-age: -1
       contexts:

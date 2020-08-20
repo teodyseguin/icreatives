@@ -1,0 +1,8 @@
+uuid: 9440f265-5886-4cdb-87b6-106e49fd11d1
+langcode: en
+status: true
+dependencies: {  }
+id: product_messages
+label: 'Product messages'
+target_entity_type_id: commerce_product
+description: 'Messages for a product'

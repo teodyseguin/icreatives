@@ -16,11 +16,11 @@ mode: default
 content:
   field_client:
     weight: 3
-    label: hidden
+    label: above
     settings:
-      link_to_entity: false
+      link: true
     third_party_settings: {  }
-    type: string
+    type: entity_reference_label
     region: content
   field_image:
     weight: 0

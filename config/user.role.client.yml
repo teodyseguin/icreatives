@@ -1,0 +1,12 @@
+uuid: 212ff17c-6f52-4f53-9522-0fe7a17ee431
+langcode: en
+status: true
+dependencies: {  }
+id: client
+label: Client
+weight: 3
+is_admin: null
+permissions:
+  - 'create online commerce_store'
+  - 'update own online commerce_store'
+  - 'view online commerce_store'

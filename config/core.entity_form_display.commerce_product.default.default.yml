@@ -5,7 +5,9 @@ dependencies:
   config:
     - commerce_product.commerce_product_type.default
     - field.field.commerce_product.default.body
+    - field.field.commerce_product.default.field_messages
   module:
+    - comment
     - commerce
     - path
     - text
@@ -30,6 +32,12 @@ content:
     weight: 5
     settings: {  }
     third_party_settings: {  }
+    region: content
+  field_messages:
+    weight: 9
+    settings: {  }
+    third_party_settings: {  }
+    type: comment_default
     region: content
   path:
     type: path

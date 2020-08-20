@@ -20,10 +20,12 @@ content:
   field_client:
     weight: 12
     settings:
+      match_operator: CONTAINS
+      match_limit: 10
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: string_textfield
+    type: entity_reference_autocomplete
     region: content
   field_image:
     weight: 11

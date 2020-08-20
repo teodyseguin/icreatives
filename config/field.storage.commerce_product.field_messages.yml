@@ -1,0 +1,20 @@
+uuid: 608849a9-5ace-4fac-adc9-d194201565b0
+langcode: en
+status: true
+dependencies:
+  module:
+    - comment
+    - commerce_product
+id: commerce_product.field_messages
+field_name: field_messages
+entity_type: commerce_product
+type: comment
+settings:
+  comment_type: product_messages
+module: comment
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

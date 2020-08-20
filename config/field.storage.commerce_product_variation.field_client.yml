@@ -1,17 +1,16 @@
-uuid: 96410513-554a-490d-af66-18b9ae0b89ed
+uuid: a11b9695-9936-498e-a5aa-bb3b74c6d3b8
 langcode: en
 status: true
 dependencies:
   module:
     - commerce_product
+    - user
 id: commerce_product_variation.field_client
 field_name: field_client
 entity_type: commerce_product_variation
-type: string
+type: entity_reference
 settings:
-  max_length: 255
-  is_ascii: false
-  case_sensitive: false
+  target_type: user
 module: core
 locked: false
 cardinality: 1
