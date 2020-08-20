@@ -52,3 +52,50 @@ function particle_theme() {
     ],
   ];
 }
+
+/**
+ * Implements hoook_preprocess_commerce_product().
+ */
+function particle_preprocess_commerce_product(&$variables) {
+
+}
+
+/**
+ * Implements hook_preprocess_commerce_product_variation().
+ */
+function particle_preprocess_commerce_product_variation(&$variables) {
+  // Load SS Tools.
+  $tools = \Drupal::service('ic_core.ic_core_tools');
+  $product_variation_entity = $variables['product_variation_entity'];
+
+  // Load the price.
+  $price = $product_variation_entity->getPrice();
+  $variables['price'] = $price;
+
+  // Load product image.
+  $field_image = $product_variation_entity->field_image->getValue();
+  $file_storage = $tools->getStorage('file');
+  $file = $file_storage->load($field_image[0]['target_id']);
+  $variables['image'] = $file->get('uri')->value;
+
+  // Load client.
+  $client = $product_variation_entity->field_client->referencedEntities();
+
+  if (!empty($client)) {
+    $client = reset($client);
+    $username = $client->get('name')->value;
+    $first_name = $client->get('field_first_name')->value;
+    $last_name = $client->get('field_last_name')->value;
+    $display_name = $username;
+
+    if (!empty($first_name)) {
+      $display_name = $first_name;
+    }
+
+    if (!empty($last_name)) {
+      $display_name .= ' ' . $last_name;
+    }
+
+    $variables['client'] = $display_name;
+  }
+}

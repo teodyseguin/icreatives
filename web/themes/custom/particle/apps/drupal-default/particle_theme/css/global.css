@@ -35,31 +35,26 @@
   --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
-html.dashboard,
-html.inbox,
-html.invoice,
-html.products {
+html {
   height: 100%;
 }
 
-html.dashboard aside a,
-html.inbox aside a,
-html.invoice aside a,
-html.products aside a {
+html aside a {
   color: var(--white);
 }
 
-html.dashboard #block-mainnavigation,
-html.inbox #block-mainnavigation,
-html.invoice #block-mainnavigation,
-html.products #block-mainnavigation {
+html #block-mainnavigation {
   margin: 19px;
 }
 
-html.dashboard .top-details,
-html.inbox .top-details,
-html.invoice .top-details,
-html.products .top-details {
+html .top-details {
   height: 72px;
-  box-shadow: 0 0 1px 1px #ccc;
+}
+
+main[role="main"] .layout-sidebar-first {
+  width: 14%;
+}
+
+main[role="main"] .layout-content {
+  width: 86%;
 }

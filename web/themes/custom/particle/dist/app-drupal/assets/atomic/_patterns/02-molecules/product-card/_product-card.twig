@@ -1,0 +1,35 @@
+{#
+/**
+ * @file
+ * product-card
+ *
+ * Available variables for product-card:
+ *  - product_card.variable_name [variable_type]: Description of the variable. Example below.
+ *  - product_card.invert [bool]: When set, colors will be inverted for light display on dark background.
+ */{
+#}
+
+{% if product_id %}
+  <a href="/product/{{ product_id }}" class="product-card flex text-black rounded-lg border border-grey-300 cursor-pointer">
+{% else %}
+  <div class="product-card flex rounded-lg border border-grey-300 cursor-pointer">
+{% endif %}
+  <div class="product-card__image p-5">
+    <img src="{{ product_image }}">
+  </div>
+  <div class="product-card__details">
+    <div class="title mt-5 mr-5 font-sansserif">
+      {{ product_title }}
+    </div>
+    <div class="client mt-2 mr-5 font-sansserif">
+      {{ client }}
+    </div>
+    <div class="price mt-2 mr-5 font-sansserif">
+      {{ product_price }}
+    </div>
+  </div>
+{% if product_id %}
+</a>
+{% else %}
+</div>
+{% endif %}

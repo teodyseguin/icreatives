@@ -1,0 +1,9 @@
+product_demo_block:
+  title: Product Component
+  content:
+    lead: Add a quick description here.
+    summary: Add code examples here using <code>html code syntax</code>
+
+product:
+  example_var: This is an example var
+

@@ -16,7 +16,7 @@ function particle_preprocess_html(&$variables) {
     $path = explode('/', $path);
 
     // We only want pages with single paths like /dashboard, /splash etc.
-    if (count($path) == 2) {
+    if (count($path) > 0) {
       $path = $path['1'];
       $variables['html_attributes']->addClass($path);
     }
