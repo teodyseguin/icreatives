@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - commerce_product.commerce_product_variation_type.default
+    - field.field.commerce_product_variation.default.field_client
     - field.field.commerce_product_variation.default.field_image
   module:
     - commerce_price
@@ -13,9 +14,17 @@ targetEntityType: commerce_product_variation
 bundle: default
 mode: default
 content:
+  field_client:
+    weight: 3
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
   field_image:
-    weight: 1
-    label: above
+    weight: 0
+    label: hidden
     settings:
       image_style: ''
       image_link: ''
@@ -23,18 +32,18 @@ content:
     type: image
     region: content
   list_price:
-    label: above
+    label: hidden
     type: commerce_price_default
-    weight: -1
+    weight: 1
     region: content
     settings:
       strip_trailing_zeroes: false
       currency_display: symbol
     third_party_settings: {  }
   price:
-    label: above
+    label: hidden
     type: commerce_price_default
-    weight: 0
+    weight: 2
     region: content
     settings:
       strip_trailing_zeroes: false
