@@ -1,4 +1,11 @@
 services:
+  ic_core.non_authenticated_redirect:
+    class: Drupal\ic_core\EventSubscriber\NonAuthenticatedRedirect
+    arguments:
+      - '@ic_core.ic_core_tools'
+    tags:
+      - { name: event_subscriber }
+
   ic_core.simple_fb_connect_events:
     class: Drupal\ic_core\EventSubscriber\SimpleFBConnectEvents
     arguments:
@@ -14,3 +21,4 @@ services:
       - '@path.alias_manager'
       - '@path.matcher'
       - '@entity_type.manager'
+      - '@current_user'
