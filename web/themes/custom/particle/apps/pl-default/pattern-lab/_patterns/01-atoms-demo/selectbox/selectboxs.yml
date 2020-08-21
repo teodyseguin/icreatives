@@ -1,0 +1,9 @@
+selectbox_demo_block:
+  title: Selectbox Component
+  content:
+    lead: Add a quick description here.
+    summary: Add code examples here using <code>html code syntax</code>
+
+selectbox:
+  example_var: This is an example var
+

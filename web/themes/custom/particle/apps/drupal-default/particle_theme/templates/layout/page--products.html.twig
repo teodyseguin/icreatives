@@ -1,9 +1,11 @@
 {{ attach_library('particle/page.products') }}
+{{ attach_library('particle/client_filter') }}
 
 {% if not has_components_module %}
   {% include '@particle/misc/components--error-message.html.twig' %}
 {% else %}
   {% include '@templates/products/_products.twig' with {
+    "clients": clients,
     "primary_menu": page.primary_menu,
     "highlighted": page.highlighted,
     "header_branding": page.header_branding,

@@ -1,0 +1,11 @@
+select {
+  width: 250px;
+  height: 100%;
+  cursor: pointer;
+  text-indent: 5px;
+}
+
+.chevron-down {
+  right: 10px;
+  bottom: 6px;
+}

@@ -54,13 +54,6 @@ function particle_theme() {
 }
 
 /**
- * Implements hoook_preprocess_commerce_product().
- */
-function particle_preprocess_commerce_product(&$variables) {
-
-}
-
-/**
  * Implements hook_preprocess_commerce_product_variation().
  */
 function particle_preprocess_commerce_product_variation(&$variables) {

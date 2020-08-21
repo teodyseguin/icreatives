@@ -28,11 +28,11 @@
   [
     'py-2',
     'px-4',
-    'text-white',
-    'font-bold',
     'rounded',
+    button.additional_class,
+    button.text_color ? button.text_color : 'text-white',
     button.color ? button.color : 'bg-blue-500',
-    button.hoverColor ? 'hover:' ~ button.hoverColor : 'hover:bg-blue-700'
+    button.hoverColor ? 'hover:' ~ button.hoverColor : ''
   ]
     |merge(button_classes|default([]))
     |join(' ')

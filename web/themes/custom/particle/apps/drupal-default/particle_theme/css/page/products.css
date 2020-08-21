@@ -4,11 +4,14 @@
  */
 
 .product-lists {
-  display: flex;
   margin-top: 20px;
 }
 
 .product-lists .views-row {
   width: 20%;
   margin: 20px 25px;
+}
+
+.views-exposed-form {
+  display: none;
 }

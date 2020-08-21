@@ -9,11 +9,7 @@
  */{
 #}
 
-{% if product_id %}
-  <a href="/product/{{ product_id }}" class="product-card flex text-black rounded-lg border border-grey-300 cursor-pointer">
-{% else %}
-  <div class="product-card flex rounded-lg border border-grey-300 cursor-pointer">
-{% endif %}
+<div class="product-card flex rounded-lg border border-grey-300 cursor-pointer">
   <div class="product-card__image p-5">
     <img src="{{ product_image }}">
   </div>
@@ -28,8 +24,4 @@
       {{ product_price }}
     </div>
   </div>
-{% if product_id %}
-</a>
-{% else %}
 </div>
-{% endif %}

@@ -37,4 +37,8 @@ function particle_preprocess_page(&$variables) {
   if ($moduleHandler->moduleExists('components')) {
     $variables['has_components_module'] = TRUE;
   }
+
+  $tools = \Drupal::service('ic_core.ic_core_tools');
+  $clients = $tools->getClients();
+  $variables['clients'] = $clients;
 }

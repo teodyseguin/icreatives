@@ -22,6 +22,11 @@ jquery:
       preprocess: false
       weight: -20
 
+client_filter:
+  js:
+    js/client-filter.js:
+      minified: true
+
 global:
   css:
     theme:
