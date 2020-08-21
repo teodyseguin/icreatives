@@ -245,7 +245,7 @@ display:
           empty: false
           tokenize: false
           content:
-            value: '<h2 class="font-sansserif">Products</h2>'
+            value: '<h3 class="font-sansserif">Products</h3>'
             format: full_html
           plugin_id: text
       exposed_block: false
@@ -260,7 +260,7 @@ display:
           empty: true
           tokenize: false
           content:
-            value: 'No products available...'
+            value: 'No products are available...'
             format: basic_html
           plugin_id: text
     cache_metadata:

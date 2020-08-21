@@ -1,0 +1,7 @@
+node:
+  invoice:
+    path: /invoice
+global:
+  use_on:
+    - front
+    - backoffice

@@ -1,0 +1,36 @@
+uuid: 5e2c563b-66fb-42f3-bf62-1cbedc70a7a4
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.invoice.body
+    - field.field.node.invoice.field_client
+    - field.field.node.invoice.field_date
+    - field.field.node.invoice.field_invoice_link
+    - node.type.invoice
+  module:
+    - text
+    - user
+id: node.invoice.teaser
+targetEntityType: node
+bundle: invoice
+mode: teaser
+content:
+  body:
+    label: hidden
+    type: text_summary_or_trimmed
+    weight: 101
+    settings:
+      trim_length: 600
+    third_party_settings: {  }
+    region: content
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden:
+  field_client: true
+  field_date: true
+  field_invoice_link: true
