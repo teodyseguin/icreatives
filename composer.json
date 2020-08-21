@@ -18,6 +18,7 @@
         "drupal/components": "^1.1",
         "drupal/core-composer-scaffold": "^8.8.1",
         "drupal/core-recommended": "^8.8",
+        "drupal/entity_submit_redirect": "^1.1",
         "drupal/fontawesome_menu_icons": "^1.8",
         "drupal/inline_entity_form": "1.0.0-rc6",
         "drupal/libraries": "3.0.0-alpha1",
