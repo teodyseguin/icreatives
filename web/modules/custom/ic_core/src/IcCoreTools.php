@@ -8,6 +8,7 @@ use Drupal\Core\Path\CurrentPathStack;
 use Drupal\Core\Path\AliasManager;
 use Drupal\Core\Path\PathMatcher;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
+use Drupal\Core\Session\AccountInterface;
 
 /**
  * A utility class for various usage and purpose.
@@ -49,17 +50,25 @@ class IcCoreTools {
   protected $entityTypeManager;
 
   /**
+   * Account Interface.
+   *
+   * @var \Drupal\Core\Session\AccountInterface
+   */
+  protected $currentUser;
+
+  /**
    * Constructor.
    *
    * @param \Symfony\Component\HttpFoundation\Session\SessionInterface $session
    *   Used for reading data from and writing data to session.
    */
-  public function __construct(SessionInterface $session, CurrentPathStack $currentPath, AliasManager $aliasManager, PathMatcher $pathMatcher, EntityTypeManagerInterface $entityTypeManager) {
+  public function __construct(SessionInterface $session, CurrentPathStack $currentPath, AliasManager $aliasManager, PathMatcher $pathMatcher, EntityTypeManagerInterface $entityTypeManager, AccountInterface $currentUser) {
     $this->session = $session;
     $this->currentPath = $currentPath;
     $this->aliasManager = $aliasManager;
     $this->pathMatcher = $pathMatcher;
     $this->entityTypeManager = $entityTypeManager;
+    $this->currentUser = $currentUser;
   }
 
   /**
@@ -133,6 +142,13 @@ class IcCoreTools {
                   ->execute();
 
     return $userStorage->loadMultiple($uids);
+  }
+
+  /**
+   * Check if the current user is an anonymous user.
+   */
+  public function isAnonymous() {
+    return $this->currentUser->isAnonymous();
   }
 
 }
