@@ -122,4 +122,17 @@ class IcCoreTools {
     return $this->entityTypeManager->getStorage($storage);
   }
 
+  /**
+   * Get all the client users in the site.
+   */
+  public function getClients() {
+    $userStorage = $this->entityTypeManager->getStorage('user');
+    $query = $userStorage->getQuery();
+    $uids = $query->condition('status', '1')
+                  ->condition('roles', 'client')
+                  ->execute();
+
+    return $userStorage->loadMultiple($uids);
+  }
+
 }
