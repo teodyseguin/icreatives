@@ -1,6 +1,8 @@
 node:
   invoice:
     path: /invoice
+  message:
+    path: /inbox
 global:
   use_on:
     - front

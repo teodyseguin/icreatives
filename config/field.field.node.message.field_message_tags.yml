@@ -1,0 +1,29 @@
+uuid: 0bebf18f-67a3-4bbc-ba10-817d0bd959f4
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_message_tags
+    - node.type.message
+    - taxonomy.vocabulary.message_tags
+id: node.message.field_message_tags
+field_name: field_message_tags
+entity_type: node
+bundle: message
+label: Tags
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      message_tags: message_tags
+    sort:
+      field: name
+      direction: asc
+    auto_create: true
+    auto_create_bundle: ''
+field_type: entity_reference

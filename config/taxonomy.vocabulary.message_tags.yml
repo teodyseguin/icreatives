@@ -1,0 +1,8 @@
+uuid: 3909ce7c-6218-40bc-b41c-e3e42cc84a93
+langcode: en
+status: true
+dependencies: {  }
+name: 'Message tags'
+vid: message_tags
+description: 'Tags for messages'
+weight: 0

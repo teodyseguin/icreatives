@@ -1,0 +1,66 @@
+uuid: 6cf5702b-7bb8-425c-a168-329bc437b0ff
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.message.body
+    - field.field.node.message.field_client
+    - field.field.node.message.field_customer_name
+    - field.field.node.message.field_date
+    - field.field.node.message.field_message_tags
+    - node.type.message
+  module:
+    - datetime
+    - text
+    - user
+id: node.message.default
+targetEntityType: node
+bundle: message
+mode: default
+content:
+  body:
+    label: hidden
+    type: text_default
+    weight: 101
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  field_client:
+    weight: 102
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_customer_name:
+    weight: 103
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_date:
+    weight: 105
+    label: above
+    settings:
+      format_type: medium
+      timezone_override: ''
+    third_party_settings: {  }
+    type: datetime_default
+    region: content
+  field_message_tags:
+    weight: 104
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden: {  }

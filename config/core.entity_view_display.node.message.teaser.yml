@@ -1,0 +1,38 @@
+uuid: 0bb2f696-2976-47a3-9a1d-27016bf357c0
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.message.body
+    - field.field.node.message.field_client
+    - field.field.node.message.field_customer_name
+    - field.field.node.message.field_date
+    - field.field.node.message.field_message_tags
+    - node.type.message
+  module:
+    - text
+    - user
+id: node.message.teaser
+targetEntityType: node
+bundle: message
+mode: teaser
+content:
+  body:
+    label: hidden
+    type: text_summary_or_trimmed
+    weight: 101
+    settings:
+      trim_length: 600
+    third_party_settings: {  }
+    region: content
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden:
+  field_client: true
+  field_customer_name: true
+  field_date: true
+  field_message_tags: true

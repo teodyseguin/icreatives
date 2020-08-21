@@ -25,6 +25,6 @@ settings:
 visibility:
   request_path:
     id: request_path
-    pages: "/dashboard\r\n/inbox\r\n/invoice\r\n/products\r\n/product/*"
+    pages: "/dashboard\r\n/inbox\r\n/inbox/*\r\n/invoice\r\n/invoice/*\r\n/products\r\n/products/*\r\n/product/*"
     negate: false
     context_mapping: {  }
