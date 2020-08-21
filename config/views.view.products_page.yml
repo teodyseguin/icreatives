@@ -4,6 +4,7 @@ status: true
 dependencies:
   module:
     - commerce_product
+    - user
 id: products_page
 label: 'Products page'
 module: views
@@ -146,12 +147,70 @@ display:
             operator_limit_selection: false
             operator_list: {  }
           group: 1
+        field_client_target_id:
+          id: field_client_target_id
+          table: commerce_product_variation__field_client
+          field: field_client_target_id
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: '='
+          value:
+            min: ''
+            max: ''
+            value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: field_client_target_id_op
+            label: 'Client (field_client)'
+            description: ''
+            use_operator: false
+            operator: field_client_target_id_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: field_client_target_id
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              administrator: '0'
+              client: '0'
+            placeholder: ''
+            min_placeholder: ''
+            max_placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          plugin_id: numeric
       sorts: {  }
       title: 'Products page'
       header: {  }
       footer: {  }
       empty: {  }
-      relationships: {  }
+      relationships:
+        uid:
+          id: uid
+          table: commerce_product_variation_field_data
+          field: uid
+          relationship: none
+          group_type: group
+          admin_label: User
+          required: false
+          entity_type: commerce_product_variation
+          entity_field: uid
+          plugin_id: standard
       arguments: {  }
       display_extenders: {  }
     cache_metadata:
@@ -159,6 +218,7 @@ display:
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
+        - url
         - url.query_args
       tags: {  }
   page_1:
@@ -173,12 +233,41 @@ display:
       defaults:
         css_class: false
         header: false
-      header: {  }
-      exposed_block: true
+        empty: false
+      header:
+        area:
+          id: area
+          table: views
+          field: area
+          relationship: none
+          group_type: group
+          admin_label: ''
+          empty: false
+          tokenize: false
+          content:
+            value: '<h2 class="font-sansserif">Products</h2>'
+            format: full_html
+          plugin_id: text
+      exposed_block: false
+      empty:
+        area:
+          id: area
+          table: views
+          field: area
+          relationship: none
+          group_type: group
+          admin_label: ''
+          empty: true
+          tokenize: false
+          content:
+            value: 'No products available...'
+            format: basic_html
+          plugin_id: text
     cache_metadata:
       max-age: -1
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
+        - url
         - url.query_args
       tags: {  }
