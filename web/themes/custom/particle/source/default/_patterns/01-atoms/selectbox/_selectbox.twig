@@ -11,6 +11,7 @@
 
 <div class="relative selectbox overflow-hidden border mx-5 my-4">
   <select class="bg-transparent -mr-12 text-sm">
+    <option value="all">All</option>
     {% for client in clients %}
       <option value="{{ client.id() }}">
         {{ client.get('name').value }}

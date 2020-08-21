@@ -1,0 +1,50 @@
+/**
+ * @file
+ * inbox.css
+ */
+
+.inbox-table header {
+  margin-bottom: 25px;
+}
+
+.inbox-table th {
+  padding: 15px;
+  border: 1px solid var(--gray-light);
+}
+
+.inbox-table thead {
+  border-bottom: 2px solid var(--gray-light);
+}
+
+.inbox-table tr {
+  border-bottom: 1px solid var(--gray-light);
+}
+
+.inbox-table td {
+  padding: 15px;
+  border: 1px solid var(--gray-light);
+}
+
+.inbox-table td a {
+  color: var(--black);
+}
+
+.inbox-table td a:hover {
+  text-decoration: underline;
+}
+
+.views-exposed-form {
+  display: none;
+}
+
+.inbox-table .pager {
+  margin: 20px;
+}
+
+.inbox-table .pager__item {
+  display: inline;
+}
+
+.inbox-table #view-body-table-column {
+  width: 60%;
+}

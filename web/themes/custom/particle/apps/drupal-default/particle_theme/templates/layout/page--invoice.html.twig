@@ -5,6 +5,8 @@
   {% include '@particle/misc/components--error-message.html.twig' %}
 {% else %}
   {% include '@templates/invoice/_invoice.twig' with {
+    "display_filter": display_filter,
+    "clients": clients,
     "primary_menu": page.primary_menu,
     "highlighted": page.highlighted,
     "header_branding": page.header_branding,

@@ -1,9 +1,12 @@
 {{ attach_library('particle/page.inbox') }}
+{{ attach_library('particle/client_filter') }}
 
 {% if not has_components_module %}
   {% include '@particle/misc/components--error-message.html.twig' %}
 {% else %}
   {% include '@templates/inbox/_inbox.twig' with {
+    "display_filter": display_filter,
+    "clients": clients,
     "primary_menu": page.primary_menu,
     "highlighted": page.highlighted,
     "header_branding": page.header_branding,
