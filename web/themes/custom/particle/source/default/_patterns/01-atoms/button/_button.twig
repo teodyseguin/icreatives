@@ -28,8 +28,9 @@
   [
     'py-2',
     'px-4',
-    'rounded',
+    button.rounded ? button.rounded : '',
     button.additional_class,
+    button.font_size ? button.font_size : 'text-sm',
     button.text_color ? button.text_color : 'text-white',
     button.color ? button.color : 'bg-blue-500',
     button.hoverColor ? 'hover:' ~ button.hoverColor : ''
