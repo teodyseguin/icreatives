@@ -1,0 +1,46 @@
+/**
+ * @file
+ * invoice.css
+ */
+
+.invoice-table header {
+  margin-bottom: 25px;
+}
+
+.invoice-table th {
+  padding: 15px;
+  border: 1px solid var(--gray-light);
+}
+
+.invoice-table thead {
+  border-bottom: 2px solid var(--gray-light);
+}
+
+.invoice-table tr {
+  border-bottom: 1px solid var(--gray-light);
+}
+
+.invoice-table td {
+  padding: 15px;
+  border: 1px solid var(--gray-light);
+}
+
+.invoice-table td a {
+  color: var(--black);
+}
+
+.invoice-table td a:hover {
+  text-decoration: underline;
+}
+
+.views-exposed-form {
+  display: none;
+}
+
+.invoice-table .pager {
+  margin: 20px;
+}
+
+.invoice-table .pager__item {
+  display: inline;
+}

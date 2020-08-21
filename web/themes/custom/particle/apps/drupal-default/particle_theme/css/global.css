@@ -4,6 +4,7 @@
  */
 
 :root {
+  --black: #000;
   --blue: #4e73df;
   --indigo: #6610f2;
   --purple: #6f42c1;
@@ -17,6 +18,7 @@
   --cyan: #36b9cc;
   --white: #fff;
   --gray: #858796;
+  --gray-light: #ccc;
   --gray-dark: #5a5c69;
   --primary: #4e73df;
   --secondary: #858796;
@@ -49,6 +51,10 @@ html #block-mainnavigation {
 
 html .top-details {
   height: 72px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-family-sans-serif);
 }
 
 main[role="main"] .layout-sidebar-first {
