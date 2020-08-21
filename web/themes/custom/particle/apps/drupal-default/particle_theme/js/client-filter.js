@@ -13,6 +13,12 @@
   $('.filter button').click(function filterClient() {
     const selectedValue = $('.filter .selectbox select').val();
 
+    if (selectedValue === 'all') {
+      window.location = `/${drupalSettings.path.currentPath}`;
+
+      return;
+    }
+
     $('.views-exposed-form .input--text').val(selectedValue);
     $('.views-exposed-form .input--submit').trigger('click');
     localStorage.setItem('selectedClient', selectedValue);
