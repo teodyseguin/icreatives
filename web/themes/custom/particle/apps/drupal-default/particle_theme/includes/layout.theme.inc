@@ -38,6 +38,14 @@ function particle_preprocess_page(&$variables) {
     $variables['has_components_module'] = TRUE;
   }
 
+  $current_user = \Drupal::currentUser();
+  $roles = $current_user->getRoles();
+
+  // We only want to display the filter for admins.
+  if (in_array('administrator', $roles) || in_array('site_admin', $roles)) {
+    $variables['display_filter'] = TRUE;
+  }
+
   $tools = \Drupal::service('ic_core.ic_core_tools');
   $clients = $tools->getClients();
   $variables['clients'] = $clients;
