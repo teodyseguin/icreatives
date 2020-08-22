@@ -151,4 +151,11 @@ class IcCoreTools {
     return $this->currentUser->isAnonymous();
   }
 
+  /**
+   * Get the roles of the current logged in user.
+   */
+  public function getCurrentRoles() {
+    return $this->currentUser->getRoles();
+  }
+
 }
