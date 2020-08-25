@@ -1,0 +1,9 @@
+generic_demo_block:
+  title: Generic Component
+  content:
+    lead: Add a quick description here.
+    summary: Add code examples here using <code>html code syntax</code>
+
+generic:
+  example_var: This is an example var
+
