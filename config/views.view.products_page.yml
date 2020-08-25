@@ -266,63 +266,10 @@ display:
         - user
         - user.roles
       tags: {  }
-  page_1:
-    display_plugin: page
-    id: page_1
-    display_title: 'Product page per client'
-    position: 1
-    display_options:
-      display_extenders: {  }
-      path: products/%
-      css_class: product-lists
-      defaults:
-        css_class: false
-        header: false
-        empty: false
-      header:
-        area:
-          id: area
-          table: views
-          field: area
-          relationship: none
-          group_type: group
-          admin_label: ''
-          empty: false
-          tokenize: false
-          content:
-            value: '<h3 class="font-sansserif">Products</h3>'
-            format: full_html
-          plugin_id: text
-      exposed_block: false
-      empty:
-        area:
-          id: area
-          table: views
-          field: area
-          relationship: none
-          group_type: group
-          admin_label: ''
-          empty: true
-          tokenize: false
-          content:
-            value: '<p class="p-5">No products are available...</p>'
-            format: full_html
-          plugin_id: text
-      display_description: ''
-    cache_metadata:
-      max-age: -1
-      contexts:
-        - 'languages:language_content'
-        - 'languages:language_interface'
-        - url
-        - url.query_args
-        - user
-        - user.roles
-      tags: {  }
   page_2:
     display_plugin: page
     id: page_2
-    display_title: 'Product page per client'
+    display_title: 'Product page for admin(s)'
     position: 1
     display_options:
       display_extenders: {  }
@@ -345,7 +292,7 @@ display:
           empty: false
           tokenize: false
           content:
-            value: '<h3 class="font-sansserif">Products</h3>'
+            value: "<h3 class=\"font-sansserif\">Products</h3>\r\n<a href=\"/product/add/default\" class=\"inline-block my-4 btn border py-4 px-5 text-black text-sm\">Add Product</a>"
             format: full_html
           plugin_id: text
       exposed_block: false

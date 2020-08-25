@@ -7,3 +7,6 @@ global:
   use_on:
     - front
     - backoffice
+commerce_store:
+  online:
+    path: /dashboard
