@@ -38,15 +38,29 @@ function particle_preprocess_page(&$variables) {
     $variables['has_components_module'] = TRUE;
   }
 
-  $current_user = \Drupal::currentUser();
-  $roles = $current_user->getRoles();
+  $tools = \Drupal::service('ic_core.ic_core_tools');
+  $roles = $tools->getCurrentRoles();
 
   // We only want to display the filter for admins.
   if (in_array('administrator', $roles) || in_array('site_admin', $roles)) {
     $variables['display_filter'] = TRUE;
   }
 
-  $tools = \Drupal::service('ic_core.ic_core_tools');
   $clients = $tools->getClients();
   $variables['clients'] = $clients;
+
+  $current_user_id = $tools->getCurrentUser()->id();
+  $current_user = $tools->getStorage('user')->load($current_user_id);
+
+  $variables['full_name'] = $tools->getUserFullName();
+  $variables['user_id'] = $current_user_id;
+
+  $target_id = $current_user->user_picture->getValue();
+
+  // Get the current user picture.
+  if (!empty($target_id)) {
+    $target_id = reset($target_id);
+    $file = $tools->getStorage('file')->load($target_id['target_id']);
+    $variables['user_picture'] = $file->get('uri')->value;
+  }
 }
