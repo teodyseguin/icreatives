@@ -158,4 +158,43 @@ class IcCoreTools {
     return $this->currentUser->getRoles();
   }
 
+  /**
+   * Return the current user;
+   */
+  public function getCurrentUser() {
+    return $this->currentUser;
+  }
+
+  /**
+   * Get the full name of the user field field first and last name is not empty.
+   * Otherwise, this function will return the username of the current user.
+   */
+  public function getUserFullName() {
+    $user_storage = $this->getStorage('user');
+    $current_user_id = $this->getCurrentUser()->id();
+    $current_user = $user_storage->load($current_user_id);
+
+    $first_name = $current_user->field_first_name->getValue();
+    $last_name = $current_user->field_last_name->getValue();
+
+    if (!empty($first_name)) {
+      $first_name = reset($first_name);
+      $first_name = $first_name['value'];
+    }
+
+    if (!empty($last_name)) {
+      $last_name = reset($last_name);
+      $last_name = $last_name['value'];
+    }
+
+    $full_name = "$first_name $last_name";
+
+    if ($full_name == '') {
+      return $current_user->get('name')->value;
+    }
+    else {
+      return $full_name;
+    }
+  }
+
 }
