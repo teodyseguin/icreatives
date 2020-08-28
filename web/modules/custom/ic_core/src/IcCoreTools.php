@@ -9,6 +9,7 @@ use Drupal\Core\Path\AliasManager;
 use Drupal\Core\Path\PathMatcher;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Session\AccountInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 /**
  * A utility class for various usage and purpose.
@@ -169,9 +170,13 @@ class IcCoreTools {
    * Get the full name of the user field field first and last name is not empty.
    * Otherwise, this function will return the username of the current user.
    */
-  public function getUserFullName() {
+  public function getUserFullName($current_user_id = NULL) {
     $user_storage = $this->getStorage('user');
-    $current_user_id = $this->getCurrentUser()->id();
+
+    if (!$current_user_id) {
+      $current_user_id = $this->getCurrentUser()->id();
+    }
+
     $current_user = $user_storage->load($current_user_id);
 
     $first_name = $current_user->field_first_name->getValue();
@@ -195,6 +200,18 @@ class IcCoreTools {
     else {
       return $full_name;
     }
+  }
+
+  /**
+   * Redirect to a page based on the given path.
+   */
+  public function pageRedirect($path) {
+    $response = new RedirectResponse($path);
+    $request = \Drupal::request();
+    $request->getSession()->save();
+    $response->prepare($request);
+    \Drupal::service('kernel')->terminate($request, $response);
+    $response->send();
   }
 
 }

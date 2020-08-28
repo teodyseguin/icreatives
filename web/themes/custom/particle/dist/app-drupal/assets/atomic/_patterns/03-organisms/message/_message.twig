@@ -9,8 +9,34 @@
  */
 #}
 
-<div class="message">
-  <h1>message</h1>
-  <div>Do good work!</div>
-  <div>Example scoped variable: <code>{{ message.example_var }}</code></div>
-</div>
+<article{{ attributes.addClass('flex', 'flex-col') }}>
+  <div class="flex font-sansserif mb-5 font-bold text-gray-800">
+    {{ client_name }}
+  </div>
+  <div class="contents flex flex-row mb-5">
+    <div class="image w-1/6 mr-5">
+      <div class="image-container border border-gray-700 h-full"></div>
+    </div>
+    <div class="info w-5/6 flex flex-col flex-no-wrap">
+      <div class="info__product-name font-sansserif mb-5 uppercase font-bold text-gray-800">
+        {{ product_name }}
+      </div>
+      <div class="info__customer-name font-sansserif mb-5 uppercase font-bold text-gray-800">
+        {{ customer_name }}
+      </div>
+      <div class="info__comments font-sansserif">
+        <div class="flex uppercase font-bold font-sansserif mb-5 text-gray-800">Commens/Inquiry</div>
+        {{ comments|raw }}
+      </div>
+    </div>
+  </div>
+
+  <div class="separator flex border-b-2 border-gray-700 mb-5"></div>
+
+  <div class="messages flex flex-col rounded border border-gray-500 shadow-xl">
+    <div class="messages__title border-b border-gray-500 px-5 py-3 mb-5 w-full bg-gray-300">Message</div>
+    <div class="messages__form">
+      {{ content.comment }}
+    </div>
+  </div>
+</article>

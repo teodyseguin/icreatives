@@ -31,6 +31,8 @@ function particle_preprocess_html(&$variables) {
  * Implements hook_preprocess_HOOK().
  */
 function particle_preprocess_page(&$variables) {
+  $variables['user_picture'] = NULL;
+
   // Themes are not able to declare module dependencies at this time.
   // We use this as a shortcut to guarantee the component library module exists.
   $moduleHandler = \Drupal::service('module_handler');
@@ -61,6 +63,9 @@ function particle_preprocess_page(&$variables) {
   if (!empty($target_id)) {
     $target_id = reset($target_id);
     $file = $tools->getStorage('file')->load($target_id['target_id']);
-    $variables['user_picture'] = $file->get('uri')->value;
+
+    if ($file) {
+      $variables['user_picture'] = $file->get('uri')->value;
+    }
   }
 }

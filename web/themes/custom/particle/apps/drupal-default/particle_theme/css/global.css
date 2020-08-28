@@ -57,6 +57,18 @@ h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-family-sans-serif);
 }
 
+.nav-tabs {
+  margin: 15px -5px;
+}
+
+.nav-tabs .nav-item {
+  display: inline;
+  border: 1px solid #eee;
+  border-bottom: 3px solid #eee;
+  padding: 8px 10px;
+  margin: 5px;
+}
+
 main[role="main"] .layout-sidebar-first {
   width: 14%;
 }

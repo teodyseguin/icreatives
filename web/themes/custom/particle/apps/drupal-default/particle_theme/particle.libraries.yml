@@ -74,3 +74,9 @@ form.user_login:
     theme:
       css/form/user-login.css:
         minified: true
+
+form.comment:
+  css:
+    theme:
+      css/form/comment.css:
+        minified: true
