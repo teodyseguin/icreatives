@@ -1,0 +1,25 @@
+uuid: 7ca63dc7-3132-4420-9e63-ad97cb50e957
+langcode: en
+status: true
+dependencies:
+  config:
+    - comment.type.messages
+    - field.field.comment.messages.comment_body
+  module:
+    - text
+id: comment.messages.default
+targetEntityType: comment
+bundle: messages
+mode: default
+content:
+  comment_body:
+    type: text_textarea
+    weight: 0
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    region: content
+hidden:
+  author: true
+  subject: true

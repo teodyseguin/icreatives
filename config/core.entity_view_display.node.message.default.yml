@@ -3,14 +3,19 @@ langcode: en
 status: true
 dependencies:
   config:
+    - core.entity_view_display.comment.messages.default
     - field.field.node.message.body
+    - field.field.node.message.comment
     - field.field.node.message.field_client
     - field.field.node.message.field_customer_name
     - field.field.node.message.field_date
+    - field.field.node.message.field_image
     - field.field.node.message.field_message_tags
+    - field.field.node.message.field_product_name
     - node.type.message
   module:
-    - datetime
+    - comment
+    - image
     - text
     - user
 id: node.message.default
@@ -21,46 +26,60 @@ content:
   body:
     label: hidden
     type: text_default
-    weight: 101
+    weight: 3
     settings: {  }
     third_party_settings: {  }
     region: content
+  comment:
+    weight: 5
+    label: hidden
+    settings:
+      view_mode: default
+      pager_id: 0
+    third_party_settings: {  }
+    type: comment_default
+    region: content
   field_client:
-    weight: 102
-    label: above
+    weight: 1
+    label: hidden
     settings:
       link: true
     third_party_settings: {  }
     type: entity_reference_label
     region: content
   field_customer_name:
-    weight: 103
-    label: above
+    weight: 2
+    label: hidden
     settings:
       link_to_entity: false
     third_party_settings: {  }
     type: string
     region: content
-  field_date:
-    weight: 105
-    label: above
+  field_image:
+    weight: 0
+    label: hidden
     settings:
-      format_type: medium
-      timezone_override: ''
+      image_style: ''
+      image_link: ''
     third_party_settings: {  }
-    type: datetime_default
+    type: image
     region: content
   field_message_tags:
-    weight: 104
+    weight: 4
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_product_name:
+    weight: 6
     label: above
     settings:
       link: true
     third_party_settings: {  }
     type: entity_reference_label
     region: content
-  links:
-    weight: 100
-    settings: {  }
-    third_party_settings: {  }
-    region: content
-hidden: {  }
+hidden:
+  field_date: true
+  links: true

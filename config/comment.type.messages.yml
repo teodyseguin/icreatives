@@ -1,0 +1,8 @@
+uuid: a101a24e-e33d-4d68-ab14-5626a924d6db
+langcode: en
+status: true
+dependencies: {  }
+id: messages
+label: Messages
+target_entity_type_id: node
+description: 'Messages for client'

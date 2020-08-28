@@ -5,10 +5,13 @@ dependencies:
   config:
     - core.entity_view_mode.node.teaser
     - field.field.node.message.body
+    - field.field.node.message.comment
     - field.field.node.message.field_client
     - field.field.node.message.field_customer_name
     - field.field.node.message.field_date
+    - field.field.node.message.field_image
     - field.field.node.message.field_message_tags
+    - field.field.node.message.field_product_name
     - node.type.message
   module:
     - text
@@ -32,7 +35,10 @@ content:
     third_party_settings: {  }
     region: content
 hidden:
+  comment: true
   field_client: true
   field_customer_name: true
   field_date: true
+  field_image: true
   field_message_tags: true
+  field_product_name: true

@@ -10,7 +10,7 @@ dependencies:
 id: userlogin
 theme: particle
 region: content
-weight: 0
+weight: 1
 provider: null
 plugin: user_login_block
 settings:

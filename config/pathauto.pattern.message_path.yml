@@ -1,0 +1,22 @@
+uuid: 255bb04f-e529-4e56-bf5d-c57edb23e896
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: message_path
+label: 'Message path'
+type: 'canonical_entities:node'
+pattern: 'messages/[node:title]'
+selection_criteria:
+  a210baed-f912-4b7f-ac0e-eb4379aeb21d:
+    id: node_type
+    bundles:
+      message: message
+    negate: false
+    context_mapping:
+      node: node
+    uuid: a210baed-f912-4b7f-ac0e-eb4379aeb21d
+selection_logic: and
+weight: -5
+relationships: {  }

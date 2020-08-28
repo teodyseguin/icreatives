@@ -9,4 +9,5 @@ is_admin: null
 permissions:
   - 'create online commerce_store'
   - 'update own online commerce_store'
+  - 'use text format restricted_html'
   - 'view online commerce_store'

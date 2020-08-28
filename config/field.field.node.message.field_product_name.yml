@@ -1,0 +1,28 @@
+uuid: 8d0dbf68-6c8c-4b47-bb44-58396caee840
+langcode: en
+status: true
+dependencies:
+  config:
+    - commerce_product.commerce_product_type.default
+    - field.storage.node.field_product_name
+    - node.type.message
+id: node.message.field_product_name
+field_name: field_product_name
+entity_type: node
+bundle: message
+label: 'Product name'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:commerce_product'
+  handler_settings:
+    target_bundles:
+      default: default
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

@@ -1,0 +1,20 @@
+uuid: 21ad42c2-e9fb-4ad4-aff9-11efa7f0006b
+langcode: en
+status: true
+dependencies:
+  theme:
+    - particle
+id: tabs
+theme: particle
+region: content
+weight: -1
+provider: null
+plugin: local_tasks_block
+settings:
+  id: local_tasks_block
+  label: Tabs
+  provider: core
+  label_display: '0'
+  primary: true
+  secondary: true
+visibility: {  }
