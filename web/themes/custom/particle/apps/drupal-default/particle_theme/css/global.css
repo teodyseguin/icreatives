@@ -76,3 +76,7 @@ main[role="main"] .layout-sidebar-first {
 main[role="main"] .layout-content {
   width: 86%;
 }
+
+.layout-container {
+  margin: 0;
+}
