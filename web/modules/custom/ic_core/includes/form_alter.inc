@@ -25,4 +25,10 @@ function ic_core_form_alter(&$form, FormStateInterface $form_state, $form_id) {
     // We don't need to use the preview button so we are disabling it from here.
     $form['actions']['preview']['#access'] = FALSE;
   }
+
+  if ($form_id == 'commerce_product_default_add_form') {
+    // We hide the default save button and just let the save and add variation button to remain,
+    // so that users are force to provide a variation product.
+    $form['actions']['submit']['#access'] = FALSE;
+  }
 }
