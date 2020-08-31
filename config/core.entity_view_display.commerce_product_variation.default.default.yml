@@ -6,6 +6,7 @@ dependencies:
     - commerce_product.commerce_product_variation_type.default
     - field.field.commerce_product_variation.default.field_client
     - field.field.commerce_product_variation.default.field_image
+    - image.style.product_image_92_94
   module:
     - commerce_price
     - image
@@ -16,7 +17,7 @@ mode: default
 content:
   field_client:
     weight: 3
-    label: above
+    label: hidden
     settings:
       link: true
     third_party_settings: {  }
@@ -26,7 +27,7 @@ content:
     weight: 0
     label: hidden
     settings:
-      image_style: ''
+      image_style: product_image_92_94
       image_link: ''
     third_party_settings: {  }
     type: image

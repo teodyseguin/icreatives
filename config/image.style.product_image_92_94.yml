@@ -1,0 +1,15 @@
+uuid: 562f263e-3d7a-4b22-af47-9ce038c2be16
+langcode: en
+status: true
+dependencies: {  }
+name: product_image_92_94
+label: 'Product Image 92x94'
+effects:
+  d19064f4-141d-495a-b6dc-9f2920138c40:
+    uuid: d19064f4-141d-495a-b6dc-9f2920138c40
+    id: image_scale
+    weight: 1
+    data:
+      width: 92
+      height: 94
+      upscale: true
