@@ -624,8 +624,8 @@ display:
           empty: true
           tokenize: false
           content:
-            value: 'No invoice are available...'
-            format: basic_html
+            value: '<p class="p-5">No invoice are available...</p>'
+            format: full_html
           plugin_id: text
       relationships:
         field_client:
