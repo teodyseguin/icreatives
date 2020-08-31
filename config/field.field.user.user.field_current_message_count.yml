@@ -1,0 +1,26 @@
+uuid: 2b2dafd5-a96a-4a18-9868-c4e753b48af0
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.user.field_current_message_count
+  module:
+    - user
+id: user.user.field_current_message_count
+field_name: field_current_message_count
+entity_type: user
+bundle: user
+label: 'Current message count'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

@@ -4,8 +4,10 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.user.compact
+    - field.field.user.user.field_current_message_count
     - field.field.user.user.field_first_name
     - field.field.user.user.field_last_name
+    - field.field.user.user.field_previous_message_count
     - field.field.user.user.user_picture
     - image.style.thumbnail
   module:
@@ -28,6 +30,8 @@ content:
     third_party_settings: {  }
     label: hidden
 hidden:
+  field_current_message_count: true
   field_first_name: true
   field_last_name: true
+  field_previous_message_count: true
   member_for: true

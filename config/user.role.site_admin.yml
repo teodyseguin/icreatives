@@ -33,3 +33,4 @@ permissions:
   - 'view default commerce_product'
   - 'view online commerce_store'
   - 'view own unpublished commerce_product'
+  - 'view the administration theme'
