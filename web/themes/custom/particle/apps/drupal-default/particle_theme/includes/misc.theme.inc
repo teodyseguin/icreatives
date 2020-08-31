@@ -59,17 +59,24 @@ function particle_theme() {
 function particle_preprocess_commerce_product_variation(&$variables) {
   // Load SS Tools.
   $tools = \Drupal::service('ic_core.ic_core_tools');
+  $image_style_storage = $tools->getStorage('image_style');
+  $commerce_storage = $tools->getStorage('commerce_currency');
   $product_variation_entity = $variables['product_variation_entity'];
 
   // Load the price.
   $price = $product_variation_entity->getPrice();
-  $variables['price'] = $price;
+  $currency_code = $price->getCurrencyCode();
+  $price = str_replace($currency_code, '', $price);
+  $currency_symbol = $commerce_storage->load($currency_code)->getSymbol();
+  $variables['price'] = "$currency_symbol$price";
 
   // Load product image.
   $field_image = $product_variation_entity->field_image->getValue();
   $file_storage = $tools->getStorage('file');
   $file = $file_storage->load($field_image[0]['target_id']);
-  $variables['image'] = $file->get('uri')->value;
+
+  $style = $image_style_storage->load('product_image_92_94');
+  $variables['image'] = $style->buildUrl($file->get('uri')->value);
 
   // Load client.
   $client = $product_variation_entity->field_client->referencedEntities();
