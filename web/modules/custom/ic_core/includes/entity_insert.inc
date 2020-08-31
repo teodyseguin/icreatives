@@ -34,6 +34,9 @@ function ic_core_entity_insert(EntityInterface $entity) {
     $client->save();
   }
 
+  // When a message node receives a comment (messages is comment type),
+  // we just wanted to make sure that current is not zero.
+  // If it's zero, then we add at least 1 to it.
   if ($entity->bundle() == 'messages') {
     $entity_id = $entity->entity_id->getValue();
 
@@ -55,8 +58,10 @@ function ic_core_entity_insert(EntityInterface $entity) {
     $current_message_count = $client->get('field_current_message_count')->value;
     $previous_message_count = $client->get('field_previous_message_count')->value;
 
-    $client->set('field_current_message_count', $current_message_count + 1);
-    $client->set('field_previous_message_count', $previous_message_count + 1);
-    $client->save();
+    if ($current_message_count == 0) {
+      $client->set('field_current_message_count', $current_message_count + 1);
+      $client->set('field_previous_message_count', $previous_message_count + 1);
+      $client->save();
+    }
   }
 }
