@@ -10,6 +10,7 @@ dependencies:
     - field.storage.node.field_invoice_link
     - node.type.invoice
     - user.role.administrator
+    - user.role.client
     - user.role.site_admin
   module:
     - datetime
@@ -690,89 +691,10 @@ display:
         - 'config:field.storage.node.field_client'
         - 'config:field.storage.node.field_date'
         - 'config:field.storage.node.field_invoice_link'
-  page_1:
-    display_plugin: page
-    id: page_1
-    display_title: 'Invoice page per client'
-    position: 1
-    display_options:
-      display_extenders: {  }
-      path: invoice/%
-      display_description: ''
-      header:
-        area:
-          id: area
-          table: views
-          field: area
-          relationship: none
-          group_type: group
-          admin_label: ''
-          empty: false
-          tokenize: false
-          content:
-            value: '<h3>Invoice</h3>'
-            format: full_html
-          plugin_id: text
-      defaults:
-        header: false
-        arguments: false
-      arguments:
-        uid:
-          id: uid
-          table: users_field_data
-          field: uid
-          relationship: field_client
-          group_type: group
-          admin_label: ''
-          default_action: ignore
-          exception:
-            value: all
-            title_enable: false
-            title: All
-          title_enable: false
-          title: ''
-          default_argument_type: current_user
-          default_argument_options: {  }
-          default_argument_skip_url: false
-          summary_options:
-            base_path: ''
-            count: true
-            items_per_page: 25
-            override: false
-          summary:
-            sort_order: asc
-            number_of_records: 0
-            format: default_summary
-          specify_validation: true
-          validate:
-            type: commerce_current_user
-            fail: 'not found'
-          validate_options:
-            admin_permission: ''
-          break_phrase: false
-          not: false
-          entity_type: user
-          entity_field: uid
-          plugin_id: user_uid
-    cache_metadata:
-      max-age: -1
-      contexts:
-        - 'languages:language_content'
-        - 'languages:language_interface'
-        - url
-        - url.query_args
-        - user
-        - 'user.node_grants:view'
-        - user.permissions
-      tags:
-        - 'config:field.storage.node.body'
-        - 'config:field.storage.node.field_client'
-        - 'config:field.storage.node.field_date'
-        - 'config:field.storage.node.field_invoice_link'
   page_2:
     display_plugin: page
     id: page_2
-    display_title: 'Invoice page for admin(s)'
+    display_title: 'Invoice page'
     position: 1
     display_options:
       display_extenders: {  }
@@ -782,6 +704,7 @@ display:
         options:
           role:
             administrator: administrator
+            client: client
             site_admin: site_admin
       defaults:
         access: false

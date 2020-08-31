@@ -1,0 +1,15 @@
+uuid: 8cb433db-86b7-489f-99a6-a3cc371b763e
+langcode: en
+status: true
+dependencies: {  }
+name: message_image
+label: 'Message Image'
+effects:
+  d5cfd01a-7f6e-4ef1-a1ae-607f2368b760:
+    uuid: d5cfd01a-7f6e-4ef1-a1ae-607f2368b760
+    id: image_scale
+    weight: 1
+    data:
+      width: 263
+      height: 467
+      upscale: true

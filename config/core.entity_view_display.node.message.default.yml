@@ -12,6 +12,7 @@ dependencies:
     - field.field.node.message.field_image
     - field.field.node.message.field_message_tags
     - field.field.node.message.field_product_name
+    - image.style.message_image
     - node.type.message
   module:
     - comment
@@ -59,7 +60,7 @@ content:
     weight: 0
     label: hidden
     settings:
-      image_style: ''
+      image_style: message_image
       image_link: ''
     third_party_settings: {  }
     type: image
