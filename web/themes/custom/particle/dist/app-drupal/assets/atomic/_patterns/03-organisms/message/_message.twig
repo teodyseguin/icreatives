@@ -15,7 +15,11 @@
   </div>
   <div class="contents flex flex-row mb-5">
     <div class="image w-1/6 mr-5">
-      <div class="image-container border border-gray-700 h-full"></div>
+      <div class="image-container border border-gray-700 h-full">
+        {% if file_image %}
+          <img src={{ file_image }} />
+        {% endif %}
+      </div>
     </div>
     <div class="info w-5/6 flex flex-col flex-no-wrap">
       <div class="info__product-name font-sansserif mb-5 uppercase font-bold text-gray-800">
