@@ -23,7 +23,7 @@
   {% include '@molecules/product-card/_product-card.twig' with {
     "product_id": product_variation_entity.id(),
     "product_title": product_variation_entity.getTitle(),
-    "product_image": file_url(image),
+    "product_image": image,
     "product_price": price,
     "product_client": client
   } %}
