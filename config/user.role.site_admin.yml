@@ -27,6 +27,8 @@ permissions:
   - 'manage default commerce_product_variation'
   - 'update own default commerce_product'
   - 'update own online commerce_store'
+  - 'use text format basic_html'
+  - 'use text format full_html'
   - 'use text format restricted_html'
   - 'view commerce_product_attribute'
   - 'view commerce_store'
