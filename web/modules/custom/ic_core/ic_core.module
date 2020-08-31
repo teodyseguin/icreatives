@@ -7,3 +7,4 @@
 
 include 'includes/form_alter.inc';
 include 'includes/user_login.inc';
+include 'includes/entity_insert.inc';

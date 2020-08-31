@@ -84,3 +84,7 @@ main[role="main"] .layout-content {
 #block-mainnavigation .svg-inline--fa {
   width: 25px;
 }
+
+#block-mainnavigation .is-active {
+  text-decoration: underline;
+}

@@ -35,12 +35,13 @@
 #}
 {%
   set classes = [
+    'w-full',
     'cols-' ~ header|length,
     responsive ? 'responsive-enabled',
     sticky ? 'sticky-enabled',
   ]
 %}
-<div class="table-wrapper px-5 py-10 mx-5 border rounded-lg shadow-md">
+<div class="table-wrapper px-5 py-10 mx-5 border rounded-lg shadow-md w-full">
   <table{{ attributes.addClass(classes) }}>
     {% if caption_needed %}
       <caption>
