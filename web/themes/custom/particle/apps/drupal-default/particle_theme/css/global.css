@@ -80,3 +80,7 @@ main[role="main"] .layout-content {
 .layout-container {
   margin: 0;
 }
+
+#block-mainnavigation .svg-inline--fa {
+  width: 25px;
+}
