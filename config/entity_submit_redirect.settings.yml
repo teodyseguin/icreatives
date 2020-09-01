@@ -10,3 +10,6 @@ global:
 commerce_store:
   online:
     path: /dashboard
+commerce_product_variation:
+  default:
+    path: /products

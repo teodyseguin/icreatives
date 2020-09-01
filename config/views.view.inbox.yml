@@ -701,7 +701,7 @@ display:
           empty: true
           tokenize: false
           content:
-            value: '<a href="/node/add/message" class="inline-block my-4 btn border py-4 px-5 text-black text-sm">Add Message</a>'
+            value: "<h3 class=\"font-sansserif\">Inbox</h3>\r\n<a href=\"/node/add/message\" class=\"inline-block my-4 btn border py-4 px-5 text-black text-sm add-page-button\">Add Message</a>"
             format: full_html
           plugin_id: text
       empty:

@@ -292,7 +292,7 @@ display:
           empty: true
           tokenize: false
           content:
-            value: "<h3 class=\"font-sansserif\">Products</h3>\r\n<a href=\"/product/add/default\" class=\"inline-block my-4 btn border py-4 px-5 text-black text-sm\">Add Product</a>"
+            value: "<h3 class=\"font-sansserif\">Products</h3>\r\n<a href=\"/product/add/default\" class=\"inline-block my-4 btn border py-4 px-5 text-black text-sm add-page-button\">Add Product</a>"
             format: full_html
           plugin_id: text
       exposed_block: false
