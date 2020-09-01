@@ -606,7 +606,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          empty: false
+          empty: true
           tokenize: false
           content:
             value: "<h3>Invoice</h3>\r\n<a href=\"/node/add/invoice\" class=\"inline-block my-4 btn border py-4 px-5 text-black text-sm\">Add Invoice</a>"
