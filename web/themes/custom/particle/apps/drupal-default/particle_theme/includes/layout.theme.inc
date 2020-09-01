@@ -25,6 +25,12 @@ function particle_preprocess_html(&$variables) {
   if ($tools->isFrontPage()) {
     $variables['html_attributes']->addClass('front');
   }
+
+  $roles = $tools->getCurrentRoles();
+
+  if (in_array('client', $roles)) {
+    $variables['html_attributes']->addClass('client');
+  }
 }
 
 /**

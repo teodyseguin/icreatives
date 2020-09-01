@@ -88,3 +88,7 @@ main[role="main"] .layout-content {
 #block-mainnavigation .is-active {
   text-decoration: underline;
 }
+
+html.client .add-page-button {
+  display: none;
+}
