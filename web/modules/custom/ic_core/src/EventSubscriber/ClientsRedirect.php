@@ -43,25 +43,9 @@ class ClientsRedirect implements EventSubscriberInterface {
    * Redirect the user to the front page or the login page if he is an anonymous user.
    */
   public function redirectToProperPage(GetResponseEvent $event) {
-    // This is necessary because this also gets called on
-    // node sub-tabs such as "edit", "revisions", etc.
-    // This prevents those pages from redirected.
-    // if ($this->request->attributes->get('_route') !== 'entity.node.canonical') {
-    //   return;
-    // }
-
     $roles = $this->tools->getCurrentRoles();
     $currentUser = $this->tools->getCurrentUser();
     $currentUserId = $currentUser->id();
-
-    // Products page client
-    // products?field_client_target_id=<user id>
-
-    // Inbox per client
-    // inbox?field_client_target_id=<user id>
-
-    // Invoice per client
-    // invoice?field_client_target_id=<user id>
 
     if (!in_array('client', $roles)) {
       return;
