@@ -9,6 +9,7 @@ import 'protons';
 
 // Module template
 import './_product-card.twig';
+import './index.css';
 
 export const name = 'product-card';
 

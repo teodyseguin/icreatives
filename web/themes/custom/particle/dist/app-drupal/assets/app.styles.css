@@ -96056,6 +96056,10 @@ select {
   display: inline-block;
 }
 
+.product-card {
+  height: 136px;
+}
+
 .clock[data-v-cd6b6e44] {
   width: 200px;
   height: 200px;
