@@ -12,6 +12,7 @@ function particle_preprocess_node(array &$variables) {
   $tools = \Drupal::service('ic_core.ic_core_tools');
   $file_storage = $tools->getStorage('file');
   $image_style_storage = $tools->getStorage('image_style');
+  $commerce_product_variation_storage = $tools->getStorage('commerce_product_variation');
 
   // Default to turning off byline/submitted.
   $variables['display_submitted'] = FALSE;
@@ -25,21 +26,25 @@ function particle_preprocess_node(array &$variables) {
     if (!empty($product)) {
       $product = reset($product);
       $variables['product_name'] = $product->getTitle();
+      $variations = $product->variations->getValue();
+
+      if (!empty($variations)) {
+        $variation_id = $variations[0]['target_id'];
+        $product_variation = $commerce_product_variation_storage->load($variation_id);
+        $product_variation_image = $product_variation->field_image->getValue();
+
+        if (!empty($product_variation_image)) {
+          $product_variation_image = reset($product_variation_image);
+          $product_variation_image = $file_storage->load($product_variation_image['target_id']);
+          $style = $image_style_storage->load('message_image');
+          $variables['file_image'] = $style->buildUrl($product_variation_image->get('uri')->value);
+        }
+      }
     }
 
     if (!empty($client)) {
       $client = reset($client);
       $variables['client_name'] = $tools->getUserFullName($client->id());
-    }
-
-    $file_image = $node->field_image->getValue();
-
-    if (!empty($file_image)) {
-      $file_image = reset($file_image);
-      $file_image = $file_storage->load($file_image['target_id']);
-
-      $style = $image_style_storage->load('message_image');
-      $variables['file_image'] = $style->buildUrl($file_image->get('uri')->value);
     }
   }
 }
