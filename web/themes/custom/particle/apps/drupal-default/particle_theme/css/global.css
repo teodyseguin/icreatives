@@ -69,13 +69,13 @@ h1, h2, h3, h4, h5, h6 {
   margin: 5px;
 }
 
-main[role="main"] .layout-sidebar-first {
-  width: 14%;
+/* main[role="main"] .layout-sidebar-first {
+  width: 267px;
 }
 
 main[role="main"] .layout-content {
   width: 86%;
-}
+} */
 
 .layout-container {
   margin: 0;
@@ -87,6 +87,11 @@ main[role="main"] .layout-content {
 
 #block-mainnavigation .is-active {
   text-decoration: underline;
+}
+
+#block-mainnavigation ul {
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
 }
 
 html.client .add-page-button {
