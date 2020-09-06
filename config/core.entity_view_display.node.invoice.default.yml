@@ -6,10 +6,12 @@ dependencies:
     - field.field.node.invoice.body
     - field.field.node.invoice.field_client
     - field.field.node.invoice.field_date
+    - field.field.node.invoice.field_invoice
     - field.field.node.invoice.field_invoice_link
     - node.type.invoice
   module:
     - datetime
+    - file
     - link
     - text
     - user
@@ -41,6 +43,14 @@ content:
       timezone_override: ''
     third_party_settings: {  }
     type: datetime_default
+    region: content
+  field_invoice:
+    weight: 105
+    label: above
+    settings:
+      use_description_as_link_text: true
+    third_party_settings: {  }
+    type: file_default
     region: content
   field_invoice_link:
     weight: 104

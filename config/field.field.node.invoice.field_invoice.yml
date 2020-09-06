@@ -1,0 +1,27 @@
+uuid: 4b9ae584-9440-4e3f-a1e4-68b257bcfbec
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_invoice
+    - node.type.invoice
+  module:
+    - file
+id: node.invoice.field_invoice
+field_name: field_invoice
+entity_type: node
+bundle: invoice
+label: Invoice
+description: 'Upload your Invoice here...'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  file_directory: '[date:custom:Y]-[date:custom:m]'
+  file_extensions: 'txt pdf doc'
+  max_filesize: ''
+  description_field: false
+  handler: 'default:file'
+  handler_settings: {  }
+field_type: file

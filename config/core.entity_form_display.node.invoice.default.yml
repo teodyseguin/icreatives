@@ -6,10 +6,12 @@ dependencies:
     - field.field.node.invoice.body
     - field.field.node.invoice.field_client
     - field.field.node.invoice.field_date
+    - field.field.node.invoice.field_invoice
     - field.field.node.invoice.field_invoice_link
     - node.type.invoice
   module:
     - datetime
+    - file
     - link
     - path
     - text
@@ -45,6 +47,13 @@ content:
     settings: {  }
     third_party_settings: {  }
     type: datetime_default
+    region: content
+  field_invoice:
+    weight: 26
+    settings:
+      progress_indicator: throbber
+    third_party_settings: {  }
+    type: file_generic
     region: content
   field_invoice_link:
     weight: 3
