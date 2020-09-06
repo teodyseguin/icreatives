@@ -9,8 +9,12 @@
  */
 #}
 
-<div class="aside">
-  <h1>aside</h1>
-  <div>Do good work!</div>
-  <div>Example scoped variable: <code>{{ aside.example_var }}</code></div>
-</div>
+<aside class="layout-sidebar-first bg-yelloworange min-h-screen w-0 hidden lg:block lg:w-1/6 font-sansserif text-white" role="complementary">
+  <h5 class="text-white text-center font-sansserif font-bold uppercase mt-10 mb-1">
+    Imaginarium Creatives
+  </h5>
+
+  <div class="ml-5 mr-5 border-b border-white"></div>
+
+  {{ sidebar_first }}
+</aside>
