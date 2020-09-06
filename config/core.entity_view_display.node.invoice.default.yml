@@ -7,12 +7,10 @@ dependencies:
     - field.field.node.invoice.field_client
     - field.field.node.invoice.field_date
     - field.field.node.invoice.field_invoice
-    - field.field.node.invoice.field_invoice_link
     - node.type.invoice
   module:
     - datetime
     - file
-    - link
     - text
     - user
 id: node.invoice.default
@@ -51,18 +49,6 @@ content:
       use_description_as_link_text: true
     third_party_settings: {  }
     type: file_default
-    region: content
-  field_invoice_link:
-    weight: 104
-    label: above
-    settings:
-      trim_length: 80
-      target: _blank
-      url_only: false
-      url_plain: false
-      rel: '0'
-    third_party_settings: {  }
-    type: link
     region: content
   links:
     weight: 100

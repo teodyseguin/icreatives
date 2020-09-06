@@ -8,7 +8,6 @@ dependencies:
     - field.field.node.invoice.field_client
     - field.field.node.invoice.field_date
     - field.field.node.invoice.field_invoice
-    - field.field.node.invoice.field_invoice_link
     - node.type.invoice
   module:
     - text
@@ -35,4 +34,3 @@ hidden:
   field_client: true
   field_date: true
   field_invoice: true
-  field_invoice_link: true

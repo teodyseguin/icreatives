@@ -7,14 +7,14 @@ dependencies:
     - field.storage.node.body
     - field.storage.node.field_client
     - field.storage.node.field_date
-    - field.storage.node.field_invoice_link
+    - field.storage.node.field_invoice
     - node.type.invoice
     - user.role.administrator
     - user.role.client
     - user.role.site_admin
   module:
     - datetime
-    - link
+    - file
     - node
     - text
     - user
@@ -298,14 +298,14 @@ display:
           separator: ', '
           field_api_classes: false
           plugin_id: field
-        field_invoice_link:
-          id: field_invoice_link
-          table: node__field_invoice_link
-          field: field_invoice_link
+        field_invoice:
+          id: field_invoice
+          table: node__field_invoice
+          field: field_invoice
           relationship: none
           group_type: group
           admin_label: ''
-          label: 'Invoice link'
+          label: Invoice
           exclude: false
           alter:
             alter_text: false
@@ -346,14 +346,10 @@ display:
           hide_empty: false
           empty_zero: false
           hide_alter_empty: true
-          click_sort_column: uri
-          type: link
+          click_sort_column: target_id
+          type: file_default
           settings:
-            trim_length: 80
-            url_only: false
-            url_plain: false
-            rel: '0'
-            target: _blank
+            use_description_as_link_text: false
           group_column: ''
           group_columns: {  }
           group_rows: true
@@ -690,7 +686,7 @@ display:
         - 'config:field.storage.node.body'
         - 'config:field.storage.node.field_client'
         - 'config:field.storage.node.field_date'
-        - 'config:field.storage.node.field_invoice_link'
+        - 'config:field.storage.node.field_invoice'
   page_2:
     display_plugin: page
     id: page_2
@@ -726,4 +722,4 @@ display:
         - 'config:field.storage.node.body'
         - 'config:field.storage.node.field_client'
         - 'config:field.storage.node.field_date'
-        - 'config:field.storage.node.field_invoice_link'
+        - 'config:field.storage.node.field_invoice'
