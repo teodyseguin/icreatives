@@ -19,7 +19,7 @@
       return;
     }
 
-    $('.views-exposed-form .input--text').val(selectedValue);
+    $('.views-exposed-form #edit-field-client-target-id').val(selectedValue);
     $('.views-exposed-form .input--submit').trigger('click');
     localStorage.setItem('selectedClient', selectedValue);
   });
