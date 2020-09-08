@@ -167,6 +167,18 @@ class IcCoreTools {
   }
 
   /**
+   * Get the site admin user.
+   */
+  public function getSiteAdmin() {
+    $ids = $this->getStorage('user')->getQuery()
+    ->condition('status', 1)
+    ->condition('roles', 'site_admin')
+    ->execute();
+
+    return $this->getStorage('user')->loadMultiple($ids);
+  }
+
+  /**
    * Get the full name of the user field field first and last name is not empty.
    * Otherwise, this function will return the username of the current user.
    */
