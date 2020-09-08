@@ -16,6 +16,6 @@
 function particle_preprocess_comment(array &$variables) {
   $tools = \Drupal::service('ic_core.ic_core_tools');
 
-  $user = $variables['user'];
-  $variables['client_name'] = $tools->getUserFullName($user->id());
+  $author_id = $variables['author_id'];
+  $variables['client_name'] = $tools->getUserFullName($author_id);
 }
