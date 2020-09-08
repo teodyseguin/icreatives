@@ -97,3 +97,9 @@ main[role="main"] .layout-content {
 html.client .add-page-button {
   display: none;
 }
+
+.message-count {
+  display: inline-block;
+  float: right;
+  font-weight: bold;
+}
