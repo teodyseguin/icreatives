@@ -8,15 +8,12 @@ dependencies:
     - field.field.node.message.field_client
     - field.field.node.message.field_customer_name
     - field.field.node.message.field_date
-    - field.field.node.message.field_image
     - field.field.node.message.field_message_tags
     - field.field.node.message.field_product_name
-    - image.style.thumbnail
     - node.type.message
   module:
     - comment
     - datetime
-    - image
     - path
     - text
 id: node.message.default
@@ -65,14 +62,6 @@ content:
     settings: {  }
     third_party_settings: {  }
     type: datetime_default
-    region: content
-  field_image:
-    weight: 13
-    settings:
-      progress_indicator: throbber
-      preview_image_style: thumbnail
-    third_party_settings: {  }
-    type: image_image
     region: content
   field_message_tags:
     weight: 6

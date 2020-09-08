@@ -9,14 +9,11 @@ dependencies:
     - field.field.node.message.field_client
     - field.field.node.message.field_customer_name
     - field.field.node.message.field_date
-    - field.field.node.message.field_image
     - field.field.node.message.field_message_tags
     - field.field.node.message.field_product_name
-    - image.style.message_image
     - node.type.message
   module:
     - comment
-    - image
     - text
     - user
 id: node.message.default
@@ -55,15 +52,6 @@ content:
       link_to_entity: false
     third_party_settings: {  }
     type: string
-    region: content
-  field_image:
-    weight: 0
-    label: hidden
-    settings:
-      image_style: message_image
-      image_link: ''
-    third_party_settings: {  }
-    type: image
     region: content
   field_message_tags:
     weight: 4
