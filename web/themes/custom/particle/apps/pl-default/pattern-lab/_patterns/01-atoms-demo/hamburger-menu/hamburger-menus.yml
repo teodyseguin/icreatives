@@ -1,0 +1,9 @@
+hamburger_menu_demo_block:
+  title: Hamburger Menu Component
+  content:
+    lead: Add a quick description here.
+    summary: Add code examples here using <code>html code syntax</code>
+
+hamburger_menu:
+  example_var: This is an example var
+
