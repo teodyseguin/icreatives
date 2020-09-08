@@ -17,6 +17,13 @@ function particle_preprocess(&$variables) {
   $variables['paths']['images'] = Particle::IMAGES_PATH;
   $variables['paths']['fonts'] = Particle::FONTS_PATH;
   $variables['paths']['svgs'] = Particle::SVGS_PATH;
+
+  // We want to get the message counts per current logged in user,
+  // and store it to the drupalSettings.
+  $tools = \Drupal::service('ic_core.ic_core_tools');
+  $user_data = \Drupal::service('user.data');
+  $current_user_id = $tools->getCurrentUser()->id();
+  $variables['#attached']['drupalSettings']['ic']['messages'] = $user_data->get('ic_core', $current_user_id, 'messages');
 }
 
 /**
