@@ -9,12 +9,14 @@ dependencies:
     - field.storage.node.field_date
     - field.storage.node.field_message_tags
     - node.type.message
+    - taxonomy.vocabulary.message_tags
     - user.role.administrator
     - user.role.client
     - user.role.site_admin
   module:
     - datetime
     - node
+    - taxonomy
     - text
     - user
 id: inbox
@@ -86,12 +88,21 @@ display:
           summary: ''
           description: ''
           columns:
+            nid: nid
             title: title
             field_date: field_date
             field_message_tags: field_message_tags
             body: body
             field_customer_name: field_customer_name
+            view_node: view_node
           info:
+            nid:
+              sortable: false
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
             title:
               sortable: false
               default_sort_order: asc
@@ -107,8 +118,6 @@ display:
               empty_column: false
               responsive: ''
             field_message_tags:
-              sortable: false
-              default_sort_order: asc
               align: ''
               separator: ''
               empty_column: false
@@ -122,6 +131,13 @@ display:
               responsive: ''
             field_customer_name:
               sortable: true
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            view_node:
+              sortable: false
               default_sort_order: asc
               align: ''
               separator: ''
@@ -555,6 +571,98 @@ display:
             default_group_multiple: {  }
             group_items: {  }
           plugin_id: numeric
+        field_message_tags_target_id:
+          id: field_message_tags_target_id
+          table: node__field_message_tags
+          field: field_message_tags_target_id
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: or
+          value: {  }
+          group: 1
+          exposed: true
+          expose:
+            operator_id: field_message_tags_target_id_op
+            label: Filter
+            description: ''
+            use_operator: false
+            operator: field_message_tags_target_id_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: field_message_tags_target_id
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              administrator: '0'
+              client: '0'
+              site_admin: '0'
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+          type: textfield
+          limit: true
+          vid: message_tags
+          hierarchy: false
+          error_message: true
+          plugin_id: taxonomy_index_tid
+        body_value:
+          id: body_value
+          table: node__body
+          field: body_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: allwords
+          value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: body_value_op
+            label: 'Body (body)'
+            description: ''
+            use_operator: false
+            operator: body_value_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: body_value
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              administrator: '0'
+              client: '0'
+              site_admin: '0'
+            placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          plugin_id: string
       sorts:
         created:
           id: created
@@ -701,7 +809,7 @@ display:
           empty: true
           tokenize: false
           content:
-            value: "<h3 class=\"font-sansserif\">Inbox</h3>\r\n<a href=\"/node/add/message\" class=\"inline-block my-4 btn border py-4 px-5 text-black text-sm add-page-button\">Add Message</a>"
+            value: "<div class=\"header-left\">\r\n  <h3 class=\"font-sansserif\">Inbox</h3>\r\n  <a href=\"/node/add/message\" class=\"inline-block my-4 btn border py-4 px-5 text-black text-sm add-page-button\">Add Message</a>\r\n</div>\r\n<div class=\"header-right flex-grow text-right relative\">\r\n  <input type=\"text\" class=\"border rounded-md p-2 pr-16\"><button type=\"button\" class=\"absolute right-0\">Search</button>\r\n</div>"
             format: full_html
           plugin_id: text
       empty:
@@ -720,6 +828,72 @@ display:
           plugin_id: text
       css_class: inbox-table
       fields:
+        nid:
+          id: nid
+          table: node_field_data
+          field: nid
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: ID
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: number_integer
+          settings:
+            thousand_separator: ''
+            prefix_suffix: true
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          entity_type: node
+          entity_field: nid
+          plugin_id: field
         title:
           id: title
           table: node_field_data
@@ -795,8 +969,8 @@ display:
           label: Date
           exclude: false
           alter:
-            alter_text: false
-            text: ''
+            alter_text: true
+            text: '<span data-id="{{ nid }}">{{ field_date__value }}</span>'
             make_link: false
             path: ''
             absolute: false
@@ -859,8 +1033,8 @@ display:
           label: Tags
           exclude: false
           alter:
-            alter_text: false
-            text: ''
+            alter_text: true
+            text: '<span data-id="{{ nid }}"><a href="/inbox?field_message_tags_target_id={{ field_message_tags|url_encode }}">{{ field_message_tags }}</a></span>'
             make_link: false
             path: ''
             absolute: false
@@ -922,8 +1096,8 @@ display:
           label: Description
           exclude: false
           alter:
-            alter_text: false
-            text: ''
+            alter_text: true
+            text: '<span data-id="{{ nid }}">{{ body }}</span>'
             make_link: false
             path: ''
             absolute: false
@@ -984,8 +1158,8 @@ display:
           label: Name
           exclude: false
           alter:
-            alter_text: false
-            text: ''
+            alter_text: true
+            text: '<span data-id="{{ nid }}">{{ field_customer_name }}</span>'
             make_link: false
             path: ''
             absolute: false
@@ -1097,6 +1271,7 @@ display:
         - 'languages:language_interface'
         - url
         - url.query_args
+        - user
         - 'user.node_grants:view'
         - user.roles
       tags:
