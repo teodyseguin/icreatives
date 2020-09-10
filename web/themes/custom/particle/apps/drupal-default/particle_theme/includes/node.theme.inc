@@ -13,6 +13,7 @@ function particle_preprocess_node(array &$variables) {
   $file_storage = $tools->getStorage('file');
   $image_style_storage = $tools->getStorage('image_style');
   $commerce_product_variation_storage = $tools->getStorage('commerce_product_variation');
+  $term_storage = $tools->getStorage('taxonomy_term');
 
   // Default to turning off byline/submitted.
   $variables['display_submitted'] = FALSE;
@@ -22,6 +23,7 @@ function particle_preprocess_node(array &$variables) {
   if ($node->bundle() == 'message') {
     $product = $node->field_product_name->referencedEntities();
     $client = $node->field_client->referencedEntities();
+    $tags = $node->field_message_tags->getValue();
 
     if (!empty($product)) {
       $product = reset($product);
@@ -39,6 +41,17 @@ function particle_preprocess_node(array &$variables) {
           $style = $image_style_storage->load('message_image');
           $variables['file_image'] = $style->buildUrl($product_variation_image->get('uri')->value);
         }
+      }
+    }
+
+    if (!empty($tags)) {
+      foreach ($tags as $tag) {
+        $term_name = $term_storage->load($tag['target_id'])->get('name')->value;
+        $term_link = "/inbox?field_message_tags_target_id=" . urlencode($term_name);
+        $variables['tags'][] = [
+          'link' => $term_link,
+          'name' => $term_name,
+        ];
       }
     }
 

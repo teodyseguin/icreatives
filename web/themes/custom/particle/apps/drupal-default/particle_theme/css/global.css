@@ -69,14 +69,6 @@ h1, h2, h3, h4, h5, h6 {
   margin: 5px;
 }
 
-/* main[role="main"] .layout-sidebar-first {
-  width: 267px;
-}
-
-main[role="main"] .layout-content {
-  width: 86%;
-} */
-
 .layout-container {
   margin: 0;
 }
@@ -102,4 +94,13 @@ html.client .add-page-button {
   display: inline-block;
   float: right;
   font-weight: bold;
+}
+
+table caption details {
+  display: none;
+}
+
+.ui-autocomplete .ui-menu-item .ui-menu-item-wrapper {
+  display: block;
+  width: 100%;
 }

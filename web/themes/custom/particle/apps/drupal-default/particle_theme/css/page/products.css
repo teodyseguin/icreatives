@@ -15,3 +15,8 @@
 .views-exposed-form {
   display: none;
 }
+
+.product-lists .rows-wrapper {
+  margin-left: -25px;
+  margin-right: -25px;
+}

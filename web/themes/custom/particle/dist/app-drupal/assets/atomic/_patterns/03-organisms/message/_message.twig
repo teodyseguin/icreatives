@@ -21,7 +21,7 @@
         {% endif %}
       </div>
     </div>
-    <div class="info w-5/6 flex flex-col flex-no-wrap">
+    <div class="info w-5/6 flex flex-col flex-no-wrap relative">
       <div class="info__product-name font-sansserif mb-5 uppercase font-bold text-gray-800">
         {{ product_name }}
       </div>
@@ -29,8 +29,15 @@
         {{ customer_name }}
       </div>
       <div class="info__comments font-sansserif">
-        <div class="flex uppercase font-bold font-sansserif mb-5 text-gray-800">Commens/Inquiry</div>
+        <div class="flex uppercase font-bold font-sansserif mb-5 text-gray-800">Comments/Inquiry</div>
         {{ comments|raw }}
+      </div>
+      <div class="info__tags font-sansserif absolute bottom-0">
+        {% if tags %}
+          {% for tag in tags %}
+            <a href="{{ tag['link'] }}" class="text-gray-800 mr-1">{{ tag['name'] }}</a>
+          {% endfor %}
+        {% endif %}
       </div>
     </div>
   </div>
