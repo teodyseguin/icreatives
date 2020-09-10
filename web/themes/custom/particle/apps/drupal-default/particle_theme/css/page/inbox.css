@@ -53,6 +53,10 @@
   display: none;
 }
 
+.inbox-table .js-form-item-body-value {
+  display: none;
+}
+
 .inbox-table .views-exposed-form {
   margin-bottom: 30px;
 }
@@ -82,7 +86,7 @@
 
 .inbox-table .rows-wrapper {
   display: flex;
-  padding: 20px;
+  padding-top: 0;
   padding-bottom: 60px;
   border: 1px solid #ccc;
   box-shadow: 0 5px 7px #ccc;
