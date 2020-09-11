@@ -27,6 +27,11 @@ client_filter:
     js/client-filter.js:
       minified: true
 
+search_inbox:
+  js:
+    js/search-inbox.js:
+      minified: true
+
 message_indicator:
   js:
     js/message-indicator.js:
