@@ -1,11 +1,14 @@
 (function clientFilterModule($) {
-  if (drupalSettings.path.hasOwnProperty('currentQuery')) {
-    const selectedClient = localStorage.getItem('selectedClient');
+  const { currentQuery } = drupalSettings.path;
 
-    // If selectedClient is available from local storage,
-    // then we set that value as a default for the client filter.
-    if (selectedClient) {
-      $('.filter .selectbox select').val(selectedClient);
+  if (currentQuery) {
+    const { field_client_target_id } = currentQuery;
+
+    if (field_client_target_id !== '') {
+      $('.filter .selectbox select').val(field_client_target_id);
+    }
+    else {
+      $('.filter .selectbox select').val('all');
     }
   }
 
@@ -21,6 +24,5 @@
 
     $('.views-exposed-form #edit-field-client-target-id').val(selectedValue);
     $('.views-exposed-form .input--submit').trigger('click');
-    localStorage.setItem('selectedClient', selectedValue);
   });
 })(jQuery);
