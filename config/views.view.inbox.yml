@@ -809,7 +809,7 @@ display:
           empty: true
           tokenize: false
           content:
-            value: "<div class=\"header-left\">\r\n  <h3 class=\"font-sansserif\">Inbox</h3>\r\n  <a href=\"/node/add/message\" class=\"inline-block my-4 btn border py-4 px-5 text-black text-sm add-page-button\">Add Message</a>\r\n</div>\r\n<div class=\"header-right flex-grow text-right relative\">\r\n  <input type=\"text\" class=\"border rounded-md p-2 pr-16\"><button type=\"button\" class=\"absolute right-0\">Search</button>\r\n</div>"
+            value: "<div class=\"header-left\">\r\n  <h3 class=\"font-sansserif\">Inbox</h3>\r\n  <a href=\"/node/add/message\" class=\"inline-block my-4 btn border py-4 px-5 text-black text-sm add-page-button\">Add Message</a>\r\n</div>\r\n<div class=\"header-right flex-grow text-right relative\">\r\n  <div class=\"overflow-hidden\">\r\n    <input type=\"text\" class=\"border rounded-l-md p-2 w-1/4\"><button type=\"button\" class=\"py-2 px-3 rounded-r-md bg-yelloworange\"><i class=\"fas fa-search text-white\"></i></button>\r\n  </div>\r\n</div>"
             format: full_html
           plugin_id: text
       empty:
