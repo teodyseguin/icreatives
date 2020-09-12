@@ -12,9 +12,15 @@ use Drupal\Core\Form\FormStateInterface;
  */
 function ic_core_form_alter(&$form, FormStateInterface $form_state, $form_id) {
   if ($form_id == 'user_login_form') {
+    $form['#attached']['library'][] = 'ic_core/fb_login_button';
     $form['#attached']['library'][] = 'particle/form.user_login';
     $form['name']['#attributes']['placeholder'] = 'Enter Email Address...';
     $form['pass']['#attributes']['placeholder'] = 'Password';
+
+    $form['actions']['fb_simple_connect'] = [
+      '#type' => 'button',
+      '#value' => 'Facebook Login',
+    ];
   }
 
   if ($form_id == 'comment_messages_form') {

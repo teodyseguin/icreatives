@@ -1,0 +1,4 @@
+fb_login_button:
+  js:
+    js/fb-login-button.js:
+      minified: true
