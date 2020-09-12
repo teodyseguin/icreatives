@@ -55,6 +55,15 @@ export default enable;
 
 $(document).ready(function main() {
   $('#nav-icon1').click(function toggleHamburgerMenu() {
-    $(this).toggleClass('open');
+    // $(this).toggleClass('open');
+    $('#page-left-sidebar')
+      .addClass('fixed z-50 w-full')
+      .removeClass('hidden w-0');
+  });
+
+  $('.fa-times').click(function closeAside() {
+    $('#page-left-sidebar')
+      .removeClass('fixed z-50 w-full')
+      .addClass('hidden w-0');
   });
 });

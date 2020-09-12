@@ -96018,9 +96018,11 @@ tr {
 
 #nav-icon1 {
   position: relative;
-  width: 60px;
-  height: 45px;
-  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  width: 35px;
+  height: 30px;
+  margin: 20px 10px;
   transform: rotate(0deg);
   transition: .5s ease-in-out;
   cursor: pointer;
@@ -96028,7 +96030,6 @@ tr {
 
 #nav-icon1 span {
   display: block;
-  position: absolute;
   height: 9px;
   width: 100%;
   background: var(--yelloworange);
@@ -96039,17 +96040,17 @@ tr {
   transition: .25s ease-in-out;
 }
 
-#nav-icon1 span:nth-child(1) {
-  top: 0px;
+/* #nav-icon1 span:nth-child(1) {
+  top: 0;
 }
 
 #nav-icon1 span:nth-child(2) {
-  top: 18px;
+  margin: 10px 0;
 }
 
 #nav-icon1 span:nth-child(3) {
-  top: 36px;
-}
+  bottom: 0;
+} */
 
 #nav-icon1.open span:nth-child(1) {
   top: 18px;
