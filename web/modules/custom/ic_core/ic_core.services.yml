@@ -30,3 +30,9 @@ services:
       - '@entity_type.manager'
       - '@current_user'
       - '@user.data'
+      - '@simple_fb_connect.fb_factory'
+
+  ic_core.fb_service:
+    class: Drupal\ic_core\IcFbService
+    arguments:
+      - '@ic_core.ic_core_tools'
