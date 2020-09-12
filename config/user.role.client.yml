@@ -7,6 +7,7 @@ label: Client
 weight: 3
 is_admin: null
 permissions:
+  - 'access ic pages'
   - 'create online commerce_store'
   - 'update own online commerce_store'
   - 'use text format restricted_html'
