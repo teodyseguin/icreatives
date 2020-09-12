@@ -34,10 +34,14 @@
         <div class="top-details flex w-full justify-end border-b border-gray-400 shadow-lg">
           <div class="flex-grow block lg:hidden">{% include '@atoms/hamburger-menu/_hamburger-menu.twig' %}</div>
           <div class="flex text-right mr-10 align-middle justify-center">
-            <svg class="flex h-8 w-8 mt-4" viewBox="0 0 20 20" fill="#ccc" class="mail w-6 h-6"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path></svg>
+            {# <svg class="flex h-8 w-8 mt-4" viewBox="0 0 20 20" fill="#ccc" class="mail w-6 h-6"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path></svg> #}
             <div class="name inline-block ml-4 mr-4 mt-5">{{ full_name }}</div>
             <div class="overflow-hidden avatar inline-block h-10 w-10 bg-yelloworange rounded-full mt-3">
-              <a href="/user/{{ user_id }}"><img src={{ file_url(user_picture) }} /></a>
+              <a href="/user/{{ user_id }}" class="flex w-full h-full">
+                {% if user_picture %}
+                 <img src={{ file_url(user_picture) }} />
+                {% endif %}
+              </a>
             </div>
           </div>
         </div>
@@ -48,22 +52,22 @@
             <div class="flex flex-col md:flex-row">
               {% include '@atoms/rounded-box/_rounded-box.twig' with {
                 "title": "Question 1",
-                "count": 35,
+                "count": 0,
                 "shadow": true
               } %}
               {% include '@atoms/rounded-box/_rounded-box.twig' with {
                 "title": "Question 2",
-                "count": 15,
+                "count": 0,
                 "shadow": true
               }%}
               {% include '@atoms/rounded-box/_rounded-box.twig' with {
                 "title": "Question 3",
-                "count": 8,
+                "count": 0,
                 "shadow": true
               } %}
               {% include '@atoms/rounded-box/_rounded-box.twig' with {
                 "title": "Question 4",
-                "count": 3,
+                "count": 0,
                 "shadow": true
               } %}
             </div>
@@ -74,22 +78,22 @@
             <div class="flex flex-col md:flex-row">
               {% include '@atoms/rounded-box/_rounded-box.twig' with {
                 "title": "Question 5",
-                "count": 10,
+                "count": 0,
                 "shadow": true
               } %}
               {% include '@atoms/rounded-box/_rounded-box.twig' with {
                 "title": "Question 6",
-                "count": 56,
+                "count": 0,
                 "shadow": true
               } %}
               {% include '@atoms/rounded-box/_rounded-box.twig' with {
                 "title": "Question 7",
-                "count": 100,
+                "count": 0,
                 "shadow": true
               } %}
               {% include '@atoms/rounded-box/_rounded-box.twig' with {
                 "title": "Question 8",
-                "count": 5,
+                "count": 0,
                 "shadow": true
               } %}
             </div>
@@ -103,22 +107,22 @@
               <div class="flex flex-col flex-grow">
                 {% include '@atoms/rounded-box/_rounded-box.twig' with {
                   "title": "Total Facebook Followers",
-                  "count": 5,
+                  "count": 0,
                   "shadow": true
                 } %}
                 {% include '@atoms/rounded-box/_rounded-box.twig' with {
                   "title": "Total Facebook Reach",
-                  "count": 5,
+                  "count": 0,
                   "shadow": true
                 } %}
                 {% include '@atoms/rounded-box/_rounded-box.twig' with {
                   "title": "Total Facebook Impressions",
-                  "count": 5,
+                  "count": 0,
                   "shadow": true
                 } %}
                 {% include '@atoms/rounded-box/_rounded-box.twig' with {
                   "title": "Link Clicks",
-                  "count": 5,
+                  "count": 0,
                   "shadow": true
                 } %}
               </div>
@@ -126,12 +130,12 @@
               <div class="flex flex-col flex-grow">
                 {% include '@atoms/rounded-box/_rounded-box.twig' with {
                   "title": "Engagement rate",
-                  "count": 5,
+                  "count": 0,
                   "shadow": true
                 } %}
                 {% include '@atoms/rounded-box/_rounded-box.twig' with {
                   "title": "Top 5 contents",
-                  "count": 5,
+                  "count": 0,
                   "shadow": true
                 } %}
               </div>
@@ -144,12 +148,12 @@
               <div class="flex flex-col flex-grow">
                 {% include '@atoms/rounded-box/_rounded-box.twig' with {
                   "title": "Gender and Age of Followers",
-                  "count": 5,
+                  "count": 0,
                   "shadow": true
                 } %}
                 {% include '@atoms/rounded-box/_rounded-box.twig' with {
                   "title": "Gender and Age of Audience Reached",
-                  "count": 5,
+                  "count": 0,
                   "shadow": true
                 } %}
               </div>
@@ -157,12 +161,12 @@
               <div class="flex flex-col flex-grow">
                 {% include '@atoms/rounded-box/_rounded-box.twig' with {
                   "title": "Location of Followers",
-                  "count": 5,
+                  "count": 0,
                   "shadow": true
                 } %}
                 {% include '@atoms/rounded-box/_rounded-box.twig' with {
                   "title": "Location of Audience Reached",
-                  "count": 5,
+                  "count": 0,
                   "shadow": true
                 } %}
               </div>
