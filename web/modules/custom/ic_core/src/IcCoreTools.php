@@ -11,6 +11,7 @@ use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Session\AccountInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Drupal\user\UserDataInterface;
+use Drupal\simple_fb_connect\SimpleFbConnectFbFactory;
 
 /**
  * A utility class for various usage and purpose.
@@ -65,6 +66,8 @@ class IcCoreTools {
    */
   protected $userData;
 
+  protected $simpleFbConnect;
+
   /**
    * Constructor.
    *
@@ -78,7 +81,8 @@ class IcCoreTools {
     PathMatcher $pathMatcher,
     EntityTypeManagerInterface $entityTypeManager,
     AccountInterface $currentUser,
-    UserDataInterface $userData) {
+    UserDataInterface $userData,
+    SimpleFbConnectFbFactory $simpleFbConnect) {
 
     $this->session = $session;
     $this->currentPath = $currentPath;
@@ -87,6 +91,7 @@ class IcCoreTools {
     $this->entityTypeManager = $entityTypeManager;
     $this->currentUser = $currentUser;
     $this->userData = $userData;
+    $this->simpleFbConnect = $simpleFbConnect;
   }
 
   /**
@@ -107,16 +112,24 @@ class IcCoreTools {
    * @param \Symfony\Component\EventDispatcher\GenericEvent $event
    *   The event dispatched by simple facebook connect.
    */
-  public function setFbData($accessToken, GenericEvent $event) {
+  public function setUserData($accessToken, GenericEvent $event) {
     // The subject is actually the user object.
     $subject = $event->getSubject();
+    $fbId = $event->getArgument('fbid');
 
-    // Update the field with the obtained access token.
-    $subject->set('field_facebook_access_token', $accessToken);
+    // Adding a role of client.
+    $subject->addRole('client');
+    // We need at least to save the user object so that the uid will become available.
     $subject->save();
 
     // Set an indicator telling that this is the first time this user logged in to the site.
     $this->userData->set('ic_core', $subject->id(), 'first_time_login', TRUE);
+
+    // Store the fbid to user data.
+    $this->userData->set('ic_core', $subject->id(), 'fbid', $fbId);
+
+    // Store the fb access token to user data.
+    $this->userData->set('ic_core', $subject->id(), 'fb_access_token', (string) $accessToken);
   }
 
   /**
@@ -153,8 +166,18 @@ class IcCoreTools {
     return $this->entityTypeManager->getStorage($storage);
   }
 
+  /**
+   * Get the user data service.
+   */
   public function getUserData() {
     return $this->userData;
+  }
+
+  /**
+   * Get the fb service.
+   */
+  public function getFbService() {
+    return $this->simpleFbConnect->getFbService();
   }
 
   /**
@@ -209,6 +232,7 @@ class IcCoreTools {
    */
   public function getUserFullName($current_user_id = NULL) {
     $user_storage = $this->getStorage('user');
+    $full_name = '';
 
     if (!$current_user_id) {
       $current_user_id = $this->getCurrentUser()->id();
@@ -222,14 +246,14 @@ class IcCoreTools {
     if (!empty($first_name)) {
       $first_name = reset($first_name);
       $first_name = $first_name['value'];
+      $full_name .= $first_name . ' ';
     }
 
     if (!empty($last_name)) {
       $last_name = reset($last_name);
       $last_name = $last_name['value'];
+      $full_name .= $last_name;
     }
-
-    $full_name = "$first_name $last_name";
 
     if ($full_name == '') {
       return $current_user->get('name')->value;

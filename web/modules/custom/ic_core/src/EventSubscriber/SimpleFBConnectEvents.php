@@ -54,7 +54,7 @@ class SimpleFBConnectEvents implements EventSubscriberInterface {
     // Upon checking, the token is a long lived token.
     // A 60 days expiration token.
     $accessToken = $this->tools->getSessionKey('simple_fb_connect_access_token');
-    $this->tools->setFbData($accessToken, $event);
+    $this->tools->setUserData($accessToken, $event);
   }
 
 }
