@@ -44,18 +44,24 @@ class NonAuthenticatedRedirect implements EventSubscriberInterface {
    * Redirect the user to the front page or the login page if he is an anonymous user.
    */
   public function redirectToFront(GetResponseEvent $event) {
-    $isAnonymous = $this->tools->isAnonymous();
-    $isFrontPage = $this->tools->isFrontPage();
+    // @TODO
+    // Disabled this for the mean time.
+    // $isAnonymous = $this->tools->isAnonymous();
+    // $isFrontPage = $this->tools->isFrontPage();
 
-    if ($isAnonymous && !$isFrontPage) {
-      $path_alias = $this->tools->getAliasByPath("/");
-      $response = new RedirectResponse($path_alias);
-      $request = \Drupal::request();
-      $request->getSession()->save();
-      $response->prepare($request);
-      \Drupal::service('kernel')->terminate($request, $response);
-      $response->send();
-    }
+    // $pathInfo = $event->getRequest()->getPathInfo();
+
+    // if ($pathInfo != '/user/simple-fb-connect') {
+    //   if ($isAnonymous && !$isFrontPage) {
+    //     $path_alias = $this->tools->getAliasByPath("/");
+    //     $response = new RedirectResponse($path_alias);
+    //     $request = \Drupal::request();
+    //     $request->getSession()->save();
+    //     $response->prepare($request);
+    //     \Drupal::service('kernel')->terminate($request, $response);
+    //     $response->send();
+    //   }
+    // }
   }
 
 }
