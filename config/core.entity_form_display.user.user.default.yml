@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.user.user.field_facebook_access_token
     - field.field.user.user.field_first_name
     - field.field.user.user.field_last_name
     - field.field.user.user.user_picture
@@ -51,7 +52,7 @@ content:
     third_party_settings: {  }
   path:
     type: path
-    weight: 30
+    weight: 7
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -68,4 +69,5 @@ content:
     third_party_settings: {  }
     weight: 1
     region: content
-hidden: {  }
+hidden:
+  field_facebook_access_token: true
