@@ -10,6 +10,7 @@ use Drupal\Core\Path\PathMatcher;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Session\AccountInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Drupal\user\UserDataInterface;
 
 /**
  * A utility class for various usage and purpose.
@@ -58,18 +59,34 @@ class IcCoreTools {
   protected $currentUser;
 
   /**
+   * User Data Interface;
+   *
+   * @var \Drupal\user\UserDataInterface
+   */
+  protected $userData;
+
+  /**
    * Constructor.
    *
    * @param \Symfony\Component\HttpFoundation\Session\SessionInterface $session
    *   Used for reading data from and writing data to session.
    */
-  public function __construct(SessionInterface $session, CurrentPathStack $currentPath, AliasManager $aliasManager, PathMatcher $pathMatcher, EntityTypeManagerInterface $entityTypeManager, AccountInterface $currentUser) {
+  public function __construct(
+    SessionInterface $session,
+    CurrentPathStack $currentPath,
+    AliasManager $aliasManager,
+    PathMatcher $pathMatcher,
+    EntityTypeManagerInterface $entityTypeManager,
+    AccountInterface $currentUser,
+    UserDataInterface $userData) {
+
     $this->session = $session;
     $this->currentPath = $currentPath;
     $this->aliasManager = $aliasManager;
     $this->pathMatcher = $pathMatcher;
     $this->entityTypeManager = $entityTypeManager;
     $this->currentUser = $currentUser;
+    $this->userData = $userData;
   }
 
   /**
@@ -93,9 +110,13 @@ class IcCoreTools {
   public function setFbData($accessToken, GenericEvent $event) {
     // The subject is actually the user object.
     $subject = $event->getSubject();
+
     // Update the field with the obtained access token.
     $subject->set('field_facebook_access_token', $accessToken);
     $subject->save();
+
+    // Set an indicator telling that this is the first time this user logged in to the site.
+    $this->userData->set('ic_core', $subject->id(), 'first_time_login', TRUE);
   }
 
   /**
@@ -130,6 +151,10 @@ class IcCoreTools {
    */
   public function getStorage($storage) {
     return $this->entityTypeManager->getStorage($storage);
+  }
+
+  public function getUserData() {
+    return $this->userData;
   }
 
   /**
