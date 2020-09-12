@@ -25,7 +25,7 @@
   <main role="main">
     <a id="main-content" tabindex="-1"></a>{# link is in html.html.twig #}
     {{ breadcrumb }}
-    <section class="row flex flex-row">
+    <section class="row flex flex-row relative">
       {% include '@organisms/aside/_aside.twig' with {
         "sidebar_first": sidebar_first
       } %}
