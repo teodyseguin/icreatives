@@ -104,3 +104,7 @@ table caption details {
   display: block;
   width: 100%;
 }
+
+#page-left-sidebar h5 {
+  text-underline-position: under;
+}
