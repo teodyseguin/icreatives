@@ -96019,7 +96019,7 @@ tr {
 #nav-icon1 {
   position: relative;
   width: 45px;
-  height: 20px;
+  height: auto;
   margin: 10px;
   transform: rotate(0deg);
   transition: .5s ease-in-out;
@@ -96028,7 +96028,7 @@ tr {
 
 #nav-icon1 span {
   display: block;
-  height: 9px;
+  height: 7px;
   width: 100%;
   background: var(--yelloworange);
   border-radius: 9px;
