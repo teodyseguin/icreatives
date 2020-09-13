@@ -108,3 +108,7 @@ table caption details {
 #page-left-sidebar h5 {
   text-underline-position: under;
 }
+
+button#search-inbox {
+  padding: 9px 15px !important;
+}
