@@ -8,8 +8,15 @@
 }
 
 .product-lists .views-row {
-  width: 20%;
-  margin: 20px 25px;
+  width: 100%;
+  margin: 20px 0;
+}
+
+@media screen and (min-width: 1024px) {
+  .product-lists .views-row {
+    width: 20%;
+    margin: 20px 25px;
+  }
 }
 
 .views-exposed-form {
@@ -17,6 +24,13 @@
 }
 
 .product-lists .rows-wrapper {
-  margin-left: -25px;
-  margin-right: -25px;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+@media screen and (min-width: 1024px) {
+  .product-lists .rows-wrapper {
+    margin-left: -25px;
+    margin-right: -25px;
+  }
 }
