@@ -12,6 +12,7 @@ use Drupal\Core\Session\AccountInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Drupal\user\UserDataInterface;
 use Drupal\simple_fb_connect\SimpleFbConnectFbFactory;
+use Drupal\Core\Logger\LoggerChannelFactoryInterface;
 
 /**
  * A utility class for various usage and purpose.
@@ -66,7 +67,19 @@ class IcCoreTools {
    */
   protected $userData;
 
+  /**
+   * The simple fb connect fb factory.
+   *
+   * @var \Drupal\simple_fb_connect\SimpleFbConnectFbFactory
+   */
   protected $simpleFbConnect;
+
+  /**
+   * Logger factory channel.
+   *
+   * @var \Drupal\Core\Logger\LoggerChannelFactoryInterface
+   */
+  protected $loggerFactory;
 
   /**
    * Constructor.
@@ -82,7 +95,8 @@ class IcCoreTools {
     EntityTypeManagerInterface $entityTypeManager,
     AccountInterface $currentUser,
     UserDataInterface $userData,
-    SimpleFbConnectFbFactory $simpleFbConnect) {
+    SimpleFbConnectFbFactory $simpleFbConnect,
+    LoggerChannelFactoryInterface $loggerFactory) {
 
     $this->session = $session;
     $this->currentPath = $currentPath;
@@ -92,6 +106,26 @@ class IcCoreTools {
     $this->currentUser = $currentUser;
     $this->userData = $userData;
     $this->simpleFbConnect = $simpleFbConnect;
+    $this->loggerFactory = $loggerFactory;
+  }
+
+  /**
+   * Generic logger method for IC.
+   *
+   * @param $message
+   *   A string of message.
+   * @param $type
+   *   A string that describe what type of logger function name to use.
+   */
+  public function logger($message, $type) {
+    $this->loggerFactory->get('ic_core')->{$type}($message);
+  }
+
+  /**
+   * Return the loggerFactory.
+   */
+  public function loggerFactory() {
+    return $this->loggerFactory;
   }
 
   /**
