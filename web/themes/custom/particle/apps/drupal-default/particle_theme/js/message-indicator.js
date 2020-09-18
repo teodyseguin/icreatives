@@ -3,6 +3,10 @@
     const { messages } = drupalSettings.ic;
     let messageCount = 0;
 
+    if (!messages) {
+      return;
+    }
+
     if (Object.keys(messages).length) {
       Object.keys(messages).forEach(function iterate(value) {
         if (messages[value]) {
