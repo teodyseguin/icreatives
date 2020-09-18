@@ -48,7 +48,7 @@
 
         <div class="flex flex-col flex-no-wrap mb-10">
           <div>
-            <h2 class="p-5">Metrics group 1</h2>
+            <h2 class="p-5">Facebook message count</h2>
             <div class="flex flex-col md:flex-row">
               {% include '@atoms/rounded-box/_rounded-box.twig' with {
                 "title": "Question 1",
@@ -74,7 +74,7 @@
           </div>
 
           <div>
-            <h2 class="p-5">Metrics group 2</h2>
+            <h2 class="p-5">Instagram message count</h2>
             <div class="flex flex-col md:flex-row">
               {% include '@atoms/rounded-box/_rounded-box.twig' with {
                 "title": "Question 5",
@@ -107,22 +107,22 @@
               <div class="flex flex-col flex-grow">
                 {% include '@atoms/rounded-box/_rounded-box.twig' with {
                   "title": "Total Facebook Followers",
-                  "count": 0,
+                  "count": page_insights['total_facebook_followers'],
                   "shadow": true
                 } %}
                 {% include '@atoms/rounded-box/_rounded-box.twig' with {
                   "title": "Total Facebook Reach",
-                  "count": 0,
+                  "count": page_insights['total_facebook_reach'],
                   "shadow": true
                 } %}
                 {% include '@atoms/rounded-box/_rounded-box.twig' with {
                   "title": "Total Facebook Impressions",
-                  "count": 0,
+                  "count": page_insights['total_facebook_impressions'],
                   "shadow": true
                 } %}
                 {% include '@atoms/rounded-box/_rounded-box.twig' with {
                   "title": "Link Clicks",
-                  "count": 0,
+                  "count": page_insights['link_clicks'],
                   "shadow": true
                 } %}
               </div>
@@ -133,9 +133,12 @@
                   "count": 0,
                   "shadow": true
                 } %}
+
                 {% include '@atoms/rounded-box/_rounded-box.twig' with {
                   "title": "Top 5 contents",
                   "count": 0,
+                  "top_five": true,
+                  "contents": top_five_contents,
                   "shadow": true
                 } %}
               </div>
@@ -149,11 +152,15 @@
                 {% include '@atoms/rounded-box/_rounded-box.twig' with {
                   "title": "Gender and Age of Followers",
                   "count": 0,
+                  "gender_age_followers": true,
+                  "contents": page_insights['gender_age_followers'],
                   "shadow": true
                 } %}
                 {% include '@atoms/rounded-box/_rounded-box.twig' with {
                   "title": "Gender and Age of Audience Reached",
                   "count": 0,
+                  "gender_age_followers": true,
+                  "contents": page_insights['gender_age_followers'],
                   "shadow": true
                 } %}
               </div>
@@ -162,11 +169,15 @@
                 {% include '@atoms/rounded-box/_rounded-box.twig' with {
                   "title": "Location of Followers",
                   "count": 0,
+                  "location_followers": true,
+                  "contents": page_insights['location_followers'],
                   "shadow": true
                 } %}
                 {% include '@atoms/rounded-box/_rounded-box.twig' with {
                   "title": "Location of Audience Reached",
                   "count": 0,
+                  "location_followers": true,
+                  "contents": page_insights['location_followers'],
                   "shadow": true
                 } %}
               </div>
