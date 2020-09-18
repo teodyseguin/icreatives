@@ -74,4 +74,14 @@ function particle_preprocess_page(&$variables) {
       $variables['user_picture'] = $file->get('uri')->value;
     }
   }
+
+  $tools = \Drupal::service('ic_core.ic_core_tools');
+
+  if ($tools->getCurrentUser()->id() != 0) {
+    $fb_service = \Drupal::service('ic_core.fb_service');
+    $page_insights = $fb_service->getFbPageInsights();
+    $variables['page_insights'] = $page_insights;
+    $variables['top_five_contents'] = $fb_service->getTopFiveContents();
+    $variables['#attached']['drupalSettings']['ic']['page_insights'] = $fb_service->getFbPageInsights();
+  }
 }
