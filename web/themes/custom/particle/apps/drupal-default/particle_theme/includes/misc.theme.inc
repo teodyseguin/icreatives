@@ -21,18 +21,13 @@ function particle_preprocess(&$variables) {
   // We want to get the message counts per current logged in user,
   // and store it to the drupalSettings.
   $tools = \Drupal::service('ic_core.ic_core_tools');
-  $fb_service = \Drupal::service('ic_core.fb_service');
   $user_data = $tools->getUserData();
 
   $user_data = $tools->getUserData();
   $current_user_id = $tools->getCurrentUser()->id();
 
-  // $fb_pages = $fb_service->getFbPages();
-  // $fb_page_follower_counts = $fb_service->getFbPageFollowers();
   $variables['#attached']['drupalSettings']['ic']['messages'] = $user_data->get('ic_core', $current_user_id, 'messages');
   $variables['#attached']['drupalSettings']['ic']['fb_access_token'] = $user_data->get('ic_core', $current_user_id, 'fb_access_token');
-  // $variables['#attached']['drupalSettings']['ic']['fb_pages'] = $fb_pages;
-  // $variables['#attached']['drupalSettings']['ic']['fb_page_follower_count'] = $fb_page_follower_counts;
 }
 
 /**
