@@ -31,15 +31,32 @@
       } %}
 
       <div class="layout-content w-full lg:w-5/6">
-        <div class="top-details flex w-full justify-end border-b border-gray-400 shadow-lg">
-          <div class="flex-grow block lg:hidden">{% include '@atoms/hamburger-menu/_hamburger-menu.twig' %}</div>
+        <div class="top-details flex flex-wrap w-full justify-left lg:justify-end border-b border-gray-400 shadow-lg">
+          {% include '@atoms/hamburger-menu/_hamburger-menu.twig' %}
+          {% if display_filter %}
+            <div class="filter flex flex-row flex-grow lg:ml-4">
+              {% include '@atoms/selectbox/_selectbox.twig' with {
+                "clients": clients
+              } %}
+              {% include '@atoms/button/_button.twig' with {
+                "button": {
+                  "text": "Select",
+                  "text_color": "black",
+                  "font_size": "text-xs",
+                  "color": "white",
+                  "hoverColor": false,
+                  "additional_class": "my-4 border"
+                }
+              } %}
+            </div>
+          {% endif %}
           <div class="flex text-right mr-10 align-middle justify-center">
             {# <svg class="flex h-8 w-8 mt-4" viewBox="0 0 20 20" fill="#ccc" class="mail w-6 h-6"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path></svg> #}
-            <div class="name inline-block ml-4 mr-4 mt-5">{{ full_name }}</div>
-            <div class="overflow-hidden avatar inline-block h-10 w-10 bg-yelloworange rounded-full mt-3">
-              <a href="/user/{{ user_id }}" class="flex w-full h-full">
+            <div class="hidden md:block name inline-block ml-4 mr-4 mt-5">{{ full_name }}</div>
+            <div class="hidden md:block overflow-hidden avatar inline-block h-10 w-10 bg-yelloworange rounded-full mt-3">
+              <a href="/user/{{ user_id }}">
                 {% if user_picture %}
-                 <img src={{ file_url(user_picture) }} />
+                  <img src={{ file_url(user_picture) }} />
                 {% endif %}
               </a>
             </div>
