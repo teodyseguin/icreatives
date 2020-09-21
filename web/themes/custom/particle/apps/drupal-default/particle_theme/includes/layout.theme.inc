@@ -77,7 +77,7 @@ function particle_preprocess_page(&$variables) {
 
   $tools = \Drupal::service('ic_core.ic_core_tools');
 
-  if ($tools->getCurrentUser()->id() != 0) {
+  if ($tools->getCurrentUser()->id() != 0 && $tools->getPath() == '/dashboard') {
     $fb_service = \Drupal::service('ic_core.fb_service');
     $page_insights = $fb_service->getFbPageInsights();
     $variables['page_insights'] = $page_insights;
