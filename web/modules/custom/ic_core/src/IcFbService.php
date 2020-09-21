@@ -31,10 +31,17 @@ class IcFbService {
   public function __construct(IcCoreTools $tools) {
     $this->tools = $tools;
     $userData = $this->tools->getUserData();
-    $currentUserId = $this->tools->getCurrentUser()->id();
+    $client = \Drupal::request()->query->get('client');
 
-    $this->fbId = $userData->get('ic_core', $currentUserId, 'fbid');
-    $this->fbAccessToken = $userData->get('ic_core', $currentUserId, 'fb_access_token');
+    if ($client) {
+      $userId = $client;
+    }
+    else {
+      $userId = $this->tools->getCurrentUser()->id();
+    }
+
+    $this->fbId = $userData->get('ic_core', $userId, 'fbid');
+    $this->fbAccessToken = $userData->get('ic_core', $userId, 'fb_access_token');
   }
 
   /**
