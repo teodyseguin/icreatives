@@ -1,13 +1,14 @@
 (function clientFilterModule($) {
-  const { currentQuery } = drupalSettings.path;
+  const { currentQuery, currentPath } = drupalSettings.path;
 
   if (currentQuery) {
-    const { field_client_target_id } = currentQuery;
+    const { field_client_target_id, client } = currentQuery;
 
     if (field_client_target_id !== '') {
       $('.filter .selectbox select').val(field_client_target_id);
-    }
-    else {
+    } else if (client !== '') {
+      $('.filter .selectbox select').val(client);
+    } else {
       $('.filter .selectbox select').val('all');
     }
   }
@@ -17,12 +18,16 @@
     const selectedValue = $('.filter .selectbox select').val();
 
     if (selectedValue === 'all') {
-      window.location = `/${drupalSettings.path.currentPath}`;
+      window.location = `/${currentPath}`;
 
       return;
     }
 
-    $('.views-exposed-form #edit-field-client-target-id').val(selectedValue);
-    $('.views-exposed-form .input--submit').trigger('click');
+    if (currentPath && currentPath === 'dashboard') {
+      window.location = `/${currentPath}?client=${selectedValue}`;
+    } else {
+      $('.views-exposed-form #edit-field-client-target-id').val(selectedValue);
+      $('.views-exposed-form .input--submit').trigger('click');
+    }
   });
 })(jQuery);
