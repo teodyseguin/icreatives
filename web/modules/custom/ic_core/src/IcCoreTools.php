@@ -174,6 +174,13 @@ class IcCoreTools {
   }
 
   /**
+   * Get the current path object.
+   */
+  public function getCurrentPath() {
+    return $this->currentPath;
+  }
+
+  /**
    * Get the alias by the given path.
    *
    * @param string $path
