@@ -1,0 +1,13 @@
+{
+    "name": "ic_fb_pages",
+    "type": "drupal-module",
+    "description": "Facebook Page Entity",
+    "keywords": [
+    ],
+    "homepage": "https://www.drupal.org/project/ic_fb_pages",
+    "minimum-stability": "dev",
+    "support": {
+        "issues": "https://www.drupal.org/project/issues/ic_fb_pages",
+        "source": "http://cgit.drupalcode.org/ic_fb_pages",
+    },
+}

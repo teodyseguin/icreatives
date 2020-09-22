@@ -1,0 +1,22 @@
+{#
+/**
+ * @file ic_fb_page_entity.html.twig
+ * Default theme implementation to present Ic fb page entity data.
+ *
+ * This template is used when viewing Ic fb page entity pages.
+ *
+ *
+ * Available variables:
+ * - content: A list of content items. Use 'content' to print all content, or
+ * - attributes: HTML attributes for the container element.
+ *
+ * @see template_preprocess_ic_fb_page_entity()
+ *
+ * @ingroup themeable
+ */
+#}
+<div{{ attributes.addClass('ic_fb_page_entity') }}>
+  {% if content %}
+    {{- content -}}
+  {% endif %}
+</div>

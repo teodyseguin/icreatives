@@ -1,0 +1,35 @@
+<?php
+
+/**
+ * @file
+ * Contains ic_fb_pages.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function ic_fb_pages_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the ic_fb_pages module.
+    case 'help.page.ic_fb_pages':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Facebook Page Entity') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function ic_fb_pages_theme() {
+  return [
+    'ic_fb_pages' => [
+      'render element' => 'children',
+    ],
+  ];
+}

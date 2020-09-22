@@ -1,0 +1,14 @@
+
+# Ic fb page entity menu items definition
+entity.ic_fb_page_entity.collection:
+  title: 'Ic fb page entity list'
+  route_name: entity.ic_fb_page_entity.collection
+  description: 'List Ic fb page entity entities'
+  parent: system.admin_structure
+  weight: 100
+
+ic_fb_page_entity.admin.structure.settings:
+  title: 'Ic fb page entity settings'
+  description: 'Configure Ic fb page entity entities'
+  route_name: ic_fb_page_entity.settings
+  parent: system.admin_structure

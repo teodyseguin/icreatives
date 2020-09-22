@@ -1,0 +1,5 @@
+name: 'IC FB Pages'
+type: module
+description: 'Facebook Page Entity'
+core: 8.x
+package: 'Custom'

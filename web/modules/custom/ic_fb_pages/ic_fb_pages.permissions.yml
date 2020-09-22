@@ -1,0 +1,31 @@
+add ic fb page entity entities:
+  title: 'Create new Ic fb page entity entities'
+
+administer ic fb page entity entities:
+  title: 'Administer Ic fb page entity entities'
+  description: 'Allow to access the administration form to configure Ic fb page entity entities.'
+  restrict access: true
+
+delete ic fb page entity entities:
+  title: 'Delete Ic fb page entity entities'
+
+edit ic fb page entity entities:
+  title: 'Edit Ic fb page entity entities'
+
+view published ic fb page entity entities:
+  title: 'View published Ic fb page entity entities'
+
+view unpublished ic fb page entity entities:
+  title: 'View unpublished Ic fb page entity entities'
+
+view all ic fb page entity revisions:
+  title: 'View all Ic fb page entity revisions'
+
+revert all ic fb page entity revisions:
+  title: 'Revert all Ic fb page entity revisions'
+  description: 'Role requires permission <em>view Ic fb page entity revisions</em> and <em>edit rights</em> for ic fb page entity entities in question or <em>administer ic fb page entity entities</em>.'
+
+delete all ic fb page entity revisions:
+  title: 'Delete all revisions'
+  description: 'Role requires permission to <em>view Ic fb page entity revisions</em> and <em>delete rights</em> for ic fb page entity entities in question or <em>administer ic fb page entity entities</em>.'
+

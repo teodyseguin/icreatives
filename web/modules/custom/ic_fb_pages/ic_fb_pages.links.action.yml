@@ -1,0 +1,5 @@
+entity.ic_fb_page_entity.add_form:
+  route_name: entity.ic_fb_page_entity.add_form
+  title: 'Add Ic fb page entity'
+  appears_on:
+    - entity.ic_fb_page_entity.collection
