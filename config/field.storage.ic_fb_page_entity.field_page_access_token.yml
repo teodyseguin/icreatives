@@ -1,0 +1,21 @@
+uuid: accd0ac8-6e00-45e3-b0c6-796a5ae82a62
+langcode: en
+status: true
+dependencies:
+  module:
+    - ic_fb_pages
+id: ic_fb_page_entity.field_page_access_token
+field_name: field_page_access_token
+entity_type: ic_fb_page_entity
+type: string
+settings:
+  max_length: 255
+  is_ascii: false
+  case_sensitive: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

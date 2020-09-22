@@ -1,0 +1,60 @@
+uuid: 77077daf-d299-4a33-a189-83200514ad82
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.ic_fb_page_entity.ic_fb_page_entity.field_client
+    - field.field.ic_fb_page_entity.ic_fb_page_entity.field_page_access_token
+    - field.field.ic_fb_page_entity.ic_fb_page_entity.field_page_id
+  module:
+    - ic_fb_pages
+id: ic_fb_page_entity.ic_fb_page_entity.default
+targetEntityType: ic_fb_page_entity
+bundle: ic_fb_page_entity
+mode: default
+content:
+  field_client:
+    weight: 3
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  field_page_access_token:
+    weight: 2
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_page_id:
+    weight: 1
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  name:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  user_id:
+    type: entity_reference_autocomplete
+    weight: 4
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+      match_limit: 10
+    region: content
+    third_party_settings: {  }
+hidden: {  }
