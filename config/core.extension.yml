@@ -35,6 +35,7 @@ module:
   help: 0
   history: 0
   ic_core: 0
+  ic_fb_pages: 0
   image: 0
   inline_entity_form: 0
   libraries: 0
