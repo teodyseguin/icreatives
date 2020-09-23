@@ -76,12 +76,16 @@ function particle_preprocess_page(&$variables) {
   }
 
   $tools = \Drupal::service('ic_core.ic_core_tools');
+  $ic_fb_service = \Drupal::service('ic_core.fb_service');
+  $user_data = $tools->getUserData();
 
   if ($tools->getCurrentUser()->id() != 0 && $tools->getPath() == '/dashboard') {
-    $fb_service = \Drupal::service('ic_core.fb_service');
-    $page_insights = $fb_service->getFbPageInsights();
+    $ic_fb_service = \Drupal::service('ic_core.fb_service');
+    // Collect the fb pages managing by this user
+    $ic_fb_service->getFbPages();
+    $page_insights = $ic_fb_service->getFbPageInsights();
+
     $variables['page_insights'] = $page_insights;
-    $variables['top_five_contents'] = $fb_service->getTopFiveContents();
-    $variables['#attached']['drupalSettings']['ic']['page_insights'] = $fb_service->getFbPageInsights();
+    $variables['top_five_contents'] = $ic_fb_service->getTopFiveContents();
   }
 }
