@@ -152,7 +152,8 @@ class IcCoreTools {
     $fbId = $event->getArgument('fbid');
 
     // Adding a role of client.
-    $subject->addRole('client');
+    // $subject->addRole('client');
+
     // We need at least to save the user object so that the uid will become available.
     $subject->save();
 
