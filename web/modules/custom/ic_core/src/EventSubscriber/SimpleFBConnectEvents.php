@@ -23,8 +23,8 @@ class SimpleFBConnectEvents implements EventSubscriberInterface {
    * @param \Drupal\ic_core\IcCoreTools $ic_core_tools
    *   Utility class.
    */
-  public function __construct(IcCoreTools $ic_core_tools) {
-    $this->tools = $ic_core_tools;
+  public function __construct(IcCoreTools $tools) {
+    $this->tools = $tools;
   }
 
   /**
