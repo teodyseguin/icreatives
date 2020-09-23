@@ -77,7 +77,6 @@ function particle_preprocess_page(&$variables) {
 
   $tools = \Drupal::service('ic_core.ic_core_tools');
   $ic_fb_service = \Drupal::service('ic_core.fb_service');
-  $user_data = $tools->getUserData();
 
   if ($tools->getCurrentUser()->id() != 0 && $tools->getPath() == '/dashboard') {
     $ic_fb_service = \Drupal::service('ic_core.fb_service');
