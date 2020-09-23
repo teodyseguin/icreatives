@@ -4,6 +4,7 @@ namespace Drupal\ic_core;
 
 use Drupal\ic_core\IcCoreTools;
 use Facebook\Exceptions\FacebookResponseException;
+use Drupal\ic_fb_pages\Entity\IcFbPageEntity;
 
 /**
  * A utility class for various usage and purpose.
@@ -60,7 +61,14 @@ class IcFbService {
       $response = $fbService->get("/$fbId/accounts?fields=id,name,access_token&access_token=$fbAccessToken");
 
       if ($response) {
-        return json_decode($response->getBody());
+        $this->tools->loggerFactory()
+          ->get('ic_core.fb_service')
+          ->error('The response has been accepted');
+        
+        $pages = json_decode($response->getBody());
+        $this->upsertFbPages($pages);
+
+        return $pages;
       }
     }
     catch (FacebookResponseException $e) {
@@ -71,9 +79,42 @@ class IcFbService {
   }
 
   /**
+   * Create/Update FB Page Entities.
+   */
+  public function upsertFbPages($pages) {
+    if (!$pages && !$pages->data && count($pages->data) == 0) {
+      return;
+    }
+
+    // Fetch all FB Page Entities.
+    $icFbPageEntityStorage = $this->tools->getStorage('ic_fb_page_entity');
+
+    foreach ($pages->data as $data) {
+      $fbPage = $icFbPageEntityStorage->loadByProperties(['field_page_id' => $data->id]);
+
+      if (empty($fbPage)) {
+        $fbPageEntity = IcFbPageEntity::create([
+          'name' => $data->name,
+          'field_page_id' => $data->id,
+          'field_page_access_token' => $data->access_token,
+        ]);
+  
+        $fbPageEntity->save();
+      }
+      else {
+        // If FB Page Entity already exists,
+        // then we just wanna make sure the access token is updated.
+        $fbPage = reset($fbPage);
+        $fbPage->set('field_page_access_token', $data->access_token);
+        $fbPage->save();
+      }
+    }
+  }
+
+  /**
    * Get the facebook page followers count.
    */
-  public function getFbPageInsights($start = NULL, $end = NULL) {
+  public function getFbPageInsights($pages = NULL, $start = NULL, $end = NULL) {
     $metric = "page_fans,page_impressions,page_impressions_organic,page_impressions_paid,page_consumptions_unique,page_fans_gender_age,page_fans_city";
     $fbService = $this->tools->getFbService();
     $pages = $this->getFbPages();
