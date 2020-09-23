@@ -32,14 +32,11 @@ class IcFbService {
   public function __construct(IcCoreTools $tools) {
     $this->tools = $tools;
     $userData = $this->tools->getUserData();
-    $client = \Drupal::request()->query->get('client');
+    $userStorage = $this->tools->getStorage('user');
+    $siteAdmin = $userStorage->loadByProperties(['roles' => 'site_admin']);
 
-    if ($client) {
-      $userId = $client;
-    }
-    else {
-      $userId = $this->tools->getCurrentUser()->id();
-    }
+    $siteAdmin = reset($siteAdmin);
+    $userId = $siteAdmin->id();
 
     $this->fbId = $userData->get('ic_core', $userId, 'fbid');
     $this->fbAccessToken = $userData->get('ic_core', $userId, 'fb_access_token');
@@ -54,6 +51,10 @@ class IcFbService {
     $fbAccessToken = $this->fbAccessToken;
 
     if (!$fbId && !$fbAccessToken) {
+      $this->tools->loggerFactory()
+        ->get('ic_core.fb_service')
+        ->notice('Facebook ID and Access token is not available.');
+
       return;
     }
 
@@ -80,6 +81,9 @@ class IcFbService {
 
   /**
    * Create/Update FB Page Entities.
+   *
+   * @var $pages
+   *   An array of Facebook pages with id, name and access token.
    */
   public function upsertFbPages($pages) {
     if (!$pages && !$pages->data && count($pages->data) == 0) {
@@ -96,7 +100,7 @@ class IcFbService {
         $fbPageEntity = IcFbPageEntity::create([
           'name' => $data->name,
           'field_page_id' => $data->id,
-          'field_page_access_token' => $data->access_token,
+          'field_page_access_token' => (string) $data->access_token,
         ]);
   
         $fbPageEntity->save();
@@ -105,7 +109,7 @@ class IcFbService {
         // If FB Page Entity already exists,
         // then we just wanna make sure the access token is updated.
         $fbPage = reset($fbPage);
-        $fbPage->set('field_page_access_token', $data->access_token);
+        $fbPage->set('field_page_access_token', (string) $data->access_token);
         $fbPage->save();
       }
     }
@@ -116,24 +120,27 @@ class IcFbService {
    */
   public function getFbPageInsights($pages = NULL, $start = NULL, $end = NULL) {
     $metric = "page_fans,page_impressions,page_impressions_organic,page_impressions_paid,page_consumptions_unique,page_fans_gender_age,page_fans_city";
+    $client = \Drupal::request()->query->get('client');
     $fbService = $this->tools->getFbService();
-    $pages = $this->getFbPages();
     $insights = [];
     $now = strtotime('now');
     $thirty_days_ago = strtotime('-30 days');
 
-    if (!$pages) {
+    if (!$client) {
       return;
     }
 
-    $data = $pages->data;
+    $user_storage = $this->tools->getStorage('user');
+    $client = $user_storage->load($client);
+    $fbPageEntity = $client->field_fb_page->referencedEntities();
 
-    if (count($data) == 0) {
+    if (empty($fbPageEntity)) {
       return;
     }
 
-    $pageId = $data[0]->id;
-    $pageAccessToken = $data[0]->access_token;
+    $fbPageEntity = reset($fbPageEntity);
+    $pageId = $fbPageEntity->get('field_page_id')->value;
+    $pageAccessToken = $fbPageEntity->get('field_page_access_token')->value;
 
     try {
       $response = $fbService->get("/$pageId/insights?access_token=$pageAccessToken&metric=$metric&period=day&since=$thirty_days_ago&until=$now");
@@ -190,22 +197,25 @@ class IcFbService {
    * Get the Top Five Contents.
    */
   public function getTopFiveContents() {
+    $client = \Drupal::request()->query->get('client');
     $fbService = $this->tools->getFbService();
-    $pages = $this->getFbPages();
     $popular = [];
 
-    if (!$pages) {
+    if (!$client) {
       return;
     }
 
-    $data = $pages->data;
+    $user_storage = $this->tools->getStorage('user');
+    $client = $user_storage->load($client);
+    $fbPageEntity = $client->field_fb_page->referencedEntities();
 
-    if (count($data) == 0) {
+    if (empty($fbPageEntity)) {
       return;
     }
 
-    $pageId = $data[0]->id;
-    $pageAccessToken = $data[0]->access_token;
+    $fbPageEntity = reset($fbPageEntity);
+    $pageId = $fbPageEntity->get('field_page_id')->value;
+    $pageAccessToken = $fbPageEntity->get('field_page_access_token')->value;
 
     try {
       $response = $fbService->get("/$pageId/posts?access_token=$pageAccessToken&fields=shares,is_popular,created_time,permalink_url");
