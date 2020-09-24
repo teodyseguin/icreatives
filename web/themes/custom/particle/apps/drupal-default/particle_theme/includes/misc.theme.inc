@@ -70,9 +70,14 @@ function particle_theme() {
 function particle_preprocess_commerce_product_variation(&$variables) {
   // Load SS Tools.
   $tools = \Drupal::service('ic_core.ic_core_tools');
+  $roles = $tools->getCurrentRoles();
   $image_style_storage = $tools->getStorage('image_style');
   $commerce_storage = $tools->getStorage('commerce_currency');
   $product_variation_entity = $variables['product_variation_entity'];
+
+  if (in_array('site_admin', $roles) || in_array('administrator', $roles)) {
+    $variables['allow_edit'] = TRUE;
+  }
 
   // Load the price.
   $price = $product_variation_entity->getPrice();
