@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.user.user.field_fb_page
     - field.field.user.user.field_first_name
     - field.field.user.user.field_last_name
     - field.field.user.user.user_picture
@@ -24,10 +25,16 @@ content:
     settings: {  }
     third_party_settings: {  }
   contact:
-    weight: 5
+    weight: 6
     region: content
     settings: {  }
     third_party_settings: {  }
+  field_fb_page:
+    weight: 4
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
   field_first_name:
     weight: 2
     settings:
@@ -45,18 +52,18 @@ content:
     type: string_textfield
     region: content
   language:
-    weight: 4
+    weight: 5
     region: content
     settings: {  }
     third_party_settings: {  }
   path:
     type: path
-    weight: 7
+    weight: 8
     region: content
     settings: {  }
     third_party_settings: {  }
   timezone:
-    weight: 6
+    weight: 7
     region: content
     settings: {  }
     third_party_settings: {  }

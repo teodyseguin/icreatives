@@ -1,0 +1,27 @@
+uuid: 59dcff39-d019-4611-96df-51cbd43da6bb
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.user.field_fb_page
+  module:
+    - user
+id: user.user.field_fb_page
+field_name: field_fb_page
+entity_type: user
+bundle: user
+label: 'FB Page'
+description: 'If this is a client user, assign it''s Facebook page here.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:ic_fb_page_entity'
+  handler_settings:
+    target_bundles: null
+    sort:
+      field: name
+      direction: ASC
+    auto_create: false
+field_type: entity_reference
