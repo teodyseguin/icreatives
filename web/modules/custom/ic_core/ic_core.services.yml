@@ -37,3 +37,8 @@ services:
     class: Drupal\ic_core\IcFbService
     arguments:
       - '@ic_core.ic_core_tools'
+
+  ic_core.ig_service:
+    class: Drupal\ic_core\IcIgService
+    arguments:
+      - '@ic_core.ic_core_tools'
