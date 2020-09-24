@@ -57,13 +57,21 @@ class ClientsRedirect implements EventSubscriberInterface {
     if ($request->query->has('field_client_target_id')) {
       return;
     }
-
-    $request->query->set('field_client_target_id', $currentUserId);
+    else if ($request->query->has('client')) {
+      return;
+    }
 
     switch ($path) {
+      case '/dashboard':
+        $request->query->set('client', $currentUserId);
+        $path = "$path?client=$currentUserId";
+        $this->tools->pageRedirect($path);
+      break;
+
       case '/inbox':
       case '/invoice':
       case '/products':
+        $request->query->set('field_client_target_id', $currentUserId);
         $path = "$path?field_client_target_id=$currentUserId";
         $this->tools->pageRedirect($path);
       break;
