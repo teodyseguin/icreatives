@@ -35,6 +35,10 @@ class IcFbService {
     $userStorage = $this->tools->getStorage('user');
     $siteAdmin = $userStorage->loadByProperties(['roles' => 'site_admin']);
 
+    if (empty($siteAdmin)) {
+      return;
+    }
+
     $siteAdmin = reset($siteAdmin);
     $userId = $siteAdmin->id();
 
