@@ -1,5 +1,5 @@
-app_id: '2139842512825900'
-app_secret: 7fa8cec53492e57ea182a85b4dbede49
+app_id: '530723134433485'
+app_secret: 4a58c402b21ab713cbee1addd2c26607
 api_version: v8.0
 post_login_path: user
 redirect_user_form: 1
