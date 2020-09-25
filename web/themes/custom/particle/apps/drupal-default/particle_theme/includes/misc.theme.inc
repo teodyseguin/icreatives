@@ -92,7 +92,10 @@ function particle_preprocess_commerce_product_variation(&$variables) {
   $file = $file_storage->load($field_image[0]['target_id']);
 
   $style = $image_style_storage->load('product_image_92_94');
-  $variables['image'] = $style->buildUrl($file->get('uri')->value);
+
+  if (!empty($file)) {
+    $variables['image'] = $style->buildUrl($file->get('uri')->value);
+  }
 
   // Load client.
   $client = $product_variation_entity->field_client->referencedEntities();
