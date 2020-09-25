@@ -32,6 +32,7 @@ permissions:
   - 'edit own message content'
   - 'manage default commerce_product_variation'
   - 'select account cancellation method'
+  - 'update any default commerce_product'
   - 'update own default commerce_product'
   - 'update own online commerce_store'
   - 'use text format basic_html'
