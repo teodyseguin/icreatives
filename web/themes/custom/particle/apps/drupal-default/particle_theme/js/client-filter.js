@@ -1,12 +1,11 @@
 (function clientFilterModule($) {
   const { currentQuery, currentPath } = drupalSettings.path;
+  const { field_client_target_id, client } = currentQuery;
 
   if (currentQuery) {
-    const { field_client_target_id, client } = currentQuery;
-
-    if (field_client_target_id !== '') {
+    if (field_client_target_id) {
       $('.filter .selectbox select').val(field_client_target_id);
-    } else if (client !== '') {
+    } else if (client) {
       $('.filter .selectbox select').val(client);
     } else {
       $('.filter .selectbox select').val('all');
