@@ -34,3 +34,12 @@
     margin-right: -25px;
   }
 }
+
+.pager {
+  width: 100%;
+  padding: 0 25px;
+}
+
+.pager .pager__items {
+  display: inline;
+}
