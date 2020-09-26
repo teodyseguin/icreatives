@@ -1,0 +1,7 @@
+{% extends '@demo/_demo-block.twig' %}
+
+{% set demo = date_range_demo_block %}
+
+{% block content %}
+  {% include '@molecules/date-range/_date-range.twig' %}
+{% endblock %}

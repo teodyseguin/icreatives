@@ -1,0 +1,9 @@
+date_range_demo_block:
+  title: Date Range Component
+  content:
+    lead: Add a quick description here.
+    summary: Add code examples here using <code>html code syntax</code>
+
+date_range:
+  example_var: This is an example var
+
