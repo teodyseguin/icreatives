@@ -122,13 +122,13 @@ class IcFbService {
   /**
    * Get the facebook page followers count.
    */
-  public function getFbPageInsights($pages = NULL, $start = NULL, $end = NULL) {
+  public function getFbPageInsights($from = NULL, $to = NULL) {
     $metric = "page_fans,page_impressions,page_impressions_organic,page_impressions_paid,page_consumptions_unique,page_fans_gender_age,page_fans_city";
     $client = \Drupal::request()->query->get('client');
     $fbService = $this->tools->getFbService();
     $insights = [];
-    $now = strtotime('now');
-    $thirty_days_ago = strtotime('-30 days');
+    $until = $to ? $to : strtotime('now');
+    $since = $from ? $from : strtotime('-30 days');
 
     if (!$client) {
       return;
@@ -147,7 +147,7 @@ class IcFbService {
     $pageAccessToken = $fbPageEntity->get('field_page_access_token')->value;
 
     try {
-      $response = $fbService->get("/$pageId/insights?access_token=$pageAccessToken&metric=$metric&period=day&since=$thirty_days_ago&until=$now");
+      $response = $fbService->get("/$pageId/insights?access_token=$pageAccessToken&metric=$metric&period=day&since=$since&until=$until");
       $body = json_decode($response->getBody());
 
       if (count($body->data) == 0) {
@@ -200,10 +200,12 @@ class IcFbService {
   /**
    * Get the Top Five Contents.
    */
-  public function getTopFiveContents() {
+  public function getTopFiveContents($from = NULL, $to = NULL) {
     $client = \Drupal::request()->query->get('client');
     $fbService = $this->tools->getFbService();
     $popular = [];
+    $until = $to ? $to : strtotime('now');
+    $since = $from ? $from : strtotime('-30 days');
 
     if (!$client) {
       return;
@@ -222,7 +224,7 @@ class IcFbService {
     $pageAccessToken = $fbPageEntity->get('field_page_access_token')->value;
 
     try {
-      $response = $fbService->get("/$pageId/posts?access_token=$pageAccessToken&fields=shares,is_popular,created_time,permalink_url");
+      $response = $fbService->get("/$pageId/posts?access_token=$pageAccessToken&fields=shares,is_popular,created_time,permalink_url&since=$since&until=$until");
       $body = json_decode($response->getBody());
 
       if (count($body->data) == 0) {
