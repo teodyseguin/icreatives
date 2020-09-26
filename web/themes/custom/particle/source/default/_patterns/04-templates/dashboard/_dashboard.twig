@@ -63,9 +63,11 @@
           </div>
         </div>
 
-        <div class="flex w-full p-5">
-          {% include '@molecules/date-range/_date-range.twig' %}
-        </div>
+        {% if client %}
+          <div class="flex w-full p-5">
+            {% include '@molecules/date-range/_date-range.twig' %}
+          </div>
+        {% endif %}
 
         <div class="flex flex-col flex-no-wrap mb-10">
           <div>
