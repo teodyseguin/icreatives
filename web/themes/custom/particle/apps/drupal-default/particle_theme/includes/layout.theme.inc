@@ -81,14 +81,18 @@ function particle_preprocess_page(&$variables) {
   if ($tools->getCurrentUser()->id() != 0 && $tools->getPath() == '/dashboard') {
     $ic_fb_service = \Drupal::service('ic_core.fb_service');
     $ic_ig_service = \Drupal::service('ic_core.ig_service');
+    $client = \Drupal::request()->query->get('client');
+    $from = \Drupal::request()->query->get('from');
+    $to = \Drupal::request()->query->get('to');
+
+    $variables['client'] = $client;
 
     // Collect the fb pages managing by this user
     $ic_fb_service->getFbPages();
-    $page_insights = $ic_fb_service->getFbPageInsights();
+    $page_insights = $ic_fb_service->getFbPageInsights($from, $to);
 
     $page_insights['total_instagram_followers'] = $ic_ig_service->getIgFollowers();
-
     $variables['page_insights'] = $page_insights;
-    $variables['top_five_contents'] = $ic_fb_service->getTopFiveContents();
+    $variables['top_five_contents'] = $ic_fb_service->getTopFiveContents($from, $to);
   }
 }
