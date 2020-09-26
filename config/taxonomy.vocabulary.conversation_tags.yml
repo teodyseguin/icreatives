@@ -1,0 +1,8 @@
+uuid: da27b6db-54ac-43aa-911d-5d42960f21d3
+langcode: en
+status: true
+dependencies: {  }
+name: 'Conversation tags'
+vid: conversation_tags
+description: 'List of conversation tags to look up over the Facebook conversations'
+weight: 0
