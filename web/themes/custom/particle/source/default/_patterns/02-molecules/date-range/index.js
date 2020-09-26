@@ -3,6 +3,8 @@
  */
 
 import $ from 'jquery';
+import datepicker from 'js-datepicker';
+import '../../../../../node_modules/js-datepicker/dist/datepicker.min.css';
 
 // Module dependencies
 import 'protons';
@@ -51,3 +53,8 @@ export function enable($context, { dateRange = {} }) {
 }
 
 export default enable;
+
+(function dateRange() {
+  datepicker('.date-from');
+  datepicker('.date-to');
+})($);
