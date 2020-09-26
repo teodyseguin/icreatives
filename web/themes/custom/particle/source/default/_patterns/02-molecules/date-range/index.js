@@ -25,7 +25,7 @@ export const defaults = {
  * @param {Object} settings - Pertinent settings
  */
 // eslint-disable-next-line no-unused-vars
-export function disable($context, settings) {}
+export function disable($context, settings) { }
 
 /**
  * Each component has a chance to run when its enable function is called. It is
@@ -54,7 +54,67 @@ export function enable($context, { dateRange = {} }) {
 
 export default enable;
 
+/**
+ * Format the given Date object into this format m/d/Y.
+ * @param {Date} date
+ */
+const formatDate = (date) => {
+  return `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
+};
+
 (function dateRange() {
-  datepicker('.date-from');
-  datepicker('.date-to');
+  const { currentQuery } = drupalSettings.path;
+  const { origin, pathname } = window.location;
+  let clientQuery;
+
+  if (currentQuery) {
+    let { from, to, client } = currentQuery;
+
+    if (!client) {
+      $('.date-from').attr('disabled', true);
+      $('.date-to').attr('disabled', true);
+      return;
+    }
+
+    clientQuery = client;
+
+    datepicker('.date-from', {
+      formatter: (input, date) => {
+        const value = date.toLocaleDateString();
+        input.value = value;
+      },
+    });
+
+    datepicker('.date-to', {
+      formatter: (input, date) => {
+        const value = date.toLocaleDateString();
+        input.value = value;
+      },
+    });
+
+    if (from) {
+      from = formatDate(new Date(from * 1000));
+    }
+
+    if (to) {
+      to = formatDate(new Date(to * 1000));
+    }
+
+    $('.date-from').val(from);
+    $('.date-to').val(to);
+  }
+
+  $('.submit-daterange button').click(() => {
+    if (!clientQuery) {
+      return;
+    }
+
+    let fromTimestamp = new Date($('.date-from').val());
+    let toTimestamp = new Date($('.date-to').val());
+
+    fromTimestamp = Math.floor(fromTimestamp.getTime() / 1000);
+    toTimestamp = Math.floor(toTimestamp.getTime() / 1000);
+
+    window.location = `${origin}${pathname}?client=${clientQuery}&from=${fromTimestamp}&to=${toTimestamp}`;
+  });
 })($);
