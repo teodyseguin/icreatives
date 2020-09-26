@@ -73,26 +73,17 @@
           <div>
             <h2 class="p-5">Facebook message count</h2>
             <div class="flex flex-col md:flex-row">
-              {% include '@atoms/rounded-box/_rounded-box.twig' with {
-                "title": "Question 1",
-                "count": 0,
-                "shadow": true
-              } %}
-              {% include '@atoms/rounded-box/_rounded-box.twig' with {
-                "title": "Question 2",
-                "count": 0,
-                "shadow": true
-              }%}
-              {% include '@atoms/rounded-box/_rounded-box.twig' with {
-                "title": "Question 3",
-                "count": 0,
-                "shadow": true
-              } %}
-              {% include '@atoms/rounded-box/_rounded-box.twig' with {
-                "title": "Question 4",
-                "count": 0,
-                "shadow": true
-              } %}
+              {% if conversations %}
+                {% for conversation in conversations %}
+                  {% include '@atoms/rounded-box/_rounded-box.twig' with {
+                    "title": conversation['name'],
+                    "count": conversation['total'],
+                    "shadow": true
+                  } %}
+                {% endfor %}
+              {% else %}
+                <p class="p-5">There are no data to display at the moment ...</p>
+              {% endif %}
             </div>
           </div>
 
