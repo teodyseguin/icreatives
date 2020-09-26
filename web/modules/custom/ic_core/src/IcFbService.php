@@ -27,10 +27,16 @@ class IcFbService {
   protected $fbAccessToken;
 
   /**
+   * This will be the same FB service being used in FB Simple Connect module.
+   */
+  protected $fbService;
+
+  /**
    * Constructor.
    */
   public function __construct(IcCoreTools $tools) {
     $this->tools = $tools;
+    $this->fbService = $tools->getFbService();
     $userData = $this->tools->getUserData();
     $userStorage = $this->tools->getStorage('user');
     $siteAdmin = $userStorage->loadByProperties(['roles' => 'site_admin']);
@@ -50,7 +56,6 @@ class IcFbService {
    * Get the list of facebook pages, owned by a user.
    */
   public function getFbPages() {
-    $fbService = $this->tools->getFbService();
     $fbId = $this->fbId;
     $fbAccessToken = $this->fbAccessToken;
 
@@ -63,7 +68,7 @@ class IcFbService {
     }
 
     try {
-      $response = $fbService->get("/$fbId/accounts?fields=id,name,access_token&access_token=$fbAccessToken");
+      $response = $this->fbService->get("/$fbId/accounts?fields=id,name,access_token&access_token=$fbAccessToken");
 
       if ($response) {
         $this->tools->loggerFactory()
@@ -125,7 +130,6 @@ class IcFbService {
   public function getFbPageInsights($from = NULL, $to = NULL) {
     $metric = "page_fans,page_impressions,page_impressions_organic,page_impressions_paid,page_consumptions_unique,page_fans_gender_age,page_fans_city";
     $client = \Drupal::request()->query->get('client');
-    $fbService = $this->tools->getFbService();
     $insights = [];
     $until = $to ? $to : strtotime('now');
     $since = $from ? $from : strtotime('-30 days');
@@ -147,7 +151,7 @@ class IcFbService {
     $pageAccessToken = $fbPageEntity->get('field_page_access_token')->value;
 
     try {
-      $response = $fbService->get("/$pageId/insights?access_token=$pageAccessToken&metric=$metric&period=day&since=$since&until=$until");
+      $response = $this->fbService->get("/$pageId/insights?access_token=$pageAccessToken&metric=$metric&period=day&since=$since&until=$until");
       $body = json_decode($response->getBody());
 
       if (count($body->data) == 0) {
@@ -202,7 +206,6 @@ class IcFbService {
    */
   public function getTopFiveContents($from = NULL, $to = NULL) {
     $client = \Drupal::request()->query->get('client');
-    $fbService = $this->tools->getFbService();
     $popular = [];
     $until = $to ? $to : strtotime('now');
     $since = $from ? $from : strtotime('-30 days');
@@ -224,7 +227,7 @@ class IcFbService {
     $pageAccessToken = $fbPageEntity->get('field_page_access_token')->value;
 
     try {
-      $response = $fbService->get("/$pageId/posts?access_token=$pageAccessToken&fields=shares,is_popular,created_time,permalink_url&since=$since&until=$until");
+      $response = $this->fbService->get("/$pageId/posts?access_token=$pageAccessToken&fields=shares,is_popular,created_time,permalink_url&since=$since&until=$until");
       $body = json_decode($response->getBody());
 
       if (count($body->data) == 0) {
@@ -346,6 +349,152 @@ class IcFbService {
     krsort($group);
 
     return array_splice($group, 0, 5, TRUE);
+  }
+
+  /**
+   * Get the Facebook Conversations.
+   */
+  public function getFbConversations($from = NULL, $to = NULL) {
+    $client = \Drupal::request()->query->get('client');
+    $until = $to ? $to : strtotime('now');
+    $since = $from ? $from : strtotime('-30 days');
+    $conversations = [];
+
+    if (!$client) {
+      return;
+    }
+
+    $pageId = $this->getClientPageId($client);
+    $pageAccessToken = $this->getClientPageAccessToken($client);
+
+    try {
+      // $conversations = json_decode(file_get_contents('private://dummy/dummy.json'), TRUE);
+      $response = $this->fbService->get("/$pageId/conversations?access_token=$pageAccessToken&fields=messages{message}&since=$since&until=$until");
+      $body = json_decode($response->getBody());
+
+      if (count($body->data) == 0) {
+        return;
+      }
+
+      // Let's try to collect first all the messages.
+      foreach ($body->data as $data) {
+        if (count($data->messages->data) == 0) {
+          continue;
+        }
+
+        foreach ($data->messages->data as $message) {
+          $conversations[] = $message;
+        }
+      }
+
+      // $directory = \Drupal::service('stream_wrapper_manager')->getViaUri('private://dummy')->getUri();
+      // file_prepare_directory($directory, FILE_CREATE_DIRECTORY | FILE_MODIFY_PERMISSIONS);
+      // $fileLocation = $directory . '/dummy.json';
+      // file_save_data(json_encode($conversations), $fileLocation, FILE_EXISTS_REPLACE);
+
+      return $this->createKeywordsCount($conversations);
+    }
+    catch (FacebookResponseException $e) {
+      $this->tools->loggerFactory()
+        ->get('ic_core.fb_service')
+        ->error('Something went wrong while retrieving the conversations : @message', ['@message' => json_encode($e)]);
+    }
+  }
+
+  /**
+   * Create the keywords count.
+   */
+  public function createKeywordsCount($conversations) {
+    if (count($conversations) == 0) {
+      return;
+    }
+
+    $conversationTags = $this->getConversationTags();
+
+    if (empty($conversationTags)) {
+      return;
+    }
+
+    $findHash = function($carry, $item) {
+      if (strpos($item, '#') !== FALSE) {
+        return $carry = $item;
+      }
+    };
+
+    foreach ($conversationTags as $tag) {
+      foreach ($conversations as $conversation) {
+        $chunks = explode(' ', $conversation->message);
+        $found = array_reduce($chunks, $findHash);
+
+        if ($found && array_key_exists($found, $conversationTags)) {
+          $conversationTags[$found]['total'] += 1;
+        }
+      }
+    }
+
+    return $conversationTags;
+  }
+
+  /**
+   * Get the list of Conversation Tags and return a data array of it.
+   */
+  public function getConversationTags() {
+    $vid = 'conversation_tags';
+    $termStorage = $this->tools->getStorage('taxonomy_term');
+    $terms = $termStorage->loadTree($vid);
+    $termsData = [];
+
+    if (count($terms) == 0) {
+      return;
+    }
+
+    foreach ($terms as $term) {
+      $name = str_replace('#', '', $term->name);
+      $name = explode('_', $name);
+      $name = implode(' ', $name);
+      $termsData[$term->name] = [
+        'name' => ucwords($name),
+        'total' => 0,
+      ];
+    }
+
+    return $termsData;
+  }
+
+  /**
+   * Get the client's stored FB page ID.
+   */
+  public function getClientPageId($client) {
+    $user_storage = $this->tools->getStorage('user');
+    $client = $user_storage->load($client);
+    $fbPageEntity = $client->field_fb_page->referencedEntities();
+
+    if (empty($fbPageEntity)) {
+      return;
+    }
+
+    $fbPageEntity = reset($fbPageEntity);
+    $pageId = $fbPageEntity->get('field_page_id')->value;
+    
+    return $pageId;
+  }
+
+  /**
+   * Get the client's stored FB page access token.
+   */
+  public function getClientPageAccessToken($client) {
+    $user_storage = $this->tools->getStorage('user');
+    $client = $user_storage->load($client);
+    $fbPageEntity = $client->field_fb_page->referencedEntities();
+
+    if (empty($fbPageEntity)) {
+      return;
+    }
+
+    $fbPageEntity = reset($fbPageEntity);
+    $pageAccessToken = $fbPageEntity->get('field_page_access_token')->value;
+
+    return $pageAccessToken;
   }
 
   /**
