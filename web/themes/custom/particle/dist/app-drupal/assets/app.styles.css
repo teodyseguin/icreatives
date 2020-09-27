@@ -96065,6 +96065,10 @@ tr {
   transform: rotate(-135deg);
 }
 
+.top-post-picture {
+  height: 84px;
+}
+
 select {
   width: 250px;
   height: 100%;

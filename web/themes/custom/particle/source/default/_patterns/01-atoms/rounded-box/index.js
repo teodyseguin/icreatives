@@ -10,6 +10,9 @@ import 'protons';
 // Module template
 import './_rounded-box.twig';
 
+// Module style
+import './index.css';
+
 export const name = 'rounded-box';
 
 export const defaults = {

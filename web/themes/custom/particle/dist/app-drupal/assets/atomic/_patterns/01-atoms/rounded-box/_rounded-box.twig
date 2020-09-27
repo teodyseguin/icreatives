@@ -17,10 +17,19 @@
   {% if contents and top_five %}
     <div class="flex flex-col">
       {% for content in contents %}
-        <div class="flex flex-row">
-          <div class="flex-grow text-gray-900 font-bold font-sansserif">{{ content['created'] }}</div>
+        <div class="flex flex-row mb-2">
+          {% if content['picture'] %}
+            <div class="flex-grow w-1/5 overflow-hidden top-post-picture">
+              <img src="{{ content['picture'] }}" class="w-full" />
+            </div>
+          {% endif %}
+          <div class="flex-grow text-gray-900 font-bold font-sansserif mx-3 text-center">
+            {{ content['created'] }}
+          </div>
           <div class="flex-grow text-gray-900 font-bold font-sansserif text-right">
-            <a href="{{ content['link'] }}" target="_blank" class="text-gray-900 font-bold font-sansserif">link</a>
+            <a href="{{ content['link'] }}" target="_blank" class="text-gray-900 font-bold font-sansserif">
+              link
+            </a>
           </div>
         </div>
       {% endfor %}
