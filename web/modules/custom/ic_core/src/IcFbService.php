@@ -324,14 +324,14 @@ class IcFbService {
         $gender_age = str_replace('F.', 'Female, ', $gender_age) . ' yrs old';
         $group[$count] = [
           'gender_age' => $gender_age,
-          'count' => number_format($count),
+          'count' => $count,
         ];
       }
       elseif (strpos($gender_age, 'M') !== FALSE) {
         $gender_age = str_replace('M.', 'Male, ', $gender_age) . ' yrs old';
         $group[$count] = [
           'gender_age' => $gender_age,
-          'count' => number_format($count),
+          'count' => $count,
         ];
       }
     }
@@ -351,7 +351,7 @@ class IcFbService {
     foreach ((array) $data->values[$last]->value as $location => $count) {
       $group[$count] = [
         'location' => $location,
-        'count' => number_format($count),
+        'count' => $count,
       ];
     }
 

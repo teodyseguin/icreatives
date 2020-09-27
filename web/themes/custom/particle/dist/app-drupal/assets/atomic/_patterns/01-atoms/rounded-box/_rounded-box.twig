@@ -46,12 +46,16 @@
     <div class="flex flex-col">
       {% for content in contents %}
         <div class="flex flex-row">
-          <div class="flex-grow text-gray-700 font-sansserif">{{ content['location'] }}</div>
-          <div class="flex-grow text-gray-700 font-sansserif text-right">{{ content['count'] }}</div>
+          <div class="flex-grow text-gray-700 font-sansserif">
+            {{ content['location'] }}
+          </div>
+          <div class="flex-grow text-gray-700 font-sansserif text-right">
+            {{ content['count']|number_format }}
+          </div>
         </div>
       {% endfor %}
     </div>
   {% else %}
-    <div class="count text-3xl">{{ count }}</div>
+    <div class="count text-3xl">{{ count|number_format }}</div>
   {% endif %}
 </div>
