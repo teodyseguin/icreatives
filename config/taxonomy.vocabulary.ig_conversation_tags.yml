@@ -1,0 +1,8 @@
+uuid: 16acbd7e-e8dc-4c3d-a21c-823fef16e814
+langcode: en
+status: true
+dependencies: {  }
+name: 'IG Conversation tags'
+vid: ig_conversation_tags
+description: 'List of conversation tags for your Instagram conversations'
+weight: 0
