@@ -130,7 +130,14 @@ class IcFbService {
   public function getFbPageInsights($from = NULL, $to = NULL) {
     $metric = "page_fans,page_impressions,page_impressions_organic,page_impressions_paid,page_consumptions_unique,page_fans_gender_age,page_fans_city";
     $client = \Drupal::request()->query->get('client');
-    $insights = [];
+    $insights = [
+      'total_facebook_followers' => 0,
+      'total_facebook_reach' => 0,
+      'total_facebook_impressions' => 0,
+      'link_clicks' => 0,
+      'gender_age_followers' => 0,
+      'location_followers' => 0,
+    ];
     $until = $to ? $to : strtotime('now');
     $since = $from ? $from : strtotime('-30 days');
 
@@ -227,7 +234,7 @@ class IcFbService {
     $pageAccessToken = $fbPageEntity->get('field_page_access_token')->value;
 
     try {
-      $response = $this->fbService->get("/$pageId/posts?access_token=$pageAccessToken&fields=shares,is_popular,created_time,permalink_url&since=$since&until=$until");
+      $response = $this->fbService->get("/$pageId/posts?access_token=$pageAccessToken&fields=picture,shares,is_popular,created_time,permalink_url&since=$since&until=$until");
       $body = json_decode($response->getBody());
 
       if (count($body->data) == 0) {
@@ -240,6 +247,7 @@ class IcFbService {
             'shares' => $data->shares->count,
             'created' => date('m/d/Y', strtotime($data->created_time)),
             'link' => $data->permalink_url,
+            'picture' => $data->picture,
           ];
         }
       }
@@ -261,7 +269,8 @@ class IcFbService {
    * Parse the Page Fans Country. This will be the Total Facebook Followers.
    */
   public function totalFacebookFollowers($data) {
-    return $data->values[count($data->values) - 1]->value;
+    $value = $data->values[count($data->values) - 1]->value;
+    return $value;
   }
 
   /**
@@ -315,14 +324,14 @@ class IcFbService {
         $gender_age = str_replace('F.', 'Female, ', $gender_age) . ' yrs old';
         $group[$count] = [
           'gender_age' => $gender_age,
-          'count' => $count,
+          'count' => number_format($count),
         ];
       }
       elseif (strpos($gender_age, 'M') !== FALSE) {
         $gender_age = str_replace('M.', 'Male, ', $gender_age) . ' yrs old';
         $group[$count] = [
           'gender_age' => $gender_age,
-          'count' => $count,
+          'count' => number_format($count),
         ];
       }
     }
@@ -342,7 +351,7 @@ class IcFbService {
     foreach ((array) $data->values[$last]->value as $location => $count) {
       $group[$count] = [
         'location' => $location,
-        'count' => $count,
+        'count' => number_format($count),
       ];
     }
 
@@ -368,7 +377,6 @@ class IcFbService {
     $pageAccessToken = $this->getClientPageAccessToken($client);
 
     try {
-      // $conversations = json_decode(file_get_contents('private://dummy/dummy.json'), TRUE);
       $response = $this->fbService->get("/$pageId/conversations?access_token=$pageAccessToken&fields=messages{message}&since=$since&until=$until");
       $body = json_decode($response->getBody());
 
