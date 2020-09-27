@@ -395,11 +395,6 @@ class IcFbService {
         }
       }
 
-      // $directory = \Drupal::service('stream_wrapper_manager')->getViaUri('private://dummy')->getUri();
-      // file_prepare_directory($directory, FILE_CREATE_DIRECTORY | FILE_MODIFY_PERMISSIONS);
-      // $fileLocation = $directory . '/dummy.json';
-      // file_save_data(json_encode($conversations), $fileLocation, FILE_EXISTS_REPLACE);
-
       return $this->createKeywordsCount($conversations);
     }
     catch (FacebookResponseException $e) {
