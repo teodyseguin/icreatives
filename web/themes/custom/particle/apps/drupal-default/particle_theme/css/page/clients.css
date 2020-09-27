@@ -1,0 +1,96 @@
+/**
+ * @file
+ * clients.css
+ */
+
+.clients-table header {
+  margin-bottom: 25px;
+}
+
+.clients-table th {
+  padding: 15px;
+  border: 1px solid var(--gray-light);
+}
+
+.clients-table thead {
+  border-bottom: 2px solid var(--gray-light);
+}
+
+.clients-table tr {
+  border-bottom: 1px solid var(--gray-light);
+}
+
+.clients-table td {
+  padding: 15px;
+  border: 1px solid var(--gray-light);
+}
+
+.clients-table td a {
+  color: var(--black);
+}
+
+.clients-table td a:hover {
+  text-decoration: underline;
+}
+
+.clients-table .pager {
+  margin: 20px;
+}
+
+.clients-table .pager__item {
+  display: inline;
+}
+
+.clients-table #view-body-table-column {
+  width: 60%;
+}
+
+.clients-table .form-item-field-client-target-id {
+  display: none;
+}
+
+.clients-table .js-form-item-body-value {
+  display: none;
+}
+
+.clients-table .views-exposed-form {
+  margin-bottom: 30px;
+}
+
+.clients-table .views-exposed-form #edit-actions {
+  display: none;
+}
+
+.clients-table .views-exposed-form .input--text {
+  width: 100%;
+}
+
+.clients-table .views-exposed-form .form-item-field-message-tags-target-id {
+  display: flex;
+  width: 80%;
+}
+
+@media screen and (min-width: 768px) {
+  .clients-table .views-exposed-form .form-item-field-message-tags-target-id {
+    width: 20%;
+  }
+}
+
+.clients-table .views-exposed-form label {
+  margin-right: 10px;
+}
+
+.clients-table .views-exposed-form .input--text:focus {
+  border-color: none;
+  box-shadow: none;
+  outline: none;
+}
+
+.clients-table .rows-wrapper {
+  display: flex;
+  padding-top: 0;
+  padding-bottom: 60px;
+  border: 1px solid #ccc;
+  box-shadow: 0 5px 7px #ccc;
+  border-radius: 10px;
+}

@@ -79,6 +79,12 @@ page.products:
       css/page/products.css:
         minified: true
 
+page.clients:
+  css:
+    theme:
+      css/page/clients.css:
+        minified: true
+
 form.user_login:
   css:
     theme:
