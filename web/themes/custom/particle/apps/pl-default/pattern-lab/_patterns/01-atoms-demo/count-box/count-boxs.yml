@@ -1,0 +1,9 @@
+count_box_demo_block:
+  title: Count Box Component
+  content:
+    lead: Add a quick description here.
+    summary: Add code examples here using <code>html code syntax</code>
+
+count_box:
+  example_var: This is an example var
+
