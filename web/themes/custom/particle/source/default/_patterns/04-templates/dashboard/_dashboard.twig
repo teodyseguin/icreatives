@@ -90,22 +90,22 @@
           <div>
             <h2 class="p-5">Instagram message count</h2>
             <div class="flex flex-col md:flex-row">
-              {% include '@atoms/rounded-box/_rounded-box.twig' with {
+              {% include '@atoms/count-box/_count-box.twig' with {
                 "title": "Question 5",
                 "count": 0,
                 "shadow": true
               } %}
-              {% include '@atoms/rounded-box/_rounded-box.twig' with {
+              {% include '@atoms/count-box/_count-box.twig' with {
                 "title": "Question 6",
                 "count": 0,
                 "shadow": true
               } %}
-              {% include '@atoms/rounded-box/_rounded-box.twig' with {
+              {% include '@atoms/count-box/_count-box.twig' with {
                 "title": "Question 7",
                 "count": 0,
                 "shadow": true
               } %}
-              {% include '@atoms/rounded-box/_rounded-box.twig' with {
+              {% include '@atoms/count-box/_count-box.twig' with {
                 "title": "Question 8",
                 "count": 0,
                 "shadow": true
@@ -119,22 +119,22 @@
             <h2 class="p-5">Facebook performance</h2>
             <div class="flex flex-col sm:flex-row">
               <div class="flex flex-col flex-grow">
-                {% include '@atoms/rounded-box/_rounded-box.twig' with {
+                {% include '@atoms/count-box/_count-box.twig' with {
                   "title": "Total Facebook Followers",
                   "count": page_insights['total_facebook_followers'],
                   "shadow": true
                 } %}
-                {% include '@atoms/rounded-box/_rounded-box.twig' with {
+                {% include '@atoms/count-box/_count-box.twig' with {
                   "title": "Total Facebook Reach",
                   "count": page_insights['total_facebook_reach'],
                   "shadow": true
                 } %}
-                {% include '@atoms/rounded-box/_rounded-box.twig' with {
+                {% include '@atoms/count-box/_count-box.twig' with {
                   "title": "Total Facebook Impressions",
                   "count": page_insights['total_facebook_impressions'],
                   "shadow": true
                 } %}
-                {% include '@atoms/rounded-box/_rounded-box.twig' with {
+                {% include '@atoms/count-box/_count-box.twig' with {
                   "title": "Link Clicks",
                   "count": page_insights['link_clicks'],
                   "shadow": true
@@ -205,7 +205,7 @@
             <h2 class="p-5">Instagram performance</h2>
             <div class="flex flex-col sm:flex-row">
               <div class="flex flex-col flex-grow">
-                {% include '@atoms/rounded-box/_rounded-box.twig' with {
+                {% include '@atoms/count-box/_count-box.twig' with {
                   "title": "Total Instagram Followers",
                   "count": page_insights['total_instagram_followers'],
                   "shadow": true
