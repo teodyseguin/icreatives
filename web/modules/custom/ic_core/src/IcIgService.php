@@ -17,15 +17,20 @@ class IcIgService {
   protected $tools;
 
   /**
+   * This will be the same FB service being used in FB Simple Connect module.
+   */
+  protected $fbService;
+
+  /**
    * Constructor.
    */
   public function __construct(IcCoreTools $tools) {
     $this->tools = $tools;
+    $this->fbService = $this->tools->getFbService();
   }
 
   public function getIgFollowers() {
     $client = \Drupal::request()->query->get('client');
-    $fbService = $this->tools->getFbService();
 
     if (!$client) {
       return;
@@ -44,7 +49,7 @@ class IcIgService {
     $pageAccessToken = $fbPageEntity->get('field_page_access_token')->value;
 
     try {
-      $response = $fbService->get("/$pageId/instagram_accounts?fields=id,followed_by_count&access_token=$pageAccessToken");
+      $response = $this->fbService->get("/$pageId/instagram_accounts?fields=id,followed_by_count&access_token=$pageAccessToken");
 
       if ($response) {
         $this->tools->loggerFactory()
