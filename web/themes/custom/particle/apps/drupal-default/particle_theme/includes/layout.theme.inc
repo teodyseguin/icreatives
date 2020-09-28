@@ -91,6 +91,7 @@ function particle_preprocess_page(&$variables) {
     $ic_fb_service->getFbPages();
     $page_insights = $ic_fb_service->getFbPageInsights($from, $to);
     $variables['conversations'] = $ic_fb_service->getFbConversations($from, $to);
+    $variables['ig_conversations'] = $ic_ig_service->getIgConversations($from, $to);
 
     $page_insights['total_instagram_followers'] = $ic_ig_service->getIgFollowers();
     $variables['page_insights'] = $page_insights;
