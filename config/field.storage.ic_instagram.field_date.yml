@@ -1,0 +1,20 @@
+uuid: 8e58c7cb-aa15-4f8f-8175-1c6e765da69a
+langcode: en
+status: true
+dependencies:
+  module:
+    - datetime
+    - ic_instagram
+id: ic_instagram.field_date
+field_name: field_date
+entity_type: ic_instagram
+type: datetime
+settings:
+  datetime_type: date
+module: datetime
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

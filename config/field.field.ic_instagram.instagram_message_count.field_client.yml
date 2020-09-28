@@ -1,14 +1,14 @@
-uuid: f554e791-98d4-4ce4-b3d0-46c7867e1779
+uuid: ad9d1003-d8b0-4672-b27d-925344f322d7
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.field_client
-    - node.type.invoice
-id: node.invoice.field_client
+    - field.storage.ic_instagram.field_client
+    - ic_instagram.ic_instagram_type.instagram_message_count
+id: ic_instagram.instagram_message_count.field_client
 field_name: field_client
-entity_type: node
-bundle: invoice
+entity_type: ic_instagram
+bundle: instagram_message_count
 label: Client
 description: ''
 required: false

@@ -1,0 +1,58 @@
+uuid: dfdd041d-9479-430e-a39f-256b7aa706ab
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.ic_instagram.instagram_message_count.field_client
+    - field.field.ic_instagram.instagram_message_count.field_count
+    - field.field.ic_instagram.instagram_message_count.field_date
+    - ic_instagram.ic_instagram_type.instagram_message_count
+  module:
+    - datetime
+id: ic_instagram.instagram_message_count.default
+targetEntityType: ic_instagram
+bundle: instagram_message_count
+mode: default
+content:
+  field_client:
+    weight: 26
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  field_count:
+    weight: 1
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
+    region: content
+  field_date:
+    weight: 2
+    settings: {  }
+    third_party_settings: {  }
+    type: datetime_default
+    region: content
+  name:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  user_id:
+    type: entity_reference_autocomplete
+    weight: 3
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+      match_limit: 10
+    region: content
+    third_party_settings: {  }
+hidden: {  }

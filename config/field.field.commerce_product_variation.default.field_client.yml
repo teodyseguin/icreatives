@@ -20,7 +20,11 @@ settings:
   handler_settings:
     include_anonymous: true
     filter:
-      type: _none
+      type: role
+      role:
+        client: client
+        administrator: '0'
+        site_admin: '0'
     target_bundles: null
     sort:
       field: _none

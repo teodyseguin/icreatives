@@ -1,0 +1,23 @@
+uuid: f72035f9-9d70-487b-90cf-30aea3008260
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.ic_instagram.field_count
+    - ic_instagram.ic_instagram_type.instagram_message_count
+id: ic_instagram.instagram_message_count.field_count
+field_name: field_count
+entity_type: ic_instagram
+bundle: instagram_message_count
+label: Count
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer
