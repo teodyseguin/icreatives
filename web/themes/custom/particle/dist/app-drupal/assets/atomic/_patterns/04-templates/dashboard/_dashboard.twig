@@ -75,41 +75,44 @@
             <div class="flex flex-col md:flex-row">
               {% if conversations %}
                 {% for conversation in conversations %}
-                  {% include '@atoms/rounded-box/_rounded-box.twig' with {
+                  {% include '@atoms/count-box/_count-box.twig' with {
                     "title": conversation['name'],
                     "count": conversation['total'],
-                    "shadow": true
+                    "shadow": true,
+                    "bold_title": true
                   } %}
                 {% endfor %}
               {% else %}
                 <p class="p-5">There are no data to display at the moment ...</p>
               {% endif %}
             </div>
+            <div class="flex px-5">
+              <a href="/admin/structure/taxonomy/manage/conversation_tags/add?destination=/dashboard">
+                [Create a tag]
+              </a>
+            </div>
           </div>
 
           <div>
             <h2 class="p-5">Instagram message count</h2>
             <div class="flex flex-col md:flex-row">
-              {% include '@atoms/count-box/_count-box.twig' with {
-                "title": "Question 5",
-                "count": 0,
-                "shadow": true
-              } %}
-              {% include '@atoms/count-box/_count-box.twig' with {
-                "title": "Question 6",
-                "count": 0,
-                "shadow": true
-              } %}
-              {% include '@atoms/count-box/_count-box.twig' with {
-                "title": "Question 7",
-                "count": 0,
-                "shadow": true
-              } %}
-              {% include '@atoms/count-box/_count-box.twig' with {
-                "title": "Question 8",
-                "count": 0,
-                "shadow": true
-              } %}
+              {% if ig_conversations %}
+                {% for conversation in ig_conversations %}
+                  {% include '@atoms/ig-count-box/_ig-count-box.twig' with {
+                    "title": conversation['name'],
+                    "count": conversation['total'],
+                    "shadow": true,
+                    "bold_title": true
+                  } %}
+                {% endfor %}
+              {% else %}
+                <p class="p-5">There are no data to display at the moment ...</p>
+              {% endif %}
+            </div>
+            <div class="flex px-5">
+              <a href="/admin/structure/taxonomy/manage/ig_conversation_tags/add?destination=/dashboard">
+                [Create a tag]
+              </a>
             </div>
           </div>
         </div>
