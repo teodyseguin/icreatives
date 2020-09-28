@@ -1,0 +1,29 @@
+uuid: 903d4046-dce8-4500-8359-61b5bb755d59
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.ic_instagram.field_instagram_conversation_tag
+    - ic_instagram.ic_instagram_type.instagram_message_count
+    - taxonomy.vocabulary.ig_conversation_tags
+id: ic_instagram.instagram_message_count.field_instagram_conversation_tag
+field_name: field_instagram_conversation_tag
+entity_type: ic_instagram
+bundle: instagram_message_count
+label: 'Instagram Conversation tag'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      ig_conversation_tags: ig_conversation_tags
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

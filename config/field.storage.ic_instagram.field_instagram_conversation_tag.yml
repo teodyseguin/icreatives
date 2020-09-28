@@ -1,0 +1,20 @@
+uuid: 32c65ee1-bc94-4901-9e58-8bed25056dec
+langcode: en
+status: true
+dependencies:
+  module:
+    - ic_instagram
+    - taxonomy
+id: ic_instagram.field_instagram_conversation_tag
+field_name: field_instagram_conversation_tag
+entity_type: ic_instagram
+type: entity_reference
+settings:
+  target_type: taxonomy_term
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false
