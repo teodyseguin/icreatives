@@ -1,0 +1,34 @@
+{#
+/**
+ * @file
+ * ig-count-box
+ *
+ * Available variables for ig-count-box:
+ *  - ig_count_box.variable_name [variable_type]: Description of the variable. Example below.
+ *  - ig_count_box.invert [bool]: When set, colors will be inverted for light display on dark background.
+ */
+#}
+
+{% if shadow == true %}
+  {% set shadow = "shadow-lg" %}
+{% endif %}
+
+{% if bold_title == true %}
+  {% set bold = "font-bold" %}
+{% endif %}
+
+<div class="relative count-box flex-grow border rounded m-5 p-5 {{ shadow }}">
+  <div class="flex title mb-5 {{ bold }} text-gray-800">
+    <div class="flex-grow">{{ title }}</div>
+    <div class="flex-grow text-right">
+      <a href="/admin/structure/taxonomy/manage/ig_conversation_tags/add?destination=/dashboard">
+        <i class="fas fa-plus cursor-pointer"></i>
+      </a>
+    </div>
+  </div>
+  {% if count %}
+    <div class="count text-3xl">{{ count|number_format }}</div>
+  {% else %}
+    No data to display ...
+  {% endif %}
+</div>
