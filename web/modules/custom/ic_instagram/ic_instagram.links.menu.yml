@@ -1,0 +1,17 @@
+
+# IC Instagram menu items definition
+entity.ic_instagram.collection:
+  title: 'IC Instagram list'
+  route_name: entity.ic_instagram.collection
+  description: 'List IC Instagram entities'
+  parent: system.admin_structure
+  weight: 100
+
+
+# IC Instagram type menu items definition
+entity.ic_instagram_type.collection:
+  title: 'IC Instagram type'
+  route_name: entity.ic_instagram_type.collection
+  description: 'List IC Instagram type (bundles)'
+  parent: system.admin_structure
+  weight: 99

@@ -1,0 +1,10 @@
+entity.ic_instagram.add_form:
+  route_name: entity.ic_instagram.add_page
+  title: 'Add IC Instagram'
+  appears_on:
+    - entity.ic_instagram.collection
+entity.ic_instagram_type.add_form:
+  route_name: entity.ic_instagram_type.add_form
+  title: 'Add IC Instagram type'
+  appears_on:
+    - entity.ic_instagram_type.collection

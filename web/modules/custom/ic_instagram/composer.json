@@ -1,0 +1,13 @@
+{
+    "name": "ic_instagram",
+    "type": "drupal-module",
+    "description": "Imaginarium Creative's Instagram Integration",
+    "keywords": [
+    ],
+    "homepage": "https://www.drupal.org/project/ic_instagram",
+    "minimum-stability": "dev",
+    "support": {
+        "issues": "https://www.drupal.org/project/issues/ic_instagram",
+        "source": "http://cgit.drupalcode.org/ic_instagram",
+    },
+}

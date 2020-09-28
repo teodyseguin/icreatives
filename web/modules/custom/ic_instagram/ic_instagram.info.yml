@@ -1,0 +1,5 @@
+name: 'IC Instagram'
+type: module
+description: 'Imaginarium Creative''s Instagram Integration'
+core: 8.x
+package: 'Custom'

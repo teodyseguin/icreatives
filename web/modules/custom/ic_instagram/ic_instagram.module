@@ -1,0 +1,58 @@
+<?php
+
+/**
+ * @file
+ * Contains ic_instagram.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function ic_instagram_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the ic_instagram module.
+    case 'help.page.ic_instagram':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Imaginarium Creative&#039;&#039;s Instagram Integration') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function ic_instagram_theme() {
+  $theme = [];
+  $theme['ic_instagram'] = [
+    'render element' => 'elements',
+    'file' => 'ic_instagram.page.inc',
+    'template' => 'ic_instagram',
+  ];
+  $theme['ic_instagram_content_add_list'] = [
+    'render element' => 'content',
+    'variables' => ['content' => NULL],
+    'file' => 'ic_instagram.page.inc',
+  ];
+  return $theme;
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK().
+ */
+function ic_instagram_theme_suggestions_ic_instagram(array $variables) {
+  $suggestions = [];
+  $entity = $variables['elements']['#ic_instagram'];
+  $sanitized_view_mode = strtr($variables['elements']['#view_mode'], '.', '_');
+
+  $suggestions[] = 'ic_instagram__' . $sanitized_view_mode;
+  $suggestions[] = 'ic_instagram__' . $entity->bundle();
+  $suggestions[] = 'ic_instagram__' . $entity->bundle() . '__' . $sanitized_view_mode;
+  $suggestions[] = 'ic_instagram__' . $entity->id();
+  $suggestions[] = 'ic_instagram__' . $entity->id() . '__' . $sanitized_view_mode;
+  return $suggestions;
+}

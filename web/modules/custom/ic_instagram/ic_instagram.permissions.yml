@@ -1,0 +1,33 @@
+add ic instagram entities:
+  title: 'Create new IC Instagram entities'
+
+administer ic instagram entities:
+  title: 'Administer IC Instagram entities'
+  description: 'Allow to access the administration form to configure IC Instagram entities.'
+  restrict access: true
+
+delete ic instagram entities:
+  title: 'Delete IC Instagram entities'
+
+edit ic instagram entities:
+  title: 'Edit IC Instagram entities'
+
+view published ic instagram entities:
+  title: 'View published IC Instagram entities'
+
+view unpublished ic instagram entities:
+  title: 'View unpublished IC Instagram entities'
+
+view all ic instagram revisions:
+  title: 'View all IC Instagram revisions'
+
+revert all ic instagram revisions:
+  title: 'Revert all IC Instagram revisions'
+  description: 'Role requires permission <em>view IC Instagram revisions</em> and <em>edit rights</em> for ic instagram entities in question or <em>administer ic instagram entities</em>.'
+
+delete all ic instagram revisions:
+  title: 'Delete all revisions'
+  description: 'Role requires permission to <em>view IC Instagram revisions</em> and <em>delete rights</em> for ic instagram entities in question or <em>administer ic instagram entities</em>.'
+
+permission_callbacks:
+  - \Drupal\ic_instagram\IcInstagramPermissions::generatePermissions

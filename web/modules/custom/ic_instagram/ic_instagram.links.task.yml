@@ -1,0 +1,22 @@
+# IC Instagram routing definition
+
+entity.ic_instagram.canonical:
+  route_name: entity.ic_instagram.canonical
+  base_route: entity.ic_instagram.canonical
+  title: 'View'
+
+entity.ic_instagram.edit_form:
+  route_name: entity.ic_instagram.edit_form
+  base_route: entity.ic_instagram.canonical
+  title: 'Edit'
+
+entity.ic_instagram.version_history:
+  route_name: entity.ic_instagram.version_history
+  base_route: entity.ic_instagram.canonical
+  title: 'Revisions'
+
+entity.ic_instagram.delete_form:
+  route_name:  entity.ic_instagram.delete_form
+  base_route:  entity.ic_instagram.canonical
+  title: Delete
+  weight: 10

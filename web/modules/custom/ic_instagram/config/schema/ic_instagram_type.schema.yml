@@ -1,0 +1,12 @@
+ic_instagram.ic_instagram_type.*:
+  type: config_entity
+  label: 'IC Instagram type config'
+  mapping:
+    id:
+      type: string
+      label: 'ID'
+    label:
+      type: label
+      label: 'Label'
+    uuid:
+      type: string
