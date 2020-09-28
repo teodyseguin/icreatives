@@ -29,6 +29,9 @@ class IcIgService {
     $this->fbService = $this->tools->getFbService();
   }
 
+  /**
+   * Get the Instagram Followers count.
+   */
   public function getIgFollowers() {
     $client = \Drupal::request()->query->get('client');
 
@@ -68,6 +71,92 @@ class IcIgService {
         ->get('ic_core.ig_service')
         ->error('Something went wrong retrieving the instagram followers count : @message', ['@message' => json_encode($e)]);
     }
+  }
+
+  public function getIgConversations($from = NULL, $to = NULL) {
+    $client = \Drupal::request()->query->get('client');
+
+    if (!$client) {
+      return;
+    }
+
+    $igStorage = $this->tools->getStorage('ic_instagram');
+    $query = $igStorage->getQuery();
+    // $uids = $query->condition('status', '1')
+    //               ->condition('roles', 'client')
+    //               ->execute();
+    $ids = $query->execute();
+    $data = $igStorage->loadMultiple($ids);
+
+    return $this->createKeywordsCount($data);
+  }
+
+  /**
+   * Create the keywords count.
+   */
+  public function createKeywordsCount($conversations) {
+    $client = \Drupal::request()->query->get('client');
+
+    if (count($conversations) == 0) {
+      return;
+    }
+
+    $igConversationTags = $this->getIgConversationTags();
+
+    if (empty($igConversationTags)) {
+      return;
+    }
+
+    foreach ($conversations as $conversation) {
+      $referencedClient = $conversation->field_client->referencedEntities();
+      $term = $conversation->field_instagram_conversation_tag->referencedEntities();
+
+      if (empty($term)) {
+        continue;
+      }
+
+      if (empty($referencedClient)) {
+        continue;
+      }
+
+      $referencedClient = reset($referencedClient);
+
+      if ($referencedClient->id() != $client) {
+        continue;
+      }
+
+      $term = reset($term);
+      $term = $term->get('name')->value;
+      $igConversationTags[$term]['total'] += $conversation->get('field_count')->value;
+    }
+
+    return $igConversationTags;
+  }
+
+  /**
+   * Get the IG Conversation tags.
+   */
+  function getIgConversationTags() {
+    $vid = 'ig_conversation_tags';
+    $termStorage = $this->tools->getStorage('taxonomy_term');
+    $terms = $termStorage->loadTree($vid);
+    $termsData = [];
+
+    if (count($terms) == 0) {
+      return;
+    }
+
+    foreach ($terms as $term) {
+      $name = str_replace('#', '', $term->name);
+      $name = explode('_', $name);
+      $name = implode(' ', $name);
+      $termsData[$term->name] = [
+        'name' => ucwords($name),
+        'total' => 0,
+      ];
+    }
+
+    return $termsData;
   }
 
 }
