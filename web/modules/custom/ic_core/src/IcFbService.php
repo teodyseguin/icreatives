@@ -73,7 +73,7 @@ class IcFbService {
       if ($response) {
         $this->tools->loggerFactory()
           ->get('ic_core.fb_service')
-          ->error('The response has been accepted');
+          ->notice('The response has been accepted');
         
         $pages = json_decode($response->getBody());
         $this->upsertFbPages($pages);
