@@ -3,6 +3,7 @@
 namespace Drupal\ic_core;
 
 use Drupal\ic_core\IcCoreTools;
+use Drupal\Core\Database\Connection;
 use Facebook\Exceptions\FacebookResponseException;
 use Drupal\ic_fb_pages\Entity\IcFbPageEntity;
 
@@ -17,6 +18,11 @@ class IcIgService {
   protected $tools;
 
   /**
+   * @var \Drupal\Core\Database\Connection
+   */
+  protected $dbConnection;
+
+  /**
    * This will be the same FB service being used in FB Simple Connect module.
    */
   protected $fbService;
@@ -24,8 +30,9 @@ class IcIgService {
   /**
    * Constructor.
    */
-  public function __construct(IcCoreTools $tools) {
+  public function __construct(IcCoreTools $tools, Connection $dbConnection) {
     $this->tools = $tools;
+    $this->dbConnection = $dbConnection;
     $this->fbService = $this->tools->getFbService();
   }
 
@@ -73,20 +80,30 @@ class IcIgService {
     }
   }
 
+  /**
+   * Get the Instagram conversation count.
+   */
   public function getIgConversations($from = NULL, $to = NULL) {
     $client = \Drupal::request()->query->get('client');
+    $until = $to != NULL ? date('Y-m-d', $to) : date('Y-m-d', strtotime('now'));
+    $since = $from != NULL ? date('Y-m-d', $from) : date('Y-m-d', strtotime('-30 days'));
+    $igEntities = [];
 
     if (!$client) {
       return;
     }
 
     $igStorage = $this->tools->getStorage('ic_instagram');
-    $query = $igStorage->getQuery();
-    // $uids = $query->condition('status', '1')
-    //               ->condition('roles', 'client')
-    //               ->execute();
-    $ids = $query->execute();
-    $data = $igStorage->loadMultiple($ids);
+
+    $queryString = "SELECT * FROM ic_instagram__field_date " .
+                   "WHERE field_date_value <= '$until' AND field_date_value >= '$since'";
+    $results = $this->dbConnection->query($queryString);
+
+    foreach ($results as $key => $result) {
+      $igEntities[] = $result->entity_id;
+    }
+
+    $data = $igStorage->loadMultiple($igEntities);
 
     return $this->createKeywordsCount($data);
   }
