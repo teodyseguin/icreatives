@@ -96,5 +96,19 @@ function particle_preprocess_page(&$variables) {
     $page_insights['total_instagram_followers'] = $ic_ig_service->getIgFollowers();
     $variables['page_insights'] = $page_insights;
     $variables['top_five_contents'] = $ic_fb_service->getTopFiveContents($from, $to);
+
+    $user_storage = $tools->getStorage('user');
+    $user_data = $tools->getUserData();
+    $site_admin = $user_storage->loadByProperties(['roles' => 'site_admin']);
+
+    if (empty($site_admin)) {
+      return;
+    }
+
+    $site_admin = reset($site_admin);
+    $user_id = $site_admin->id();
+
+    $variables['#attached']['drupalSettings']['ic']['facebook_id'] = $user_data->get('ic_core', $user_id, 'fbid');
+    $variables['#attached']['drupalSettings']['ic']['facebook_token'] = $user_data->get('ic_core', $user_id, 'fb_access_token');
   }
 }
