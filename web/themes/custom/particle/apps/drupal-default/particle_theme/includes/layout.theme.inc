@@ -1,5 +1,7 @@
 <?php
 
+use Drupal\ic_core\IcCoreTesting;
+
 /**
  * @file
  * Functions to support theming layouts in the Particle theme.
@@ -95,7 +97,9 @@ function particle_preprocess_page(&$variables) {
 
     $page_insights['total_instagram_followers'] = $ic_ig_service->getIgFollowers();
     $variables['page_insights'] = $page_insights;
-    $variables['top_five_contents'] = $ic_fb_service->getTopFiveContents($from, $to);
+    $fb_posts = $ic_fb_service->getFbPosts($from, $to);
+    $variables['top_five_contents'] = $fb_posts['topFive'];
+    $variables['engagement_rate'] = $fb_posts['engagementRate'];
 
     $user_storage = $tools->getStorage('user');
     $user_data = $tools->getUserData();

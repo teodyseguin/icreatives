@@ -184,11 +184,6 @@ class IcFbService {
             $insights['link_clicks'] = $this->linkClicks($data);
           break;
 
-          case 'post_impressions_unique':
-          case 'post_engaged_users':
-            // Nothing to do yet here...
-          break;
-
           case 'page_fans_gender_age':
             $insights['gender_age_followers'] = $this->genderAgeFollowers($data);
           break;
@@ -211,7 +206,7 @@ class IcFbService {
   /**
    * Get the Top Five Contents.
    */
-  public function getTopFiveContents($from = NULL, $to = NULL) {
+  public function getFbPosts($from = NULL, $to = NULL) {
     $client = \Drupal::request()->query->get('client');
     $popular = [];
     $until = $to ? $to : strtotime('now');
@@ -234,14 +229,18 @@ class IcFbService {
     $pageAccessToken = $fbPageEntity->get('field_page_access_token')->value;
 
     try {
-      $response = $this->fbService->get("/$pageId/posts?access_token=$pageAccessToken&fields=picture,shares,is_popular,created_time,permalink_url&since=$since&until=$until");
+      $response = $this->fbService->get("/$pageId/posts?access_token=$pageAccessToken&fields=id,picture,shares,is_popular,created_time,permalink_url&since=$since&until=$until");
       $body = json_decode($response->getBody());
 
       if (count($body->data) == 0) {
         return;
       }
 
+      $postIds = [];
+
       foreach ($body->data as $data) {
+        $postIds[] = $data->id;
+
         if ($data->is_popular == TRUE) {
           $popular[$data->shares->count] = [
             'shares' => $data->shares->count,
@@ -256,13 +255,63 @@ class IcFbService {
       krsort($popular);
 
       // Then we only return the top 5 of them.
-      return array_splice($popular, 0, 5, TRUE);
+      return [
+        'topFive' => array_splice($popular, 0, 5, TRUE),
+        'engagementRate' => $this->getEngagementRate($postIds, $pageAccessToken, $since, $until),
+      ];
     }
     catch (FacebookResponseException $e) {
       $this->tools->loggerFactory()
         ->get('ic_core.fb_service')
         ->error('Something went wrong while retrieving your top five posts : @message', ['@message' => json_encode($e)]);
     }
+  }
+
+  /**
+   * Get the engagement rate.
+   */
+  public function getEngagementRate($postIds, $pageAccessToken, $since, $until) {
+    $postsData = [];
+
+    foreach ($postIds as $postId) {
+      $path = "/$postId/insights?access_token=$pageAccessToken&metric=post_impressions_unique,post_engaged_users&since=$since&until=$until";
+
+      try {
+        $response = $this->fbService->get($path);
+        $body = json_decode($response->getBody());
+        $postImpressionsUniqueCount = 0;
+        $postEngagedUsersCount = 0;
+
+        if (count($body->data) == 0) {
+          return;
+        }
+
+        foreach ($body->data as $data) {
+          $postsData[$data->name][$postId][] = $data->values[0]->value;
+          switch ($data->name) {
+            case 'post_impressions_unique':
+              $postImpressionsUniqueCount += $data->values[0]->value;
+            break;
+
+            case 'post_engaged_users':
+              $postEngagedUsersCount += $data->values[0]->value;
+            break;
+          }
+        }
+
+        return ($postEngagedUsersCount/$postImpressionsUniqueCount) * 100;
+      }
+      catch (FacebookResponseException $e) {
+        $this->tools->loggerFactory()
+          ->get('ic_core.fb_service')
+          ->error('Something went wrong while retrieving post: @postid engagement rate : @message', [
+            '@postid' => $postId,
+            '@message' => json_encode($e),
+          ]);
+      }
+    }
+
+    dump($postsData);
   }
 
   /**
