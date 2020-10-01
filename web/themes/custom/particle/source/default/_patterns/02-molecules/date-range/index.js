@@ -109,6 +109,10 @@ const formatDate = (date) => {
       return;
     }
 
+    if ($('.date-from').val() === '' && $('.date-to').val() === '') {
+      return;
+    }
+
     let fromTimestamp = new Date($('.date-from').val());
     let toTimestamp = new Date($('.date-to').val());
 
