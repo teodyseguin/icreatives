@@ -1,0 +1,21 @@
+uuid: a4ef485c-344f-4f9d-bf02-7d6827722726
+langcode: en
+status: true
+dependencies:
+  module:
+    - ic_instagram
+id: ic_instagram.field_name
+field_name: field_name
+entity_type: ic_instagram
+type: string
+settings:
+  max_length: 255
+  is_ascii: false
+  case_sensitive: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

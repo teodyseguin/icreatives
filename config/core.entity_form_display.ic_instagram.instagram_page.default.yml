@@ -1,0 +1,57 @@
+uuid: 8951460f-43d3-4461-b9ab-97dee4e4dab7
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.ic_instagram.instagram_page.field_ig_page_id
+    - field.field.ic_instagram.instagram_page.field_name
+    - field.field.ic_instagram.instagram_page.field_page_id
+    - ic_instagram.ic_instagram_type.instagram_page
+id: ic_instagram.instagram_page.default
+targetEntityType: ic_instagram
+bundle: instagram_page
+mode: default
+content:
+  field_ig_page_id:
+    weight: 28
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_name:
+    weight: 27
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_page_id:
+    weight: 26
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  name:
+    type: string_textfield
+    weight: -4
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  user_id:
+    type: entity_reference_autocomplete
+    weight: 5
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+      match_limit: 10
+    region: content
+    third_party_settings: {  }
+hidden: {  }

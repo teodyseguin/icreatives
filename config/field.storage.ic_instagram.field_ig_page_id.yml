@@ -1,0 +1,21 @@
+uuid: dbb1d3fe-3415-4e18-9c02-ac61e336f079
+langcode: en
+status: true
+dependencies:
+  module:
+    - ic_instagram
+id: ic_instagram.field_ig_page_id
+field_name: field_ig_page_id
+entity_type: ic_instagram
+type: string
+settings:
+  max_length: 255
+  is_ascii: false
+  case_sensitive: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

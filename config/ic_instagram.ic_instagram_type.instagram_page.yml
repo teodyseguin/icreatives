@@ -1,0 +1,6 @@
+uuid: 26eb3eaf-9881-416f-96c0-c49babf0d1cf
+langcode: en
+status: true
+dependencies: {  }
+id: instagram_page
+label: 'Instagram page'

@@ -1,0 +1,19 @@
+uuid: 6cae7dfa-e125-4d14-8402-5960b463ddd2
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.ic_instagram.field_ig_page_id
+    - ic_instagram.ic_instagram_type.instagram_page
+id: ic_instagram.instagram_page.field_ig_page_id
+field_name: field_ig_page_id
+entity_type: ic_instagram
+bundle: instagram_page
+label: 'IG Page Id'
+description: 'The instagram page ID'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

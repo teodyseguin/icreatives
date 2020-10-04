@@ -1,0 +1,56 @@
+uuid: fafd6f99-073e-46c6-9a9e-190bdd1c33b3
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.ic_instagram.instagram_page.field_ig_page_id
+    - field.field.ic_instagram.instagram_page.field_name
+    - field.field.ic_instagram.instagram_page.field_page_id
+    - ic_instagram.ic_instagram_type.instagram_page
+  module:
+    - user
+id: ic_instagram.instagram_page.default
+targetEntityType: ic_instagram
+bundle: instagram_page
+mode: default
+content:
+  field_ig_page_id:
+    weight: 3
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_name:
+    weight: 2
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_page_id:
+    weight: 1
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  name:
+    label: above
+    type: string
+    weight: -4
+    region: content
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+  user_id:
+    label: hidden
+    type: author
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden: {  }
