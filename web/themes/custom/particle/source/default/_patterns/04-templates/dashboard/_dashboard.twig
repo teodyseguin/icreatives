@@ -210,13 +210,82 @@
               <div class="flex flex-col flex-grow">
                 {% include '@atoms/count-box/_count-box.twig' with {
                   "title": "Total Instagram Followers",
-                  "count": page_insights['total_instagram_followers'],
+                  "count": ig_insights['total_instagram_followers'],
+                  "shadow": true
+                } %}
+                {% include '@atoms/count-box/_count-box.twig' with {
+                  "title": "Total Instagram Reach",
+                  "count": ig_insights['reach'],
+                  "shadow": true
+                } %}
+                {% include '@atoms/count-box/_count-box.twig' with {
+                  "title": "Total Instagram Impressions",
+                  "count": ig_insights['impressions'],
+                  "shadow": true
+                } %}
+                {% include '@atoms/count-box/_count-box.twig' with {
+                  "title": "Link Clicks",
+                  "count": 0,
+                  "shadow": true
+                } %}
+              </div>
+
+              <div class="flex flex-col flex-grow">
+                {% include '@atoms/percent-box/_percent-box.twig' with {
+                  "title": "Engagement rate",
+                  "count": 0,
+                  "shadow": true
+                } %}
+
+                {% include '@atoms/rounded-box/_rounded-box.twig' with {
+                  "title": "Top 5 contents",
+                  "count": 0,
+                  "top_five": true,
+                  "contents": '',
                   "shadow": true
                 } %}
               </div>
             </div>
           </div>
 
+          <div class="flex-grow">
+            <h2 class="p-5">Instagram audience</h2>
+            <div class="flex flex-row sm:flex-grow">
+              <div class="flex flex-col flex-grow">
+                {% include '@atoms/rounded-box/_rounded-box.twig' with {
+                  "title": "Gender and Age of Followers",
+                  "count": 0,
+                  "gender_age_followers": true,
+                  "contents": ig_insights['gender_age_followers'],
+                  "shadow": true
+                } %}
+                {% include '@atoms/rounded-box/_rounded-box.twig' with {
+                  "title": "Gender and Age of Audience Reached",
+                  "count": 0,
+                  "gender_age_followers": true,
+                  "contents": ig_insights['gender_age_followers'],
+                  "shadow": true
+                } %}
+              </div>
+
+              <div class="flex flex-col flex-grow">
+                {% include '@atoms/rounded-box/_rounded-box.twig' with {
+                  "title": "Location of Followers",
+                  "count": 0,
+                  "location_followers": true,
+                  "contents": ig_insights['location_followers'],
+                  "shadow": true
+                } %}
+                {% include '@atoms/rounded-box/_rounded-box.twig' with {
+                  "title": "Location of Audience Reached",
+                  "count": 0,
+                  "location_followers": true,
+                  "contents": ig_insights['location_followers'],
+                  "shadow": true
+                } %}
+              </div>
+            </div>
+          </div>
         </div>
 
       </div>

@@ -91,15 +91,19 @@ function particle_preprocess_page(&$variables) {
 
     // Collect the fb pages managing by this user
     $ic_fb_service->getFbPages();
-    $page_insights = $ic_fb_service->getFbPageInsights($from, $to);
-    $variables['conversations'] = $ic_fb_service->getFbConversations($from, $to);
-    $variables['ig_conversations'] = $ic_ig_service->getIgConversations($from, $to);
+    $ic_ig_service->getIgPages();
 
-    $page_insights['total_instagram_followers'] = $ic_ig_service->getIgFollowers();
+    $page_insights = $ic_fb_service->getFbPageInsights($from, $to);
     $variables['page_insights'] = $page_insights;
+
     $fb_posts = $ic_fb_service->getFbPosts($from, $to);
     $variables['top_five_contents'] = $fb_posts['topFive'];
     $variables['engagement_rate'] = $fb_posts['engagementRate'];
+    $variables['conversations'] = $ic_fb_service->getFbConversations($from, $to);
+
+    $variables['ig_conversations'] = $ic_ig_service->getIgConversations($from, $to);
+    $variables['ig_insights'] = $ic_ig_service->getIgPageInsights($from, $to);
+    $variables['ig_insights']['total_instagram_followers'] = $ic_ig_service->getIgFollowers();
 
     $user_storage = $tools->getStorage('user');
     $user_data = $tools->getUserData();

@@ -318,8 +318,7 @@ class IcFbService {
    * Parse the Page Fans Country. This will be the Total Facebook Followers.
    */
   public function totalFacebookFollowers($data) {
-    $value = $data->values[count($data->values) - 1]->value;
-    return $value;
+    return $data->values[count($data->values) - 1]->value;
   }
 
   /**
