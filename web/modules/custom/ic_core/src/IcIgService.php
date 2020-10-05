@@ -172,8 +172,14 @@ class IcIgService {
     $instagramStorage = $this->tools->getStorage('ic_instagram');
 
     foreach ($pages->data as $data) {
+      $id = $data->instagram_business_account->id;
+
+      if (empty($id)) {
+        continue;
+      }
+
       $igPage = $instagramStorage->loadByProperties([
-        'field_ig_page_id' => $data->instagram_business_account->id
+        'field_ig_page_id' => $id
       ]);
 
       if (empty($igPage)) {
@@ -249,7 +255,7 @@ class IcIgService {
    */
   public function getMetric1($igPageId, $fbAccessToken, $since, $until) {
     // Reach and Impressions can be of period day.
-    $metric = "reach,impressions";
+    $metric = "reach,impressions,website_clicks,text_message_clicks,phone_call_clicks,get_directions_clicks";
     $insights = [
       'reach' => 0,
       'impressions' => 0
@@ -271,6 +277,13 @@ class IcIgService {
 
           case 'impressions':
             $insights['impressions'] = $this->getIgImpressions($data);
+          break;
+
+          case 'website_clicks':
+          case 'text_message_clicks':
+          case 'phone_call_clicks':
+          case 'get_directions_click':
+            $insights['link_clicks'] = $this->linkClicks($data);
           break;
         }
       }
@@ -347,6 +360,19 @@ class IcIgService {
     }
 
     return array_sum($impressions_count);
+  }
+
+  /**
+   * Get the Total link clicks.
+   */
+  public function linkClicks($data) {
+    $clicks_count = 0;
+
+    foreach ($data->values as $value) {
+      $clicks_count += $value->value;
+    }
+
+    return $clicks_count;
   }
 
   public function getIgAudienceCity($data) {
