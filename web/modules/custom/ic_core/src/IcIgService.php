@@ -125,12 +125,6 @@ class IcIgService {
    * Get the list of facebook pages, owned by a user.
    */
   public function getIgPages() {
-    $client = \Drupal::request()->query->get('client');
-
-    if (!$client) {
-      return;
-    }
-
     $fbId = $this->fbId;
     $fbAccessToken = $this->fbAccessToken;
 
