@@ -229,7 +229,7 @@ class IcFbService {
     $pageAccessToken = $fbPageEntity->get('field_page_access_token')->value;
 
     try {
-      $response = $this->fbService->get("/$pageId/posts?access_token=$pageAccessToken&fields=id,picture,shares,is_popular,created_time,permalink_url&since=$since&until=$until");
+      $response = $this->fbService->get("/$pageId/posts?access_token=$pageAccessToken&fields=id,message,picture,shares,is_popular,created_time,permalink_url&since=$since&until=$until");
       $body = json_decode($response->getBody());
 
       if (count($body->data) == 0) {
@@ -247,6 +247,7 @@ class IcFbService {
             'created' => date('m/d/Y', strtotime($data->created_time)),
             'link' => $data->permalink_url,
             'picture' => $data->picture,
+            'message' => substr($data->message, 0, 40) . '...',
           ];
         }
       }
@@ -310,8 +311,6 @@ class IcFbService {
           ]);
       }
     }
-
-    dump($postsData);
   }
 
   /**

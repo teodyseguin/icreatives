@@ -1,3 +1,10 @@
 .top-post-picture {
   height: 84px;
 }
+
+.top-post-picture > div {
+  display: block;
+  width: 84px;
+  height: 84px;
+  background-size: cover;
+}

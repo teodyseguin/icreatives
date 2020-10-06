@@ -20,13 +20,12 @@
         <div class="flex flex-row mb-2">
           {% if content['picture'] %}
             <div class="flex-grow w-1/5 overflow-hidden top-post-picture">
-              <img src="{{ content['picture'] }}" class="w-full" />
+              <div style="background-image: url({{ content['picture'] }})"></div>
             </div>
           {% endif %}
-          <div class="flex-grow text-gray-900 font-bold font-sansserif mx-3 text-center">
+          <div class="flex-grow text-gray-900 font-bold font-sansserif mx-3 text-left">
             {{ content['created'] }}
-          </div>
-          <div class="flex-grow text-gray-900 font-bold font-sansserif text-right">
+            <p>{{ content['message'] }}</p>
             <a href="{{ content['link'] }}" target="_blank" class="text-gray-900 font-bold font-sansserif">
               link
             </a>

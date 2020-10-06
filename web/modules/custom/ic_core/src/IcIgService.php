@@ -245,7 +245,8 @@ class IcIgService {
 
     $metric1Insights = $this->getMetric1($igPageId, $fbAccessToken, $since, $until);
     $metric2Insights = $this->getMetric2($igPageId, $fbAccessToken, $since, $until);
-    $final = array_merge($metric1Insights, $metric2Insights);
+    $metric3Insights = $this->getMetric3($igPageId, $fbAccessToken, $since, $until);
+    $final = array_merge($metric1Insights, $metric2Insights, $metric3Insights);
 
     return $final;
   }
@@ -297,8 +298,11 @@ class IcIgService {
     }
   }
 
+  /**
+   * Get the Audience per city, country, gender and age.
+   */
   public function getMetric2($igPageId, $fbAccessToken, $since, $until) {
-    // Audience per city, country and gener age can only be of period lifetime.
+    // Audience per city, country and gender age can only be of period lifetime.
     $metric = "audience_city,audience_country,audience_gender_age";
     $insights = [
       'location_followers' => 0,
@@ -333,6 +337,77 @@ class IcIgService {
       $this->tools->loggerFactory()
            ->get('ic_core.ig_service')
            ->error('Something weng wrong while retrieving IG Page data : @message', ['@message' => json_encode($e)]);
+    }
+  }
+
+  public function getMetric3($igPageId, $fbAccessToken, $since, $until) {
+    $popular = [];
+
+    try {
+      $response = $this->fbService->get("/$igPageId?access_token=$fbAccessToken&fields=media{like_count,media_url}&period=day&since=$since&until=$until");
+      $body = json_decode($response->getBody());
+
+      if (count($body->media->data) == 0) {
+        return;
+      }
+
+      $mediaIds = [];
+
+      foreach ($body->media->data as $data) {
+        $mediaIds[] = $data->id;
+
+        $popular[$data->like_count] = [
+          'like_count' => $data->like_count,
+          'picture' => $data->media_url,
+        ];
+      }
+
+      krsort($popular);
+
+      return [
+        'topFive' => array_splice($popular, 0, 5, TRUE),
+        'engagementRate' => $this->getEngagementRate($mediaIds),
+      ];
+    }
+    catch (FacebookResponseException $e) {
+      $this->tools->loggerFactory()
+           ->get('ic_core.ig_service')
+           ->error('Something weng wrong while retrieving IG Page data : @message', ['@message' => json_encode($e)]);
+    }
+  }
+
+  public function getEngagementRate($mediaIds) {
+    $fbAccessToken = $this->fbAccessToken;
+
+    foreach ($mediaIds as $mediaId) {
+      $path = "/$mediaId/insights?access_token=$fbAccessToken&metric=engagement&period=lifetime";
+
+      try {
+        $response = $this->fbService->get($path);
+        $body = json_decode($response->getBody());
+        $engagement = 0;
+
+        if (count($body->data) == 0) {
+          return;
+        }
+
+        foreach ($body->data as $data) {
+          switch ($data->name) {
+            case 'engagement':
+              $engagement += $data->values[0]->value;
+            break;
+          }
+        }
+
+        return ($engagement/count($body->data)) * 100;
+      }
+      catch (FacebookResponseException $e) {
+        $this->tools->loggerFactory()
+          ->get('ic_core.fb_service')
+          ->error('Something went wrong while retrieving engagement rate : @message', [
+            '@message' => json_encode($e),
+          ]);
+      }
     }
   }
 

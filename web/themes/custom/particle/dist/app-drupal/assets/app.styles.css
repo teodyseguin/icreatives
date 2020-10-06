@@ -96069,6 +96069,13 @@ tr {
   height: 84px;
 }
 
+.top-post-picture > div {
+  display: block;
+  width: 84px;
+  height: 84px;
+  background-size: cover;
+}
+
 select {
   width: 250px;
   height: 100%;

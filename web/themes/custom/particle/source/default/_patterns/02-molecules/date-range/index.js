@@ -25,7 +25,7 @@ export const defaults = {
  * @param {Object} settings - Pertinent settings
  */
 // eslint-disable-next-line no-unused-vars
-export function disable($context, settings) { }
+export function disable($context, settings) {}
 
 /**
  * Each component has a chance to run when its enable function is called. It is
@@ -68,7 +68,9 @@ const formatDate = (date) => {
   let clientQuery;
 
   if (currentQuery) {
-    let { from, to, client } = currentQuery;
+    const { from, to, client } = currentQuery;
+    let since;
+    let until;
 
     if (!client) {
       $('.date-from').attr('disabled', true);
@@ -93,15 +95,15 @@ const formatDate = (date) => {
     });
 
     if (from) {
-      from = formatDate(new Date(from * 1000));
+      since = formatDate(new Date(from * 1000));
     }
 
     if (to) {
-      to = formatDate(new Date(to * 1000));
+      until = formatDate(new Date(to * 1000));
     }
 
-    $('.date-from').val(from);
-    $('.date-to').val(to);
+    $('.date-from').val(since);
+    $('.date-to').val(until);
   }
 
   $('.submit-daterange button').click(() => {
