@@ -247,7 +247,7 @@ class IcFbService {
             'created' => date('m/d/Y', strtotime($data->created_time)),
             'link' => $data->permalink_url,
             'picture' => $data->picture,
-            'message' => substr($data->message, 0, 40) . '...',
+            'message' => substr($data->message, 0, 30) . '...',
           ];
         }
       }

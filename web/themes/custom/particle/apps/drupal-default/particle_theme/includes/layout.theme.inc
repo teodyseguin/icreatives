@@ -103,7 +103,6 @@ function particle_preprocess_page(&$variables) {
 
     $variables['ig_conversations'] = $ic_ig_service->getIgConversations($from, $to);
     $variables['ig_insights'] = $ic_ig_service->getIgPageInsights($from, $to);
-    $variables['ig_insights']['total_instagram_followers'] = $ic_ig_service->getIgFollowers();
 
     $user_storage = $tools->getStorage('user');
     $user_data = $tools->getUserData();

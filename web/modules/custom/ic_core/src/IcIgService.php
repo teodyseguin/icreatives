@@ -27,6 +27,11 @@ class IcIgService {
   protected $fbService;
 
   /**
+   * The number of followers.
+   */
+  protected $followersCount;
+
+  /**
    * Constructor.
    */
   public function __construct(IcCoreTools $tools, Connection $dbConnection) {
@@ -75,14 +80,12 @@ class IcIgService {
       $response = $this->fbService->get("/$pageId/instagram_accounts?fields=id,followed_by_count&access_token=$pageAccessToken");
 
       if ($response) {
-        $this->tools->loggerFactory()
-          ->get('ic_core.fb_service')
-          ->error('The response has been accepted');
-
         $data = json_decode($response->getBody());
 
         if ($data) {
-          return $data->data[0]->followed_by_count;
+          $this->followersCount = $data->data[0]->followed_by_count;
+
+          return ['total_instagram_followers' => $data->data[0]->followed_by_count];
         }
       }
     }
@@ -140,10 +143,6 @@ class IcIgService {
       $response = $this->fbService->get("/$fbId/accounts?access_token=$fbAccessToken&fields=instagram_business_account{id,name}");
 
       if ($response) {
-        $this->tools->loggerFactory()
-          ->get('ic_core.ig_service')
-          ->notice('The response has been accepted');
-        
         $pages = json_decode($response->getBody());
         $this->upsertIgPages($pages);
 
@@ -243,10 +242,13 @@ class IcIgService {
     $igPage = reset($igPage);
     $igPageId = $igPage->get('field_ig_page_id')->value;
 
+    $followers = $this->getIgFollowers();
+
     $metric1Insights = $this->getMetric1($igPageId, $fbAccessToken, $since, $until);
     $metric2Insights = $this->getMetric2($igPageId, $fbAccessToken, $since, $until);
     $metric3Insights = $this->getMetric3($igPageId, $fbAccessToken, $since, $until);
-    $final = array_merge($metric1Insights, $metric2Insights, $metric3Insights);
+    
+    $final = array_merge($metric1Insights, $metric2Insights, $metric3Insights, $followers);
 
     return $final;
   }
@@ -284,7 +286,7 @@ class IcIgService {
           case 'text_message_clicks':
           case 'phone_call_clicks':
           case 'get_directions_click':
-            $insights['link_clicks'] = $this->linkClicks($data);
+            $insights['link_clicks'] += $this->linkClicks($data);
           break;
         }
       }
@@ -344,7 +346,7 @@ class IcIgService {
     $popular = [];
 
     try {
-      $response = $this->fbService->get("/$igPageId?access_token=$fbAccessToken&fields=media{like_count,media_url}&period=day&since=$since&until=$until");
+      $response = $this->fbService->get("/$igPageId?access_token=$fbAccessToken&fields=media{like_count,media_url,permalink,timestamp}&period=day&since=$since&until=$until");
       $body = json_decode($response->getBody());
 
       if (count($body->media->data) == 0) {
@@ -359,6 +361,8 @@ class IcIgService {
         $popular[$data->like_count] = [
           'like_count' => $data->like_count,
           'picture' => $data->media_url,
+          'link' => $data->permalink,
+          'created' => date('m/d/Y', strtotime($data->timestamp)),
         ];
       }
 
@@ -399,7 +403,7 @@ class IcIgService {
           }
         }
 
-        return ($engagement/count($body->data)) * 100;
+        return ($engagement/$this->followersCount) * 100;
       }
       catch (FacebookResponseException $e) {
         $this->tools->loggerFactory()
