@@ -24,6 +24,7 @@
         "drupal/entity_submit_redirect": "^1.1",
         "drupal/fontawesome": "^2.17",
         "drupal/fontawesome_menu_icons": "^1.8",
+        "drupal/fullcalendar_view": "^5.0",
         "drupal/inline_entity_form": "1.0.0-rc6",
         "drupal/libraries": "3.0.0-alpha1",
         "drupal/pathauto": "^1.8",
