@@ -85,6 +85,12 @@ page.clients:
       css/page/clients.css:
         minified: true
 
+page.calendar:
+  css:
+    theme:
+      css/page/calendar.css:
+        minified: true
+
 form.user_login:
   css:
     theme:
