@@ -471,14 +471,12 @@ class IcFbService {
       }
     };
 
-    foreach ($conversationTags as $tag) {
-      foreach ($conversations as $conversation) {
-        $chunks = explode(' ', $conversation->message);
-        $found = array_reduce($chunks, $findHash);
+    foreach ($conversations as $conversation) {
+      $chunks = explode(' ', $conversation->message);
+      $found = array_reduce($chunks, $findHash);
 
-        if ($found && array_key_exists($found, $conversationTags)) {
-          $conversationTags[$found]['total'] += 1;
-        }
+      if ($found && array_key_exists($found, $conversationTags)) {
+        $conversationTags[$found]['total'] += 1;
       }
     }
 
