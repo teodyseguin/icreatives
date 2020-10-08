@@ -20,6 +20,7 @@ module:
   contextual: 0
   ctools: 0
   datetime: 0
+  datetime_range: 0
   dblog: 0
   devel: 0
   devel_generate: 0
@@ -33,6 +34,7 @@ module:
   filter: 0
   fontawesome: 0
   fontawesome_menu_icons: 0
+  fullcalendar_view: 0
   help: 0
   history: 0
   ic_core: 0

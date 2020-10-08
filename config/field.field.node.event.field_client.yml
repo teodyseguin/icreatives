@@ -1,0 +1,28 @@
+uuid: ba6b84dc-8265-4995-b8b0-44d91df9d73c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_client
+    - node.type.event
+id: node.event.field_client
+field_name: field_client
+entity_type: node
+bundle: event
+label: Client
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:user'
+  handler_settings:
+    include_anonymous: true
+    filter:
+      type: _none
+    target_bundles: null
+    sort:
+      field: _none
+    auto_create: false
+field_type: entity_reference
