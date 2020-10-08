@@ -3,6 +3,8 @@ node:
     path: /invoice
   message:
     path: /inbox
+  event:
+    path: /calendar
 global:
   use_on:
     - front
