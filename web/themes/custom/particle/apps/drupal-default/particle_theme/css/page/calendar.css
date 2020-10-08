@@ -1,0 +1,8 @@
+/**
+ * @file
+ * calendar.css
+ */
+
+.calendar-page .views-exposed-form {
+  display: none;
+}
