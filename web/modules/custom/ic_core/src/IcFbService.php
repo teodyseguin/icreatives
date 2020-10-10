@@ -471,16 +471,27 @@ class IcFbService {
       }
     };
 
+    $tagsFound = 0;
+
     foreach ($conversations as $conversation) {
       $chunks = explode(' ', $conversation->message);
       $found = array_reduce($chunks, $findHash);
 
-      if ($found && array_key_exists($found, $conversationTags)) {
+      if ($found != NULL && array_key_exists($found, $conversationTags)) {
+        $tagsFound++;
         $conversationTags[$found]['total'] += 1;
       }
     }
 
-    return $conversationTags;
+    if ($tagsFound != 0) {
+      foreach ($conversationTags as $key => $tag) {
+        if ($tag['total'] == 0) {
+          unset($conversationTags[$key]);
+        }
+      }
+
+      return $conversationTags;
+    }
   }
 
   /**
