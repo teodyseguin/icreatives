@@ -417,6 +417,7 @@ class IcFbService {
    * Get the Facebook Conversations.
    */
   public function getFbConversations($from = NULL, $to = NULL) {
+    $userStorage = $this->tools->entityTypeManager()->getStorage('user');
     $client = \Drupal::request()->query->get('client');
     $until = $to ? $to : strtotime('now');
     $since = $from ? $from : strtotime('-30 days');
@@ -428,6 +429,8 @@ class IcFbService {
     $pageId = $this->getClientPageId($client);
     $pageAccessToken = $this->getClientPageAccessToken($client);
     $icFacebookStorage = $this->tools->getStorage('ic_facebook_entity');
+    $userClient = $userStorage->load($client);
+    $clientName = $userClient->getAccountName();
 
     try {
       $response = $this->fbService->get("/$pageId/conversations?access_token=$pageAccessToken&fields=messages{message,created_time}&since=$since&until=$until");
@@ -449,7 +452,7 @@ class IcFbService {
           if (empty($fbMessage)) {
             $facebookMessageEntity = $icFacebookStorage->create([
               'type' => 'facebook_message',
-              'name' => $message->created_time . ' - message',
+              'name' => "[$clientName] " . $message->created_time . ' - message',
               'field_message_content' => $message->message,
               'field_created_time' => date('Y-m-d', strtotime($message->created_time)),
               'field_message_id' => $message->id,
