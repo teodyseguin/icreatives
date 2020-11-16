@@ -6,6 +6,8 @@ config:
   webroot: web
   database: mariadb:10.2
   xdebug: true
+  conf:
+    php: .vscode/php.ini
 
 services:
   pma:
