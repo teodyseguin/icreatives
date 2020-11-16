@@ -1,0 +1,17 @@
+
+# IC Facebook Entity menu items definition
+entity.ic_facebook_entity.collection:
+  title: 'IC Facebook Entity list'
+  route_name: entity.ic_facebook_entity.collection
+  description: 'List IC Facebook Entity entities'
+  parent: system.admin_structure
+  weight: 100
+
+
+# IC Facebook Entity type menu items definition
+entity.ic_facebook_entity_type.collection:
+  title: 'IC Facebook Entity type'
+  route_name: entity.ic_facebook_entity_type.collection
+  description: 'List IC Facebook Entity type (bundles)'
+  parent: system.admin_structure
+  weight: 99

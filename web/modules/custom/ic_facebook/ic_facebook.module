@@ -1,0 +1,60 @@
+<?php
+
+/**
+ * @file
+ * Contains ic_facebook.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function ic_facebook_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the ic_facebook module.
+    case 'help.page.ic_facebook':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Imaginarium Creative&#039;&#039;s Facebook Integration') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function ic_facebook_theme() {
+  $theme['ic_facebook'] = [
+    'render element' => 'children',
+  ];
+  $theme['ic_facebook_entity'] = [
+    'render element' => 'elements',
+    'file' => 'ic_facebook_entity.page.inc',
+    'template' => 'ic_facebook_entity',
+  ];
+  $theme['ic_facebook_entity_content_add_list'] = [
+    'render element' => 'content',
+    'variables' => ['content' => NULL],
+    'file' => 'ic_facebook_entity.page.inc',
+  ];
+  return $theme;
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK().
+ */
+function ic_facebook_theme_suggestions_ic_facebook_entity(array $variables) {
+  $suggestions = [];
+  $entity = $variables['elements']['#ic_facebook_entity'];
+  $sanitized_view_mode = strtr($variables['elements']['#view_mode'], '.', '_');
+
+  $suggestions[] = 'ic_facebook_entity__' . $sanitized_view_mode;
+  $suggestions[] = 'ic_facebook_entity__' . $entity->bundle();
+  $suggestions[] = 'ic_facebook_entity__' . $entity->bundle() . '__' . $sanitized_view_mode;
+  $suggestions[] = 'ic_facebook_entity__' . $entity->id();
+  $suggestions[] = 'ic_facebook_entity__' . $entity->id() . '__' . $sanitized_view_mode;
+  return $suggestions;
+}

@@ -1,0 +1,33 @@
+add ic facebook entity entities:
+  title: 'Create new IC Facebook Entity entities'
+
+administer ic facebook entity entities:
+  title: 'Administer IC Facebook Entity entities'
+  description: 'Allow to access the administration form to configure IC Facebook Entity entities.'
+  restrict access: true
+
+delete ic facebook entity entities:
+  title: 'Delete IC Facebook Entity entities'
+
+edit ic facebook entity entities:
+  title: 'Edit IC Facebook Entity entities'
+
+view published ic facebook entity entities:
+  title: 'View published IC Facebook Entity entities'
+
+view unpublished ic facebook entity entities:
+  title: 'View unpublished IC Facebook Entity entities'
+
+view all ic facebook entity revisions:
+  title: 'View all IC Facebook Entity revisions'
+
+revert all ic facebook entity revisions:
+  title: 'Revert all IC Facebook Entity revisions'
+  description: 'Role requires permission <em>view IC Facebook Entity revisions</em> and <em>edit rights</em> for ic facebook entity entities in question or <em>administer ic facebook entity entities</em>.'
+
+delete all ic facebook entity revisions:
+  title: 'Delete all revisions'
+  description: 'Role requires permission to <em>view IC Facebook Entity revisions</em> and <em>delete rights</em> for ic facebook entity entities in question or <em>administer ic facebook entity entities</em>.'
+
+permission_callbacks:
+  - \Drupal\ic_facebook\IcFacebookEntityPermissions::generatePermissions

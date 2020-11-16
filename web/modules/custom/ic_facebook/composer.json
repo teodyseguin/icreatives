@@ -1,0 +1,13 @@
+{
+    "name": "ic_facebook",
+    "type": "drupal-module",
+    "description": "Imaginarium Creative's Facebook Integration",
+    "keywords": [
+    ],
+    "homepage": "https://www.drupal.org/project/ic_facebook",
+    "minimum-stability": "dev",
+    "support": {
+        "issues": "https://www.drupal.org/project/issues/ic_facebook",
+        "source": "http://cgit.drupalcode.org/ic_facebook",
+    },
+}
