@@ -199,6 +199,13 @@ class IcCoreTools {
   }
 
   /**
+   * Return the entity type manager interface.
+   */
+  public function entityTypeManager() {
+    return $this->entityTypeManager;
+  }
+
+  /**
    * Get the Entity storage.
    *
    * @param string $storgae
