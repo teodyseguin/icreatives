@@ -91,13 +91,15 @@ function particle_preprocess_page(&$variables) {
     $ic_fb_service->getFbPages();
     $ic_ig_service->getIgPages();
 
+    $ic_fb_service->getFbConversations($from, $to);
+
     $page_insights = $ic_fb_service->getFbPageInsights($from, $to);
     $variables['page_insights'] = $page_insights;
 
     $fb_posts = $ic_fb_service->getFbPosts($from, $to);
     $variables['top_five_contents'] = $fb_posts['topFive'];
     $variables['engagement_rate'] = $fb_posts['engagementRate'];
-    $variables['conversations'] = $ic_fb_service->getFbConversations($from, $to);
+    $variables['conversations'] = $ic_fb_service->createFbMessageKeywordsCount($from, $to);
 
     $variables['ig_conversations'] = $ic_ig_service->getIgConversations($from, $to);
     $variables['ig_insights'] = $ic_ig_service->getIgPageInsights($from, $to);
