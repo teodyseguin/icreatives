@@ -471,18 +471,17 @@ class IcFbService {
   /**
    * Create the keywords count.
    */
-  public function createFbMessageKeywordsCount($from, $to) {
+  public function createFbMessageKeywordsCount($client, $from, $to) {
     $icFacebookStorage = $this->tools->getStorage('ic_facebook_entity');
 
-    if (empty($from) && empty($to)) {
+    if (empty($client) && empty($from) && empty($to)) {
       return;
     }
 
     $until = date('Y-m-d', $to);
     $since = date('Y-m-d', $from);
     $fbMessageEntities = [];
-    $queryString = "SELECT entity_id FROM ic_facebook_entity__field_created_time " .
-                   "WHERE field_created_time_value <= '$until' AND field_created_time_value >= '$since'";
+    $queryString = "SELECT icfefct.entity_id FROM ic_facebook_entity__field_created_time icfefct LEFT JOIN ic_facebook_entity__field_client icfefc ON icfefct.entity_id = icfefc.entity_id WHERE icfefct.field_created_time_value <= '$until' AND icfefct.field_created_time_value >= '$since' AND icfefc.field_client_target_id = $client";
     $results = $this->dbConnection->query($queryString);
 
     foreach ($results as $key => $result) {
