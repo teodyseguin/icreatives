@@ -1,7 +1,5 @@
 <?php
 
-use Drupal\ic_core\IcCoreTesting;
-
 /**
  * @file
  * Functions to support theming layouts in the Particle theme.
