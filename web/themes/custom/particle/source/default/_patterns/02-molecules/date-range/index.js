@@ -1,3 +1,6 @@
+/* global drupalSettings */
+/* eslint no-undef: "error" */
+
 /**
  * date-range
  */
@@ -80,6 +83,7 @@ const formatDate = (date) => {
 
     clientQuery = client;
 
+    /* eslint-disable no-param-reassign */
     datepicker('.date-from', {
       formatter: (input, date) => {
         const value = date.toLocaleDateString();
@@ -87,6 +91,7 @@ const formatDate = (date) => {
       },
     });
 
+    /* eslint-disable no-param-reassign */
     datepicker('.date-to', {
       formatter: (input, date) => {
         const value = date.toLocaleDateString();
@@ -123,4 +128,4 @@ const formatDate = (date) => {
 
     window.location = `${origin}${pathname}?client=${clientQuery}&from=${fromTimestamp}&to=${toTimestamp}`;
   });
-})($);
+})();
