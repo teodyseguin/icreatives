@@ -1,0 +1,23 @@
+<?php
+
+/**
+ * Delete all Facebook message entities.
+ */
+function ic_core_update_8001() {
+  $tools = \Drupal::service('ic_core.ic_core_tools');
+  $ic_facebook_entity_storge = $tools->getStorage('ic_facebook_entity');
+  $entities = $ic_facebook_entity_storge->loadByProperties(['type' => 'facebook_message']);
+
+  if (!empty($entities)) {
+    foreach ($entities as $entity) {
+      $entity->delete();
+    }
+  }
+}
+
+/**
+ * Delete all Facebook message entities again.
+ */
+function ic_core_update_8002() {
+  ic_core_update_8001();
+}
