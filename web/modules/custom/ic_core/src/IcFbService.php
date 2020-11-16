@@ -461,6 +461,13 @@ class IcFbService {
   
             $facebookMessageEntity->save();
           }
+          else {
+            // If the facebook message entity already exists,
+            // we make sure to update the message content as they might potentially add a hashtag there if they wanted to.
+            $fbMessage = reset($fbMessage);
+            $fbMessage->set('field_message_content', $message->message);
+            $fbMessage->save();
+          }
         }
       }
     }
