@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.user.compact
+    - field.field.user.user.field_facebook_page
     - field.field.user.user.field_fb_page
     - field.field.user.user.field_first_name
     - field.field.user.user.field_last_name
@@ -29,6 +30,7 @@ content:
     third_party_settings: {  }
     label: hidden
 hidden:
+  field_facebook_page: true
   field_fb_page: true
   field_first_name: true
   field_last_name: true

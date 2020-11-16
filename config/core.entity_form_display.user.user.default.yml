@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.user.user.field_facebook_page
     - field.field.user.user.field_fb_page
     - field.field.user.user.field_first_name
     - field.field.user.user.field_last_name
@@ -29,7 +30,7 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
-  field_fb_page:
+  field_facebook_page:
     weight: 4
     settings: {  }
     third_party_settings: {  }
@@ -75,4 +76,5 @@ content:
     third_party_settings: {  }
     weight: 1
     region: content
-hidden: {  }
+hidden:
+  field_fb_page: true

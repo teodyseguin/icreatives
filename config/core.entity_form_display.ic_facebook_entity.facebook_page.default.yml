@@ -1,0 +1,59 @@
+uuid: f6eaa832-84b1-4d3f-9d7b-f4ae014ca552
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.ic_facebook_entity.facebook_page.field_client
+    - field.field.ic_facebook_entity.facebook_page.field_page_access_token
+    - field.field.ic_facebook_entity.facebook_page.field_page_id
+    - ic_facebook.ic_facebook_entity_type.facebook_page
+id: ic_facebook_entity.facebook_page.default
+targetEntityType: ic_facebook_entity
+bundle: facebook_page
+mode: default
+content:
+  field_client:
+    weight: 3
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  field_page_access_token:
+    weight: 2
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_page_id:
+    weight: 1
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  name:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  user_id:
+    type: entity_reference_autocomplete
+    weight: 4
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+      match_limit: 10
+    region: content
+    third_party_settings: {  }
+hidden: {  }

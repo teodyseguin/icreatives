@@ -1,0 +1,6 @@
+uuid: 286c17b1-4b61-418c-9267-0f025b6c319e
+langcode: en
+status: true
+dependencies: {  }
+id: facebook_message
+label: 'Facebook message'

@@ -1,0 +1,19 @@
+uuid: 30dc5d42-52f1-4b17-9e96-635657ec0200
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.ic_facebook_entity.field_message_id
+    - ic_facebook.ic_facebook_entity_type.facebook_message
+id: ic_facebook_entity.facebook_message.field_message_id
+field_name: field_message_id
+entity_type: ic_facebook_entity
+bundle: facebook_message
+label: 'Message ID'
+description: 'Unique identifier of the message from Facebook'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

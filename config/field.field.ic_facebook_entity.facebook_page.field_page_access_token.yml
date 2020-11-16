@@ -1,0 +1,19 @@
+uuid: bd83f368-2ab9-41f0-ac6c-83fa059a7c74
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.ic_facebook_entity.field_page_access_token
+    - ic_facebook.ic_facebook_entity_type.facebook_page
+id: ic_facebook_entity.facebook_page.field_page_access_token
+field_name: field_page_access_token
+entity_type: ic_facebook_entity
+bundle: facebook_page
+label: 'Page access token'
+description: 'The facebook page access token.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

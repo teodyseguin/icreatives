@@ -1,0 +1,64 @@
+uuid: 94c933a5-a4a1-4a95-9240-dad307516e13
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.ic_facebook_entity.facebook_message.field_client
+    - field.field.ic_facebook_entity.facebook_message.field_created_time
+    - field.field.ic_facebook_entity.facebook_message.field_message_content
+    - field.field.ic_facebook_entity.facebook_message.field_message_id
+    - ic_facebook.ic_facebook_entity_type.facebook_message
+  module:
+    - user
+id: ic_facebook_entity.facebook_message.default
+targetEntityType: ic_facebook_entity
+bundle: facebook_message
+mode: default
+content:
+  field_client:
+    weight: 4
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_created_time:
+    weight: 2
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_message_content:
+    weight: 1
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+  field_message_id:
+    weight: 3
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  name:
+    label: above
+    type: string
+    weight: -4
+    region: content
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+  user_id:
+    label: hidden
+    type: author
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden: {  }

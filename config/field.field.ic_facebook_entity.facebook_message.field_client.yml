@@ -1,0 +1,28 @@
+uuid: e8611210-b1e3-48bb-9c59-b598d8785041
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.ic_facebook_entity.field_client
+    - ic_facebook.ic_facebook_entity_type.facebook_message
+id: ic_facebook_entity.facebook_message.field_client
+field_name: field_client
+entity_type: ic_facebook_entity
+bundle: facebook_message
+label: Client
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:user'
+  handler_settings:
+    include_anonymous: true
+    filter:
+      type: _none
+    target_bundles: null
+    sort:
+      field: _none
+    auto_create: false
+field_type: entity_reference

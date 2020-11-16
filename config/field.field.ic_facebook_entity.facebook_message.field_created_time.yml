@@ -1,0 +1,19 @@
+uuid: e0ff91ea-efad-4a38-868d-a08f343c89a9
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.ic_facebook_entity.field_created_time
+    - ic_facebook.ic_facebook_entity_type.facebook_message
+id: ic_facebook_entity.facebook_message.field_created_time
+field_name: field_created_time
+entity_type: ic_facebook_entity
+bundle: facebook_message
+label: 'Created time'
+description: 'The time the message was created from facebook'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

@@ -1,0 +1,68 @@
+uuid: 255f1310-bc21-4ee4-8390-d61d9e8a2a94
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.ic_facebook_entity.facebook_message.field_client
+    - field.field.ic_facebook_entity.facebook_message.field_created_time
+    - field.field.ic_facebook_entity.facebook_message.field_message_content
+    - field.field.ic_facebook_entity.facebook_message.field_message_id
+    - ic_facebook.ic_facebook_entity_type.facebook_message
+id: ic_facebook_entity.facebook_message.default
+targetEntityType: ic_facebook_entity
+bundle: facebook_message
+mode: default
+content:
+  field_client:
+    weight: 29
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  field_created_time:
+    weight: 27
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_message_content:
+    weight: 26
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textarea
+    region: content
+  field_message_id:
+    weight: 28
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  name:
+    type: string_textfield
+    weight: -4
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  user_id:
+    type: entity_reference_autocomplete
+    weight: 5
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+      match_limit: 10
+    region: content
+    third_party_settings: {  }
+hidden: {  }

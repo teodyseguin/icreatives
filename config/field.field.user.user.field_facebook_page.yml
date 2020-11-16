@@ -1,0 +1,29 @@
+uuid: fba1ed2a-53da-4acf-90b4-070f9a32e13d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.user.field_facebook_page
+    - ic_facebook.ic_facebook_entity_type.facebook_page
+  module:
+    - user
+id: user.user.field_facebook_page
+field_name: field_facebook_page
+entity_type: user
+bundle: user
+label: 'Facebook page'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:ic_facebook_entity'
+  handler_settings:
+    target_bundles:
+      facebook_page: facebook_page
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

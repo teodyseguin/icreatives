@@ -1,0 +1,6 @@
+uuid: 56a3aad7-c435-4e42-8e89-08c65def55b4
+langcode: en
+status: true
+dependencies: {  }
+id: facebook_page
+label: 'Facebook page'

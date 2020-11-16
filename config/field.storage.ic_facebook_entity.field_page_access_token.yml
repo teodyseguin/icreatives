@@ -1,0 +1,21 @@
+uuid: 763df889-d431-4341-abe7-bc2e22801f14
+langcode: en
+status: true
+dependencies:
+  module:
+    - ic_facebook
+id: ic_facebook_entity.field_page_access_token
+field_name: field_page_access_token
+entity_type: ic_facebook_entity
+type: string
+settings:
+  max_length: 255
+  is_ascii: false
+  case_sensitive: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false
