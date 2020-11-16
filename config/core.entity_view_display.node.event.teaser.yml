@@ -29,14 +29,6 @@ content:
     settings: {  }
     third_party_settings: {  }
     region: content
-  title:
-    label: hidden
-    type: string
-    weight: -5
-    region: content
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
 hidden:
   field_client: true
   field_date: true
