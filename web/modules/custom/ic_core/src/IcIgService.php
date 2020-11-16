@@ -66,7 +66,7 @@ class IcIgService {
 
     $user_storage = $this->tools->getStorage('user');
     $client = $user_storage->load($client);
-    $fbPageEntity = $client->field_fb_page->referencedEntities();
+    $fbPageEntity = $client->field_facebook_page->referencedEntities();
 
     if (empty($fbPageEntity)) {
       return;
@@ -221,7 +221,7 @@ class IcIgService {
     $instagramStorage = $this->tools->getStorage('ic_instagram');
     $user_storage = $this->tools->getStorage('user');
     $client = $user_storage->load($client);
-    $fbPageEntity = $client->field_fb_page->referencedEntities();
+    $fbPageEntity = $client->field_facebook_page->referencedEntities();
 
     if (empty($fbPageEntity)) {
       return;
