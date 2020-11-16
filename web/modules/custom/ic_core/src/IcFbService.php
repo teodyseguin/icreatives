@@ -4,7 +4,7 @@ namespace Drupal\ic_core;
 
 use Drupal\ic_core\IcCoreTools;
 use Facebook\Exceptions\FacebookResponseException;
-use Drupal\ic_fb_pages\Entity\IcFbPageEntity;
+use Drupal\Core\Database\Connection;
 
 /**
  * A utility class for various usage and purpose.
@@ -32,11 +32,18 @@ class IcFbService {
   protected $fbService;
 
   /**
+   * The database connection object.
+   */
+  protected $dbConnection;
+
+  /**
    * Constructor.
    */
-  public function __construct(IcCoreTools $tools) {
+  public function __construct(IcCoreTools $tools, Connection $dbConnection) {
     $this->tools = $tools;
     $this->fbService = $tools->getFbService();
+    $this->dbConnection = $dbConnection;
+
     $userData = $this->tools->getUserData();
     $userStorage = $this->tools->getStorage('user');
     $siteAdmin = $userStorage->loadByProperties(['roles' => 'site_admin']);
@@ -100,26 +107,25 @@ class IcFbService {
     }
 
     // Fetch all FB Page Entities.
-    $icFbPageEntityStorage = $this->tools->getStorage('ic_fb_page_entity');
+    $icFacebookStorage = $this->tools->getStorage('ic_facebook_entity');
 
     foreach ($pages->data as $data) {
-      $fbPage = $icFbPageEntityStorage->loadByProperties(['field_page_id' => $data->id]);
+      $fbPage2 = $icFacebookStorage->loadByProperties(['field_page_id' => $data->id]);
 
-      if (empty($fbPage)) {
-        $fbPageEntity = IcFbPageEntity::create([
+      if (empty($fbPage2)) {
+        $facebookPageEntity = $icFacebookStorage->create([
+          'type' => 'facebook_page',
           'name' => $data->name,
           'field_page_id' => $data->id,
           'field_page_access_token' => (string) $data->access_token,
         ]);
-  
-        $fbPageEntity->save();
+
+        $facebookPageEntity->save();
       }
       else {
-        // If FB Page Entity already exists,
-        // then we just wanna make sure the access token is updated.
-        $fbPage = reset($fbPage);
-        $fbPage->set('field_page_access_token', (string) $data->access_token);
-        $fbPage->save();
+        $fbPage2 = reset($fbPage2);
+        $fbPage2->set('field_page_access_token', (string) $data->access_token);
+        $fbPage2->save();
       }
     }
   }
@@ -147,7 +153,7 @@ class IcFbService {
 
     $user_storage = $this->tools->getStorage('user');
     $client = $user_storage->load($client);
-    $fbPageEntity = $client->field_fb_page->referencedEntities();
+    $fbPageEntity = $client->field_facebook_page->referencedEntities();
 
     if (empty($fbPageEntity)) {
       return;
@@ -218,7 +224,7 @@ class IcFbService {
 
     $user_storage = $this->tools->getStorage('user');
     $client = $user_storage->load($client);
-    $fbPageEntity = $client->field_fb_page->referencedEntities();
+    $fbPageEntity = $client->field_facebook_page->referencedEntities();
 
     if (empty($fbPageEntity)) {
       return;
@@ -414,7 +420,6 @@ class IcFbService {
     $client = \Drupal::request()->query->get('client');
     $until = $to ? $to : strtotime('now');
     $since = $from ? $from : strtotime('-30 days');
-    $conversations = [];
 
     if (!$client) {
       return;
@@ -422,9 +427,10 @@ class IcFbService {
 
     $pageId = $this->getClientPageId($client);
     $pageAccessToken = $this->getClientPageAccessToken($client);
+    $icFacebookStorage = $this->tools->getStorage('ic_facebook_entity');
 
     try {
-      $response = $this->fbService->get("/$pageId/conversations?access_token=$pageAccessToken&fields=messages{message}&since=$since&until=$until");
+      $response = $this->fbService->get("/$pageId/conversations?access_token=$pageAccessToken&fields=messages{message,created_time}&since=$since&until=$until");
       $body = json_decode($response->getBody());
 
       if (count($body->data) == 0) {
@@ -438,11 +444,22 @@ class IcFbService {
         }
 
         foreach ($data->messages->data as $message) {
-          $conversations[] = $message;
+          $fbMessage = $icFacebookStorage->loadByProperties(['field_message_id' => $message->id]);
+
+          if (empty($fbMessage)) {
+            $facebookMessageEntity = $icFacebookStorage->create([
+              'type' => 'facebook_message',
+              'name' => $message->created_time . ' - message',
+              'field_message_content' => $message->message,
+              'field_created_time' => date('Y-m-d', strtotime($message->created_time)),
+              'field_message_id' => $message->id,
+              'field_client' => $client,
+            ]);
+  
+            $facebookMessageEntity->save();
+          }
         }
       }
-
-      return $this->createKeywordsCount($conversations);
     }
     catch (FacebookResponseException $e) {
       $this->tools->loggerFactory()
@@ -454,10 +471,25 @@ class IcFbService {
   /**
    * Create the keywords count.
    */
-  public function createKeywordsCount($conversations) {
-    if (count($conversations) == 0) {
+  public function createFbMessageKeywordsCount($from, $to) {
+    $icFacebookStorage = $this->tools->getStorage('ic_facebook_entity');
+
+    if (empty($from) && empty($to)) {
       return;
     }
+
+    $until = date('Y-m-d', $to);
+    $since = date('Y-m-d', $from);
+    $fbMessageEntities = [];
+    $queryString = "SELECT entity_id FROM ic_facebook_entity__field_created_time " .
+                   "WHERE field_created_time_value <= '$until' AND field_created_time_value >= '$since'";
+    $results = $this->dbConnection->query($queryString);
+
+    foreach ($results as $key => $result) {
+      $fbMessageEntities[] = $result->entity_id;
+    }
+
+    $messages = $icFacebookStorage->loadMultiple($fbMessageEntities);
 
     $conversationTags = $this->getConversationTags();
 
@@ -473,8 +505,8 @@ class IcFbService {
 
     $tagsFound = 0;
 
-    foreach ($conversations as $conversation) {
-      $chunks = explode(' ', $conversation->message);
+    foreach ($messages as $message) {
+      $chunks = explode(' ', $message->get('field_message_content')->value);
       $found = array_reduce($chunks, $findHash);
 
       if ($found != NULL && array_key_exists($found, $conversationTags)) {
@@ -526,7 +558,7 @@ class IcFbService {
   public function getClientPageId($client) {
     $user_storage = $this->tools->getStorage('user');
     $client = $user_storage->load($client);
-    $fbPageEntity = $client->field_fb_page->referencedEntities();
+    $fbPageEntity = $client->field_facebook_page->referencedEntities();
 
     if (empty($fbPageEntity)) {
       return;
@@ -544,7 +576,7 @@ class IcFbService {
   public function getClientPageAccessToken($client) {
     $user_storage = $this->tools->getStorage('user');
     $client = $user_storage->load($client);
-    $fbPageEntity = $client->field_fb_page->referencedEntities();
+    $fbPageEntity = $client->field_facebook_page->referencedEntities();
 
     if (empty($fbPageEntity)) {
       return;
