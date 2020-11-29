@@ -597,18 +597,4 @@ class IcFbService {
     return $pageAccessToken;
   }
 
-  /**
-   * Validate a given access token if it is still valid.
-   */
-  // public function validateAccessToken($accessToken) {
-  //   // debug_token?input_token=EAAeaLOjaLiwBAJCcy2DKwYfj94M52ZAsClZAEStwZB871Yp3GXXgJn4d1lVHosKcKH8eHqHaJLlRqHnVxbZCi0hXZACaUZAfXGMj0QyPMcLhMVu8T6ZBCjNxXtkBjJCGkEhZCKcxk0n1NVjr8NQwNNhCCucRcxKrAy5rP6gjnEVZBN0msHWTTV7db
-  //   $response = '';
-
-  //   if ($response->data->is_valid) {
-  //     return TRUE;
-  //   }
-
-  //   return FALSE;
-  // }
-
 }
