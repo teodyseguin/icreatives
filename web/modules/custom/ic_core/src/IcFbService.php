@@ -78,10 +78,6 @@ class IcFbService {
       $response = $this->fbService->get("/$fbId/accounts?fields=id,name,access_token&access_token=$fbAccessToken");
 
       if ($response) {
-        $this->tools->loggerFactory()
-          ->get('ic_core.fb_service')
-          ->notice('The response has been accepted');
-        
         $pages = json_decode($response->getBody());
         $this->upsertFbPages($pages);
 
