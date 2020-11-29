@@ -425,6 +425,7 @@ class IcFbService {
     $pageId = $this->getClientPageId($client);
     $pageAccessToken = $this->getClientPageAccessToken($client);
     $icFacebookStorage = $this->tools->getStorage('ic_facebook_entity');
+    $fbMessageEntities = $this->tools->getStorage('ic_facebook_entity')->loadByProperties(['type' => 'facebook_message']);
     $userClient = $userStorage->load($client);
     $clientName = $userClient->getAccountName();
 
@@ -436,41 +437,67 @@ class IcFbService {
         return;
       }
 
-      // Let's try to collect first all the messages.
-      foreach ($body->data as $data) {
-        if (count($data->messages->data) == 0) {
-          continue;
-        }
-
-        foreach ($data->messages->data as $message) {
-          $fbMessage = $icFacebookStorage->loadByProperties(['field_message_id' => $message->id]);
-
-          if (empty($fbMessage)) {
-            $facebookMessageEntity = $icFacebookStorage->create([
-              'type' => 'facebook_message',
-              'name' => "[$clientName] " . $message->created_time . ' - message',
-              'field_message_content' => $message->message,
-              'field_created_time' => date('Y-m-d', strtotime($message->created_time)),
-              'field_message_id' => $message->id,
-              'field_client' => $client,
-            ]);
-  
-            $facebookMessageEntity->save();
-          }
-          else {
-            // If the facebook message entity already exists,
-            // we make sure to update the message content as they might potentially add a hashtag there if they wanted to.
-            $fbMessage = reset($fbMessage);
-            $fbMessage->set('field_message_content', $message->message);
-            $fbMessage->save();
-          }
-        }
-      }
+      $this->fbConversationsProcessData($body->data, $icFacebookStorage, $fbMessageEntities, $clientName, $client, $pageId, $pageAccessToken);
     }
     catch (FacebookResponseException $e) {
       $this->tools->loggerFactory()
         ->get('ic_core.fb_service')
         ->error('Something went wrong while retrieving the conversations : @message', ['@message' => json_encode($e)]);
+    }
+  }
+
+  /**
+   * Process the conversation data from Facebook conversations API.
+   *
+   * @param $datas
+   *   An array of conversation objects.
+   * @param $icFacebookStorage
+   *   The ic_facebook_entity storage.
+   * @param $fbMessageEntities
+   *   An array of facebook_message entities.
+   * @param $clientName
+   *   The name of the client. The username. A string.
+   * @param $client
+   *   Represents the client id.
+   * @param $pageId
+   *   The facebook page id.
+   * @param $pageAccessToken
+   *   The facebook page access token.
+   */
+  public function fbConversationsProcessData($datas, $icFacebookStorage, $fbMessageEntities, $clientName, $client, $pageId, $pageAccessToken) {
+    // Let's try to collect first all the messages.
+    foreach ($datas as $data) {
+      if (count($data->messages->data) == 0) {
+        continue;
+      }
+
+      foreach ($data->messages->data as $message) {
+        if (array_key_exists($message->id, $fbMessageEntities)) {
+          continue;
+        }
+
+        $facebookMessageEntity = $icFacebookStorage->create([
+          'type' => 'facebook_message',
+          'name' => "[$clientName] " . $message->created_time . ' - message',
+          'field_message_content' => $message->message,
+          'field_created_time' => date('Y-m-d', strtotime($message->created_time)),
+          'field_message_id' => $message->id,
+          'field_client' => $client,
+        ]);
+
+        $facebookMessageEntity->save();
+      }
+
+      // We are doing cursor base pagination here.
+      if (isset($data->messages->paging->cursors->after)) {
+        $after = $data->messages->paging->cursors->after;
+        $response = $this->fbService->get("/$pageId/conversations?access_token=$pageAccessToken&fields=messages{message,created_time}&after=$after");
+        $body = json_decode($response->getBody());
+
+        if (count($body->data) > 0) {
+          $this->fbConversationsProcessData($body->data, $icFacebookStorage, $fbMessageEntities, $clientName, $client, $pageId, $pageAccessToken);
+        }
+      }
     }
   }
 
@@ -495,28 +522,35 @@ class IcFbService {
     }
 
     $messages = $icFacebookStorage->loadMultiple($fbMessageEntities);
-
     $conversationTags = $this->getConversationTags();
 
     if (empty($conversationTags)) {
       return;
     }
 
-    $findHash = function($carry, $item) {
-      if (strpos($item, '#') !== FALSE) {
-        return $carry = $item;
+    $checkChunksForTag = function($chunks, &$conversationTags) {
+      $count = 0;
+
+      foreach ($chunks as $chunk) {
+        if (strpos($chunk, '#') !== FALSE && array_key_exists($chunk, $conversationTags)) {
+          $conversationTags[$chunk]['total'] += 1;
+          $count++;
+        }
       }
+
+      return $count > 0 ? TRUE : FALSE;
     };
 
     $tagsFound = 0;
 
     foreach ($messages as $message) {
-      $chunks = explode(' ', $message->get('field_message_content')->value);
-      $found = array_reduce($chunks, $findHash);
+      $content = $message->get('field_message_content')->value;
+      $content = str_replace(' ', '-', trim(preg_replace('/\s\s+/', ' ', $content)));
+      $chunks = explode('-', $content);
+      $found = $checkChunksForTag($chunks, $conversationTags);
 
-      if ($found != NULL && array_key_exists($found, $conversationTags)) {
+      if ($found) {
         $tagsFound++;
-        $conversationTags[$found]['total'] += 1;
       }
     }
 
