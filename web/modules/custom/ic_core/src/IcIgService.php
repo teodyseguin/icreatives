@@ -171,11 +171,15 @@ class IcIgService {
     $instagramStorage = $this->tools->getStorage('ic_instagram');
 
     foreach ($pages->data as $data) {
-      $id = $data->instagram_business_account->id;
-
-      if (empty($id)) {
+      if (!property_exists($data, 'instagram_business_account')) {
         continue;
       }
+
+      if (!property_exists($data->instagram_business_account, 'id')) {
+        continue;
+      }
+
+      $id = $data->instagram_business_account->id;
 
       $igPage = $instagramStorage->loadByProperties([
         'field_ig_page_id' => $id
