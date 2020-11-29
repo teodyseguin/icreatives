@@ -265,7 +265,8 @@ class IcIgService {
     $metric = "reach,impressions,website_clicks,text_message_clicks,phone_call_clicks,get_directions_clicks";
     $insights = [
       'reach' => 0,
-      'impressions' => 0
+      'impressions' => 0,
+      'link_clicks' => 0,
     ];
 
     try {
