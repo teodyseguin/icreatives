@@ -13,7 +13,7 @@ use Drupal\Core\Queue\QueueWorkerBase;
  *   cron = {"time" = 5}
  * )
  */
-class FbConversationQueue extends QueueWorkerBase {
+class FbInnerConversationQueue extends QueueWorkerBase {
 
   /**
    * {@inheritdoc}
