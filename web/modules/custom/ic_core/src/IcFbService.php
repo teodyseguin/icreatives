@@ -412,9 +412,9 @@ class IcFbService {
   /**
    * Get the Facebook Conversations.
    */
-  public function getFbConversations($from = NULL, $to = NULL) {
+  public function getFbConversations($from = NULL, $to = NULL, $client = NULL, $after = NULL) {
     $userStorage = $this->tools->entityTypeManager()->getStorage('user');
-    $client = \Drupal::request()->query->get('client');
+    $client = $client ? $client : \Drupal::request()->query->get('client');
     $until = $to ? $to : strtotime('now');
     $since = $from ? $from : strtotime('-30 days');
 
@@ -439,14 +439,26 @@ class IcFbService {
     }
 
     try {
-      $response = $this->fbService->get("/$pageId/conversations?access_token=$pageAccessToken&fields=messages{message,created_time}&since=$since&until=$until");
+      $path = "/$pageId/conversations?access_token=$pageAccessToken&fields=messages{message,created_time}&since=$since&until=$until";
+
+      if ($after) {
+        $path = "/$pageId/conversations?access_token=$pageAccessToken&fields=messages{message,created_time}&after=$after";
+      }
+
+      $response = $this->fbService->get($path);
       $body = json_decode($response->getBody());
 
       if (count($body->data) == 0) {
         return;
       }
 
-      $this->fbConversationsProcessData($body->data, $icFacebookStorage, $fbMessageList, $clientName, $client, $pageId, $pageAccessToken);
+      $this->fbConversationsProcessData($body->data, $icFacebookStorage, $fbMessageList, $clientName, $client, $pageAccessToken);
+
+      if (isset($body->paging->cursors->after) && isset($body->paging->next)) {
+        $queue = \Drupal::queue('fb_conversation_queue');
+        $queue->createQueue();
+        $queue->createItem($after);
+      }
     }
     catch (FacebookResponseException $e) {
       $this->tools->loggerFactory()
@@ -468,12 +480,10 @@ class IcFbService {
    *   The name of the client. The username. A string.
    * @param $client
    *   Represents the client id.
-   * @param $pageId
-   *   The facebook page id.
    * @param $pageAccessToken
    *   The facebook page access token.
    */
-  public function fbConversationsProcessData($datas, $icFacebookStorage, &$fbMessageList, $clientName, $client, $pageId, $pageAccessToken) {
+  public function fbConversationsProcessData($datas, $icFacebookStorage, &$fbMessageList, $clientName, $client, $pageAccessToken) {
     // Let's try to collect first all the messages.
     foreach ($datas as $data) {
       if (count($data->messages->data) == 0) {
@@ -500,13 +510,25 @@ class IcFbService {
       }
 
       // We are doing cursor base pagination here.
-      if (isset($data->messages->paging->cursors->after)) {
+      if (isset($data->messages->paging->cursors->after) && isset($data->messages->paging->next)) {
         $after = $data->messages->paging->cursors->after;
-        $response = $this->fbService->get("/$pageId/conversations?access_token=$pageAccessToken&fields=messages{message,created_time}&after=$after");
-        $body = json_decode($response->getBody());
 
-        if (count($body->data) > 0) {
-          $this->fbConversationsProcessData($body->data, $icFacebookStorage, $fbMessageList, $clientName, $client, $pageId, $pageAccessToken);
+        if (property_exists($data->messages, 'id')) {
+          $messagesId = $data->messages->id;
+          $path = "/$messagesId/messages?access_token=$pageAccessToken&fields=messages{message,created_time}&after=$after";
+
+          $queueData = [
+            'path' => $path,
+            'icFacebookStorage' => $icFacebookStorage,
+            'fbMessageList' => $fbMessageList,
+            'clientName' => $clientName,
+            'client' => $client,
+            'pageAccessToken' => $pageAccessToken,
+          ];
+
+          $queue = \Drupal::queue('fb_inner_conversation_queue');
+          $queue->createQueue();
+          $queue->createItem($queueData);
         }
       }
     }
