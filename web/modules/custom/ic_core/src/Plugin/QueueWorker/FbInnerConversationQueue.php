@@ -19,7 +19,7 @@ class FbInnerConversationQueue extends QueueWorkerBase {
    * {@inheritdoc}
    */
   public function processItem($queueData) {
-    $tools = \Drupal::service('ic_core.tools');
+    $tools = \Drupal::service('ic_core.ic_core_tools');
     $fbService = $tools->getFbService();
     $icFbService = \Drupal::service('ic_core.fb_service');
 
