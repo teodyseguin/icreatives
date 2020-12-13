@@ -426,12 +426,14 @@ class IcFbService {
 
     if (!$pageId) {
       $this->tools->messenger()->addMessage(t("Page ID for client $client is missing. Please check client $client profile."), 'error');
+      return;
     }
 
     $pageAccessToken = $this->getClientPageAccessToken($client);
 
     if (!$pageAccessToken) {
       $this->tools->messenger()->addMessage(t("Page Acces Token for client $client is missing. Please check client $client profile."), 'error');
+      return;
     }
 
     $icFacebookStorage = $this->tools->getStorage('ic_facebook_entity');
