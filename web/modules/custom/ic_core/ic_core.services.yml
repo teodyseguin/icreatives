@@ -32,6 +32,7 @@ services:
       - '@user.data'
       - '@simple_fb_connect.fb_factory'
       - '@logger.factory'
+      - '@messenger'
 
   ic_core.fb_service:
     class: Drupal\ic_core\IcFbService
