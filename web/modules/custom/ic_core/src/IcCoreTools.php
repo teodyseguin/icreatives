@@ -13,6 +13,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Drupal\user\UserDataInterface;
 use Drupal\simple_fb_connect\SimpleFbConnectFbFactory;
 use Drupal\Core\Logger\LoggerChannelFactoryInterface;
+use Drupal\Core\Messenger\MessengerInterface;
 
 /**
  * A utility class for various usage and purpose.
@@ -82,6 +83,13 @@ class IcCoreTools {
   protected $loggerFactory;
 
   /**
+   * The messenger.
+   *
+   * @var \Drupal\Core\Messenger\MessengerInterface
+   */
+  protected $messenger;
+
+  /**
    * Constructor.
    *
    * @param \Symfony\Component\HttpFoundation\Session\SessionInterface $session
@@ -96,7 +104,8 @@ class IcCoreTools {
     AccountInterface $currentUser,
     UserDataInterface $userData,
     SimpleFbConnectFbFactory $simpleFbConnect,
-    LoggerChannelFactoryInterface $loggerFactory) {
+    LoggerChannelFactoryInterface $loggerFactory,
+    MessengerInterface $messenger) {
 
     $this->session = $session;
     $this->currentPath = $currentPath;
@@ -107,6 +116,7 @@ class IcCoreTools {
     $this->userData = $userData;
     $this->simpleFbConnect = $simpleFbConnect;
     $this->loggerFactory = $loggerFactory;
+    $this->messenger = $messenger;
   }
 
   /**
@@ -322,6 +332,13 @@ class IcCoreTools {
     $response->prepare($request);
     \Drupal::service('kernel')->terminate($request, $response);
     $response->send();
+  }
+
+  /**
+   * Return the messenger service.
+   */
+  public function messenger() {
+    return $this->messenger;
   }
 
 }
