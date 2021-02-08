@@ -1,0 +1,24 @@
+{#
+/**
+ * @file
+ * top-contents
+ *
+ * Available variables for top-contents:
+ *  - top_contents.variable_name [variable_type]: Description of the variable. Example below.
+ *  - top_contents.invert [bool]: When set, colors will be inverted for light display on dark background.
+ */
+#}
+
+{% for content in contents %}
+  <a href="{{ content['link'] }}" target="_blank" class="flex flex-grow flex-wrap mx-2 mb-2">
+    {% if content['picture'] %}
+      <div class="w-full overflow-hidden top-post-picture">
+        <div style="background-image: url({{ content['picture'] }})"></div>
+      </div>
+    {% endif %}
+    <div class="w-full text-gray-900 font-bold font-sansserif text-left">
+      {{ content['created'] }}
+      <p>{{ content['message'] }}</p>
+    </div>
+  </a>
+{% endfor %}

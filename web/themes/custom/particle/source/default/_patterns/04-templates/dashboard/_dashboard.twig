@@ -26,11 +26,8 @@
     <a id="main-content" tabindex="-1"></a>{# link is in html.html.twig #}
     {{ breadcrumb }}
     <section class="row flex flex-row relative">
-      {% include '@organisms/aside/_aside.twig' with {
-        "sidebar_first": sidebar_first
-      } %}
 
-      <div class="layout-content w-full lg:w-5/6">
+      <div class="layout-content w-full"> <!-- lg:w-5/6 -->
         <div class="top-details flex flex-wrap w-full justify-left lg:justify-end border-b border-gray-400 shadow-lg">
           {% include '@atoms/hamburger-menu/_hamburger-menu.twig' %}
           {% if display_filter %}
@@ -63,232 +60,377 @@
           </div>
         </div>
 
-        {% if client %}
-          <div class="flex w-full p-5">
-            {% include '@molecules/date-range/_date-range.twig' %}
-          </div>
-        {% endif %}
+        <div class="flex">
 
-        <div class="flex flex-col flex-no-wrap mb-10">
-          <div>
-            <h2 class="p-5">Facebook message count</h2>
-            <div class="flex flex-col md:flex-row">
-              {% if conversations %}
-                {% for conversation in conversations %}
-                  {% include '@atoms/count-box/_count-box.twig' with {
-                    "title": conversation['name'],
-                    "count": conversation['total'],
-                    "shadow": true,
-                    "bold_title": true
+          {% include '@organisms/aside/_aside.twig' with {
+            "sidebar_first": sidebar_first
+          } %}
+
+          <!-- Date range widget -->
+          <div class="w-5/6">
+            {% if client %}
+              <div class="flex w-full p-5">
+                {% include '@molecules/date-range/_date-range.twig' %}
+              </div>
+            {% endif %}
+
+            <!-- Facebook and Instagram followers count -->
+            <div class="flex m-5">
+              {% include '@molecules/follower-count-graph/_follower-count-graph.twig' with {
+                title: 'Total Follower Count',
+                fb_followers: page_insights['total_facebook_followers'],
+                ig_followers: ig_insights['total_instagram_followers'],
+                id: 'line'
+              } %}
+            </div>
+            <!-- End of Facebook and Instagram followers count -->
+
+            <!-- Total Reach, Engagement Rate, Link Clicks, Total Impressions -->
+            <div class="flex flex-row m-5">
+              <div class="w-1/2 mr-5">
+                <section class="card">
+                  <header class="card-header">Total Reach</header>
+                  <div class="card-body flex flex-row">
+                    <div class="flex-grow">
+                      <div class="block font-bold">Facebook</div>
+                      {{ page_insights['total_facebook_reach'] }}
+                    </div>
+
+                    <div class="flex-grow">
+                      <div class="block font-bold">Instagram</div>
+                      {{ ig_insights['reach'] }}
+                    </div>
+                  </div>
+                </section>
+
+                <section class="card">
+                  <header class="card-header">Engagement Rate</header>
+                  <div class="card-body flex flex-row">
+                    <div class="flex-grow">
+                      <div class="block font-bold">Facebook</div>
+                      {{ engagement_rate }}
+                    </div>
+
+                    <div class="flex-grow">
+                      <div class="block font-bold">Instagram</div>
+                      {{ ig_insights['engagementRate'] }}
+                    </div>
+                  </div>
+                </section>
+              </div>
+
+              <div class="w-1/2 ml-5">
+                <section class="card">
+                  <header class="card-header">Link Clicks</header>
+                  <div class="card-body flex flex-row">
+                    <div class="flex-grow">
+                      <div class="block font-bold">Facebook</div>
+                      {{ page_insights['link_clicks'] }}
+                    </div>
+
+                    <div class="flex-grow">
+                      <div class="block font-bold">Instagram</div>
+                      {{ ig_insights['link_clicks'] }}
+                    </div>
+                  </div>
+                </section>
+
+                <section class="card">
+                  <header class="card-header">Total Impressions</header>
+                  <div class="card-body flex flex-row">
+                    <div class="flex-grow">
+                      <div class="block font-bold">Facebook</div>
+                      {{ page_insights['total_facebook_impressions'] }}
+                    </div>
+
+                    <div class="flex-grow">
+                      <div class="block font-bold">Instagram</div>
+                      {{ ig_insights['impressions'] }}
+                    </div>
+                  </div>
+                </section>
+              </div>
+            </div>
+            <!-- End of Total Reach, Engagement Rate, Link Clicks, Total Impressions -->
+
+            <!-- Facebook and Instagram messages count -->
+            <div class="flex flex-row flex-no-wrap mb-10">
+              <div class="flex-grow">
+                {% include '@molecules/messages-count/_messages-count.twig' with {
+                  title: 'Facebook message count',
+                  conversations: conversations
+                } %}
+              </div>
+
+              <div class="flex-grow">
+                {% include '@molecules/messages-count/_messages-count.twig' with {
+                  title: 'Instagram message count',
+                  conversations: ig_conversations
+                } %}
+              </div>
+            </div>
+            <!-- // End of Facebook and Instagram messages count -->
+
+            <!-- Top 5 Contents -->
+            <div class="flex flex-row m-5">
+              <div class="card w-full">
+                <header class="card-header">Top 5 Contents</header>
+                <section class="card-body flex flex-row -mx-2">
+                  {% include '@molecules/top-contents/_top-contents.twig' with {
+                    contents: ig_insights['topFive']
                   } %}
-                {% endfor %}
-              {% else %}
-                <p class="p-5">There are no data to display at the moment ...</p>
-              {% endif %}
+                </section>
+              </div>
             </div>
-            <div class="flex px-5">
-              <a href="/admin/structure/taxonomy/manage/conversation_tags/add?destination=/dashboard">
-                [Create a tag]
-              </a>
-            </div>
-          </div>
+            <!-- // End of Top 5 Contents -->
 
-          <div>
-            <h2 class="p-5">Instagram message count</h2>
-            <div class="flex flex-col md:flex-row">
-              {% if ig_conversations %}
-                {% for conversation in ig_conversations %}
-                  {% include '@atoms/ig-count-box/_ig-count-box.twig' with {
-                    "title": conversation['name'],
-                    "count": conversation['total'],
-                    "shadow": true,
-                    "bold_title": true
+            <!-- Facebook and Instagram audiences -->
+            <div class="flex flex-row m-5">
+              <div class="flex flex-wrap">
+                <h4 class="flex w-full">Facebook audience</h4>
+                <div class="flex w-full">
+                  {% include '@molecules/doughnut-graph-box/_doughnut-graph-box.twig' with {
+                    title: 'Gender and Age of Followers',
+                    contents: page_insights['gender_age_followers'],
+                    id: 'doughnut1',
+                    additional_class: 'w-1/2'
                   } %}
-                {% endfor %}
-              {% else %}
-                <p class="p-5">There are no data to display at the moment ...</p>
-              {% endif %}
+  
+                  {% include '@molecules/doughnut-graph-box/_doughnut-graph-box.twig' with {
+                    title: 'Gender and Age of Audience Reached',
+                    contents: page_insights['gender_age_followers'],
+                    id: 'doughnut2',
+                    additional_class: 'w-1/2'
+                  } %}
+                </div>
+                <div class="flex w-full">
+                  {% include '@molecules/doughnut-graph-box/_doughnut-graph-box.twig' with {
+                    title: 'Location of Followers',
+                    contents: page_insights['location_followers'],
+                    id: 'doughnut3',
+                    additional_class: 'w-1/2'
+                  } %}
+
+                  {% include '@molecules/doughnut-graph-box/_doughnut-graph-box.twig' with {
+                    title: 'Location of Audience Reached',
+                    contents: page_insights['location_followers'],
+                    id: 'doughnut4',
+                    additional_class: 'w-1/2'
+                  } %}
+                </div>
+              </div>
+              <div class="flex flex-wrap">
+                <h4 class="flex w-full">Instagram audience</h4>
+                <div class="flex w-full">
+                  {% include '@molecules/doughnut-graph-box/_doughnut-graph-box.twig' with {
+                    title: 'Gender and Age of Followers',
+                    contents: ig_insights['gender_age_followers'],
+                    id: 'ig_doughnut1',
+                    additional_class: 'w-1/2'
+                  } %}
+
+                  {% include '@molecules/doughnut-graph-box/_doughnut-graph-box.twig' with {
+                    title: 'Gender and Age of Audience Reached',
+                    contents: ig_insights['gender_age_followers'],
+                    id: 'ig_doughnut2',
+                    additional_class: 'w-1/2'
+                  } %}
+                </div>
+                <div class="flex w-full">
+                  {% include '@molecules/doughnut-graph-box/_doughnut-graph-box.twig' with {
+                    title: 'Location of Followers',
+                    contents: ig_insights['location_followers'],
+                    id: 'ig_doughnut3',
+                    additional_class: 'w-1/2'
+                  } %}
+
+                  {% include '@molecules/doughnut-graph-box/_doughnut-graph-box.twig' with {
+                    title: 'Location of Audience Reached',
+                    contents: ig_insights['location_followers'],
+                    id: 'ig_doughnut4',
+                    additional_class: 'w-1/2'
+                  } %}
+                </div>
+              </div>
             </div>
-            <div class="flex px-5">
-              <a href="/admin/structure/taxonomy/manage/ig_conversation_tags/add?destination=/dashboard">
-                [Create a tag]
-              </a>
+            <!-- // End of Facebook and Instagram audiences -->
+
+            <div class="flex flex-col md:flex-row">
+              <!-- div class="flex-grow">
+                <h2 class="p-5">Facebook performance</h2>
+                <div class="flex flex-col sm:flex-row">
+                  <div class="flex flex-col flex-grow">
+                    {# include '@atoms/count-box/_count-box.twig' with {
+                      "title": "Total Facebook Followers",
+                      "count": page_insights['total_facebook_followers'],
+                      "shadow": true
+                    } %}
+                    {% include '@atoms/count-box/_count-box.twig' with {
+                      "title": "Total Facebook Reach",
+                      "count": page_insights['total_facebook_reach'],
+                      "shadow": true
+                    } %}
+                    {% include '@atoms/count-box/_count-box.twig' with {
+                      "title": "Total Facebook Impressions",
+                      "count": page_insights['total_facebook_impressions'],
+                      "shadow": true
+                    } %}
+                    {% include '@atoms/count-box/_count-box.twig' with {
+                      "title": "Link Clicks",
+                      "count": page_insights['link_clicks'],
+                      "shadow": true
+                    } #}
+                  </div>
+
+                  <div class="flex flex-col flex-grow">
+                    {# include '@atoms/percent-box/_percent-box.twig' with {
+                      "title": "Engagement rate",
+                      "count": engagement_rate,
+                      "shadow": true
+                    } %}
+
+                    {% include '@atoms/rounded-box/_rounded-box.twig' with {
+                      "title": "Top 5 contents",
+                      "count": 0,
+                      "top_five": true,
+                      "contents": top_five_contents,
+                      "shadow": true
+                    } #}
+                  </div>
+                </div>
+              </div -->
+
+              <!-- div class="flex-grow">
+                <h2 class="p-5">Facebook audience</h2>
+                <div class="flex flex-col sm:flex-row">
+                  <div class="flex flex-col flex-grow">
+                    {# include '@atoms/rounded-box/_rounded-box.twig' with {
+                      "title": "Gender and Age of Followers",
+                      "count": 0,
+                      "gender_age_followers": true,
+                      "contents": page_insights['gender_age_followers'],
+                      "shadow": true
+                    } %}
+                    {% include '@atoms/rounded-box/_rounded-box.twig' with {
+                      "title": "Gender and Age of Audience Reached",
+                      "count": 0,
+                      "gender_age_followers": true,
+                      "contents": page_insights['gender_age_followers'],
+                      "shadow": true
+                    } #}
+                  </div>
+
+                  <div class="flex flex-col flex-grow">
+                    {# include '@atoms/rounded-box/_rounded-box.twig' with {
+                      "title": "Location of Followers",
+                      "count": 0,
+                      "location_followers": true,
+                      "contents": page_insights['location_followers'],
+                      "shadow": true
+                    } %}
+                    {% include '@atoms/rounded-box/_rounded-box.twig' with {
+                      "title": "Location of Audience Reached",
+                      "count": 0,
+                      "location_followers": true,
+                      "contents": page_insights['location_followers'],
+                      "shadow": true
+                    } #}
+                  </div>
+                </div>
+              </div -->
             </div>
+
+            <!-- Instagram metrics -->
+            <!-- div class="flex flex-col md:flex-row">
+              <div class="flex-grow">
+                <h2 class="p-5">Instagram performance</h2>
+                <div class="flex flex-col sm:flex-row">
+                  <div class="flex flex-col flex-grow">
+                    {# include '@atoms/count-box/_count-box.twig' with {
+                      "title": "Total Instagram Followers",
+                      "count": ig_insights['total_instagram_followers'],
+                      "shadow": true
+                    } %}
+                    {% include '@atoms/count-box/_count-box.twig' with {
+                      "title": "Total Instagram Reach",
+                      "count": ig_insights['reach'],
+                      "shadow": true
+                    } %}
+                    {% include '@atoms/count-box/_count-box.twig' with {
+                      "title": "Total Instagram Impressions",
+                      "count": ig_insights['impressions'],
+                      "shadow": true
+                    } %}
+                    {% include '@atoms/count-box/_count-box.twig' with {
+                      "title": "Link Clicks",
+                      "count": ig_insights['link_clicks'],
+                      "shadow": true
+                    } #}
+                  </div>
+
+                  <div class="flex flex-col flex-grow">
+                    {# include '@atoms/percent-box/_percent-box.twig' with {
+                      "title": "Engagement rate",
+                      "count": ig_insights['engagementRate'],
+                      "shadow": true
+                    } %}
+
+                    {% include '@atoms/rounded-box/_rounded-box.twig' with {
+                      "title": "Top 5 contents",
+                      "count": 0,
+                      "top_five": true,
+                      "contents": ig_insights['topFive'],
+                      "shadow": true
+                    } #}
+                  </div>
+                </div>
+              </div>
+
+              <div class="flex-grow">
+                <h2 class="p-5">Instagram audience</h2>
+                <div class="flex flex-row sm:flex-grow">
+                  <div class="flex flex-col flex-grow">
+                    {# include '@atoms/rounded-box/_rounded-box.twig' with {
+                      "title": "Gender and Age of Followers",
+                      "count": 0,
+                      "gender_age_followers": true,
+                      "contents": ig_insights['gender_age_followers'],
+                      "shadow": true
+                    } %}
+                    {% include '@atoms/rounded-box/_rounded-box.twig' with {
+                      "title": "Gender and Age of Audience Reached",
+                      "count": 0,
+                      "gender_age_followers": true,
+                      "contents": ig_insights['gender_age_followers'],
+                      "shadow": true
+                    } #}
+                  </div>
+
+                  <div class="flex flex-col flex-grow">
+                    {# include '@atoms/rounded-box/_rounded-box.twig' with {
+                      "title": "Location of Followers",
+                      "count": 0,
+                      "location_followers": true,
+                      "contents": ig_insights['location_followers'],
+                      "shadow": true
+                    } %}
+                    {% include '@atoms/rounded-box/_rounded-box.twig' with {
+                      "title": "Location of Audience Reached",
+                      "count": 0,
+                      "location_followers": true,
+                      "contents": ig_insights['location_followers'],
+                      "shadow": true
+                    } #}
+                  </div>
+                </div>
+              </div>
+            </div -->
           </div>
-        </div>
 
-        <div class="flex flex-col md:flex-row">
-          <div class="flex-grow">
-            <h2 class="p-5">Facebook performance</h2>
-            <div class="flex flex-col sm:flex-row">
-              <div class="flex flex-col flex-grow">
-                {% include '@atoms/count-box/_count-box.twig' with {
-                  "title": "Total Facebook Followers",
-                  "count": page_insights['total_facebook_followers'],
-                  "shadow": true
-                } %}
-                {% include '@atoms/count-box/_count-box.twig' with {
-                  "title": "Total Facebook Reach",
-                  "count": page_insights['total_facebook_reach'],
-                  "shadow": true
-                } %}
-                {% include '@atoms/count-box/_count-box.twig' with {
-                  "title": "Total Facebook Impressions",
-                  "count": page_insights['total_facebook_impressions'],
-                  "shadow": true
-                } %}
-                {% include '@atoms/count-box/_count-box.twig' with {
-                  "title": "Link Clicks",
-                  "count": page_insights['link_clicks'],
-                  "shadow": true
-                } %}
-              </div>
-
-              <div class="flex flex-col flex-grow">
-                {% include '@atoms/percent-box/_percent-box.twig' with {
-                  "title": "Engagement rate",
-                  "count": engagement_rate,
-                  "shadow": true
-                } %}
-
-                {% include '@atoms/rounded-box/_rounded-box.twig' with {
-                  "title": "Top 5 contents",
-                  "count": 0,
-                  "top_five": true,
-                  "contents": top_five_contents,
-                  "shadow": true
-                } %}
-              </div>
-            </div>
-          </div>
-
-          <div class="flex-grow">
-            <h2 class="p-5">Facebook audience</h2>
-            <div class="flex flex-col sm:flex-row">
-              <div class="flex flex-col flex-grow">
-                {% include '@atoms/rounded-box/_rounded-box.twig' with {
-                  "title": "Gender and Age of Followers",
-                  "count": 0,
-                  "gender_age_followers": true,
-                  "contents": page_insights['gender_age_followers'],
-                  "shadow": true
-                } %}
-                {% include '@atoms/rounded-box/_rounded-box.twig' with {
-                  "title": "Gender and Age of Audience Reached",
-                  "count": 0,
-                  "gender_age_followers": true,
-                  "contents": page_insights['gender_age_followers'],
-                  "shadow": true
-                } %}
-              </div>
-
-              <div class="flex flex-col flex-grow">
-                {% include '@atoms/rounded-box/_rounded-box.twig' with {
-                  "title": "Location of Followers",
-                  "count": 0,
-                  "location_followers": true,
-                  "contents": page_insights['location_followers'],
-                  "shadow": true
-                } %}
-                {% include '@atoms/rounded-box/_rounded-box.twig' with {
-                  "title": "Location of Audience Reached",
-                  "count": 0,
-                  "location_followers": true,
-                  "contents": page_insights['location_followers'],
-                  "shadow": true
-                } %}
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Instagram metrics -->
-        <div class="flex flex-col md:flex-row">
-          <div class="flex-grow">
-            <h2 class="p-5">Instagram performance</h2>
-            <div class="flex flex-col sm:flex-row">
-              <div class="flex flex-col flex-grow">
-                {% include '@atoms/count-box/_count-box.twig' with {
-                  "title": "Total Instagram Followers",
-                  "count": ig_insights['total_instagram_followers'],
-                  "shadow": true
-                } %}
-                {% include '@atoms/count-box/_count-box.twig' with {
-                  "title": "Total Instagram Reach",
-                  "count": ig_insights['reach'],
-                  "shadow": true
-                } %}
-                {% include '@atoms/count-box/_count-box.twig' with {
-                  "title": "Total Instagram Impressions",
-                  "count": ig_insights['impressions'],
-                  "shadow": true
-                } %}
-                {% include '@atoms/count-box/_count-box.twig' with {
-                  "title": "Link Clicks",
-                  "count": ig_insights['link_clicks'],
-                  "shadow": true
-                } %}
-              </div>
-
-              <div class="flex flex-col flex-grow">
-                {% include '@atoms/percent-box/_percent-box.twig' with {
-                  "title": "Engagement rate",
-                  "count": ig_insights['engagementRate'],
-                  "shadow": true
-                } %}
-
-                {% include '@atoms/rounded-box/_rounded-box.twig' with {
-                  "title": "Top 5 contents",
-                  "count": 0,
-                  "top_five": true,
-                  "contents": ig_insights['topFive'],
-                  "shadow": true
-                } %}
-              </div>
-            </div>
-          </div>
-
-          <div class="flex-grow">
-            <h2 class="p-5">Instagram audience</h2>
-            <div class="flex flex-row sm:flex-grow">
-              <div class="flex flex-col flex-grow">
-                {% include '@atoms/rounded-box/_rounded-box.twig' with {
-                  "title": "Gender and Age of Followers",
-                  "count": 0,
-                  "gender_age_followers": true,
-                  "contents": ig_insights['gender_age_followers'],
-                  "shadow": true
-                } %}
-                {% include '@atoms/rounded-box/_rounded-box.twig' with {
-                  "title": "Gender and Age of Audience Reached",
-                  "count": 0,
-                  "gender_age_followers": true,
-                  "contents": ig_insights['gender_age_followers'],
-                  "shadow": true
-                } %}
-              </div>
-
-              <div class="flex flex-col flex-grow">
-                {% include '@atoms/rounded-box/_rounded-box.twig' with {
-                  "title": "Location of Followers",
-                  "count": 0,
-                  "location_followers": true,
-                  "contents": ig_insights['location_followers'],
-                  "shadow": true
-                } %}
-                {% include '@atoms/rounded-box/_rounded-box.twig' with {
-                  "title": "Location of Audience Reached",
-                  "count": 0,
-                  "location_followers": true,
-                  "contents": ig_insights['location_followers'],
-                  "shadow": true
-                } %}
-              </div>
-            </div>
-          </div>
         </div>
 
       </div>
+
     </section>
   </main>
 </div>

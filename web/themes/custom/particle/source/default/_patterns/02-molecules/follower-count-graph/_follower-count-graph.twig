@@ -1,0 +1,29 @@
+{#
+/**
+ * @file
+ * follower-count-graph
+ *
+ * Available variables for follower-count-graph:
+ *  - follower_count_graph.variable_name [variable_type]: Description of the variable. Example below.
+ *  - follower_count_graph.invert [bool]: When set, colors will be inverted for light display on dark background.
+ */
+#}
+
+<section class="card flex w-full">
+  <header class="card-header">{{ title }}</header>
+  <div class="card-body relative w-full flex" style="height: 300px;">
+    <div class="w-5/6">
+      <canvas id="{{ id }}" width="1100" height="280"></canvas>
+    </div>
+    <div class="w-1/6 flex flex-wrap">
+      <div class="w-full">
+        <h4>Facebook</h4>
+        {{ fb_followers }}
+      </div>
+      <div class="w-full">
+        <h4>Instagram</h4>
+        {{ ig_followers }}
+      </div>
+    </div>
+  </div>
+</section>

@@ -37,6 +37,36 @@ message_indicator:
     js/message-indicator.js:
       minified: true
 
+raphael:
+  js:
+    js/raphael.min.js:
+      minified: true
+
+morris:
+  js:
+    js/morris.js:
+      minified: false
+
+morris_script:
+  js:
+    js/morris-script.js:
+      minified: false
+
+chart:
+  js:
+    js/Chart.js:
+      minified: true
+
+all_charts:
+  js:
+    js/all-charts.js:
+      minified: true
+
+example:
+  js:
+    js/example.js:
+      minified: true
+
 global:
   css:
     theme:

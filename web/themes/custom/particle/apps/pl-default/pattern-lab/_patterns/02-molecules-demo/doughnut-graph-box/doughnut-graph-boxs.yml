@@ -1,0 +1,9 @@
+doughnut_graph_box_demo_block:
+  title: Doughnut Graph Box Component
+  content:
+    lead: Add a quick description here.
+    summary: Add code examples here using <code>html code syntax</code>
+
+doughnut_graph_box:
+  example_var: This is an example var
+

@@ -86,7 +86,7 @@ const formatDate = (date) => {
     /* eslint-disable no-param-reassign */
     datepicker('.date-from', {
       formatter: (input, date) => {
-        const value = date.toLocaleDateString();
+        const value = date;
         input.value = value;
       },
     });
@@ -94,7 +94,7 @@ const formatDate = (date) => {
     /* eslint-disable no-param-reassign */
     datepicker('.date-to', {
       formatter: (input, date) => {
-        const value = date.toLocaleDateString();
+        const value = date;
         input.value = value;
       },
     });

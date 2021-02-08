@@ -1,0 +1,9 @@
+follower_count_graph_demo_block:
+  title: Follower Count Graph Component
+  content:
+    lead: Add a quick description here.
+    summary: Add code examples here using <code>html code syntax</code>
+
+follower_count_graph:
+  example_var: This is an example var
+

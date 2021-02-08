@@ -118,3 +118,76 @@ table caption details {
 button#search-inbox {
   padding: 9px 15px !important;
 }
+
+.progress {
+  box-shadow: none;
+  background: #f0f2f7;
+  margin-bottom: 1rem;
+}
+
+.progress {
+  display: -ms-flexbox;
+  display: flex;
+  height: 1rem;
+  overflow: hidden;
+  font-size: .75rem;
+  background-color: #e9ecef;
+  border-radius: .25rem;
+}
+
+.progress-bar {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -ms-flex-pack: center;
+  justify-content: center;
+  color: #fff;
+  text-align: center;
+  white-space: nowrap;
+  background-color: #007bff;
+  transition: width .6s ease;
+}
+
+.bg-warning {
+  background-color: #ffc107 !important;
+}
+
+.card-header {
+  border-color: #eff2f7;
+  background: #fff;
+  font-size: 16px;
+  font-weight: 300;
+}
+
+.card-header {
+  padding: .75rem 1.25rem;
+  margin-bottom: 0;
+  border-bottom: 1px solid rgba(0,0,0,.125);
+      border-bottom-color: rgba(0, 0, 0, 0.125);
+}
+
+.card-body {
+  flex: 1 1 auto;
+  padding: 1.25rem;
+}
+
+.card {
+  border: none;
+  box-shadow: none;
+  margin-bottom: 20px;
+}
+
+.card {
+  position: relative;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: #fff;
+  background-clip: border-box;
+  border: 1px solid rgba(0,0,0,.125);
+  border-radius: .25rem;
+}

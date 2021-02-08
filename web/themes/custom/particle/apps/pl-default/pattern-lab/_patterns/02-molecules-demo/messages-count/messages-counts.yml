@@ -1,0 +1,9 @@
+messages_count_demo_block:
+  title: Messages Count Component
+  content:
+    lead: Add a quick description here.
+    summary: Add code examples here using <code>html code syntax</code>
+
+messages_count:
+  example_var: This is an example var
+

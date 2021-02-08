@@ -96066,13 +96066,13 @@ tr {
 }
 
 .top-post-picture {
-  height: 84px;
+  display: block;
 }
 
 .top-post-picture > div {
   display: block;
-  width: 84px;
-  height: 84px;
+  width: 100%;
+  height: 200px;
   background-size: cover;
 }
 
@@ -96468,6 +96468,8 @@ select {
   bottom:0;
   right:0
 }
+
+
 
 .product-card {
   height: 136px;
