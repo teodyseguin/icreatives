@@ -112,28 +112,28 @@
         const date = new Date(totalFbFollowersRaw[i].end_time);
         const foundMonth = months[date.getMonth()];
 
-        if (date.getDate() === 15 || date.getDate() === 30) {
+        // if (date.getDate() === 15 || date.getDate() === 30) {
           lineChartData.labels.push(`${foundMonth} ${date.getDate()}`);
           lineChartData.datasets[0].data.push(totalFbFollowersRaw[i].value);
-        } else if (date.getDate() === 28 || date.getDate() === 29) {
-          if (date.getMonth() + 1 === 2) {
-            lineChartData.labels.push(`${foundMonth} ${date.getDate()}`);
-            lineChartData.datasets[0].data.push(totalFbFollowersRaw[i].value);
-          }
-        }
+        // } else if (date.getDate() === 28 || date.getDate() === 29) {
+        //   if (date.getMonth() + 1 === 2) {
+        //     lineChartData.labels.push(`${foundMonth} ${date.getDate()}`);
+        //     lineChartData.datasets[0].data.push(totalFbFollowersRaw[i].value);
+        //   }
+        // }
       }
     }
 
-    if (drupalSettings.ic.ig_insights.total_instagram_followers) {
-      const totalInstagramFollowers =
-        drupalSettings.ic.ig_insights.total_instagram_followers;
-      // There is currently no date data to from IG to feed on this graph.
-      // So we are doing some approximation here.
-      lineChartData.datasets[1].data.push(
-        totalInstagramFollowers - Math.floor(Math.random() * 100) + 1
-      );
-      lineChartData.datasets[1].data.push(totalInstagramFollowers);
-    }
+    // if (drupalSettings.ic.ig_insights.total_instagram_followers) {
+    //   const totalInstagramFollowers =
+    //     drupalSettings.ic.ig_insights.total_instagram_followers;
+    //   // There is currently no date data to from IG to feed on this graph.
+    //   // So we are doing some approximation here.
+    //   lineChartData.datasets[1].data.push(
+    //     totalInstagramFollowers - Math.floor(Math.random() * 100) + 1
+    //   );
+    //   lineChartData.datasets[1].data.push(totalInstagramFollowers);
+    // }
 
     new Chart(document.getElementById('line').getContext('2d')).Line(
       lineChartData

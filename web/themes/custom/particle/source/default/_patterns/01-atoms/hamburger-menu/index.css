@@ -1,5 +1,5 @@
 #nav-icon1 {
-  position: relative;
+  /* position: relative;
   width: 30px;
   height: auto;
   margin: 17px 7px;
@@ -11,7 +11,7 @@
   -moz-transition: .5s ease-in-out;
   -o-transition: .5s ease-in-out;
   transition: .5s ease-in-out;
-  cursor: pointer;
+  cursor: pointer; */
 }
 
 #nav-icon1 span {

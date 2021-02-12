@@ -3,28 +3,6 @@
  * inbox.css
  */
 
-.inbox-table header {
-  margin-bottom: 25px;
-}
-
-.inbox-table th {
-  padding: 15px;
-  border: 1px solid var(--gray-light);
-}
-
-.inbox-table thead {
-  border-bottom: 2px solid var(--gray-light);
-}
-
-.inbox-table tr {
-  border-bottom: 1px solid var(--gray-light);
-}
-
-.inbox-table td {
-  padding: 15px;
-  border: 1px solid var(--gray-light);
-}
-
 .inbox-table td a {
   color: var(--black);
 }
@@ -32,10 +10,6 @@
 .inbox-table td a:hover {
   text-decoration: underline;
 }
-
-/* .views-exposed-form {
-  display: none;
-} */
 
 .inbox-table .pager {
   margin: 20px;
@@ -45,20 +19,12 @@
   display: inline;
 }
 
-.inbox-table #view-body-table-column {
-  width: 60%;
-}
-
 .inbox-table .form-item-field-client-target-id {
   display: none;
 }
 
 .inbox-table .js-form-item-body-value {
   display: none;
-}
-
-.inbox-table .views-exposed-form {
-  margin-bottom: 30px;
 }
 
 .inbox-table .views-exposed-form #edit-actions {
@@ -94,4 +60,8 @@
   display: flex;
   padding-top: 0;
   padding-bottom: 60px;
+}
+
+.inbox-table label[for="edit-field-message-tags-target-id"] {
+  font-size: 15px;
 }

@@ -55,7 +55,10 @@ export default enable;
 
 $(document).ready(function main() {
   $('#nav-icon1').click(function toggleHamburgerMenu() {
-    // $(this).toggleClass('open');
+    if (window.outerWidth >= 1024) {
+      return;
+    }
+
     $('#page-left-sidebar')
       .addClass('fixed z-50 w-full')
       .removeClass('hidden w-0');

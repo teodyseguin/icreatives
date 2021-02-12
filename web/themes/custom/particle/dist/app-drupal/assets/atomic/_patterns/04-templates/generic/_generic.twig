@@ -28,12 +28,17 @@
     <section class="row flex flex-row relative">
 
       <div class="layout-content w-full">
-        <div class="bg-white top-details flex flex-wrap w-full justify-left lg:justify-end border-b border-gray-400 shadow-lg">
+        <div class="bg-white top-details flex flex-wrap w-full justify-left lg:justify-end">
           {% include '@atoms/hamburger-menu/_hamburger-menu.twig' %}
 
           {% include '@atoms/site-name/_site-name.twig' with {
             site_name: 'Imaginarium Creatives'
           } %}
+
+          <div class="navbar-inbox-icon relative">
+            <i class="fa fa-envelope-o"></i>
+            <span class="badge badge-danger hidden"></span>
+          </div>
 
           {% if display_filter %}
             <div class="filter flex flex-row flex-grow lg:ml-4">
@@ -52,8 +57,7 @@
               } %}
             </div>
           {% endif %}
-          <div class="flex text-right mr-10 align-middle justify-center">
-            {# <svg class="flex h-8 w-8 mt-4" viewBox="0 0 20 20" fill="#ccc" class="mail w-6 h-6"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path></svg> #}
+          <div class="flex text-right mr-3 align-middle justify-center">
             <div class="hidden md:block name inline-block ml-4 mr-4 mt-5">{{ full_name }}</div>
             <div class="hidden md:block overflow-hidden avatar inline-block h-10 w-10 bg-yelloworange rounded-full mt-3">
               <a href="/user/{{ user_id }}">

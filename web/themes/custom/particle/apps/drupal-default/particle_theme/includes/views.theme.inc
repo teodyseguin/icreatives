@@ -12,4 +12,10 @@ function particle_preprocess_views_view(&$variables) {
   if ($variables['id'] == 'inbox') {
     $variables['table_title'] = 'Inquiries';
   }
+  else if ($variables['id'] == 'invoice') {
+    $variables['table_title'] = 'Invoices';
+  }
+  else if ($variables['id'] == 'clients') {
+    $variables['table_title'] = 'Clients';
+  }
 }

@@ -38,11 +38,10 @@
       const path = $self.attr('data-drupal-link-system-path');
 
       if (path === 'inbox') {
-        const $parent = $self.parent();
-
-        $parent.append(
-          `<span class="message-count font-sansserif">${messageCount}</span>`
-        );
+        $('.navbar-inbox-icon .badge')
+          .removeClass('hidden')
+          .addClass('inline-block')
+          .html(`${messageCount}`);
       }
     });
   };
@@ -52,6 +51,10 @@
     const { messages } = drupalSettings.ic;
 
     if (!currentPath || currentPath !== 'inbox') {
+      return;
+    }
+
+    if (!messages) {
       return;
     }
 

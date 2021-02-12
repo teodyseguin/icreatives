@@ -7,8 +7,6 @@ libraries:
   - particle/core
   - particle/global
   - particle/message_indicator
-  - particle/morris
-  - particle/raphael
   - particle/chart
 libraries-override:
   core/jquery: particle/jquery

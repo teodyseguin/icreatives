@@ -44,9 +44,9 @@
 
   {% if header %}
     {% if id == 'inbox' %}
-    <header class="mt-10 flex flex-col lg:flex-row flex-wrap lg:flex-no-wrap">
+    <header class="mt-5 flex flex-col lg:flex-row flex-wrap lg:flex-no-wrap">
     {% else %}
-    <header class="mt-10">
+    <header class="mt-5">
     {% endif %}
       {{ header }}
     </header>
@@ -59,22 +59,21 @@
       {{ table_title }}
     </header>
 
-    <div class="card-body">
-      <div class="w-full px-5 pb-0 pt-5">
-        {{ exposed }}
-      </div>
-  
-      {% if rows -%}
-        {{ rows }}
-      {% elseif empty -%}
-        {{ empty }}
-      {% endif %}
-      {{ pager }}
+    <div class="w-full px-5 pb-0 pt-5">
+      {{ exposed }}
     </div>
-  </section>
+  
+    {% if rows -%}
+      {{ rows }}
+    {% elseif empty -%}
+      {{ empty }}
+    {% endif %}
+    {{ pager }}
+  
+    {{ attachment_after }}
+    {{ more }}
 
-  {{ attachment_after }}
-  {{ more }}
+  </section>
 
   {% if footer %}
     <footer>

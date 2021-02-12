@@ -28,12 +28,17 @@
     <section class="row flex flex-row relative">
 
       <div class="layout-content w-full"> <!-- lg:w-5/6 -->
-        <div class="bg-white top-details flex flex-wrap w-full justify-left lg:justify-end border-b border-gray-400 shadow-lg">
+        <div class="bg-white top-details flex flex-wrap w-full justify-left lg:justify-end">
           {% include '@atoms/hamburger-menu/_hamburger-menu.twig' %}
 
           {% include '@atoms/site-name/_site-name.twig' with {
             site_name: 'Imaginarium Creatives'
           } %}
+
+          <div class="navbar-inbox-icon relative">
+            <i class="fa fa-envelope-o"></i>
+            <span class="badge badge-danger hidden"></span>
+          </div>
 
           {% if display_filter %}
             <div class="filter flex flex-row flex-grow lg:ml-4">

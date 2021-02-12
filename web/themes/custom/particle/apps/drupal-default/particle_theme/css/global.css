@@ -13,6 +13,7 @@
   --orange: #fd7e14;
   --yellow: #f6c23e;
   --yelloworange: #f7920c;
+  --yellowocher: #e67a00;
   --green: #1cc88a;
   --teal: #20c9a6;
   --cyan: #36b9cc;
@@ -45,10 +46,21 @@ html aside a {
   color: var(--white);
   display: block;
   margin-bottom: 10px;
+  padding: 15px 0 15px 10px;
+  text-decoration: none;
+}
+
+html aside .fa-times {
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
+html aside a:hover {
+  text-decoration: none;
 }
 
 html #block-mainnavigation {
-  margin: 19px;
+  margin: 19px 0;
 }
 
 html .top-details {
@@ -86,13 +98,26 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 #block-mainnavigation .is-active {
-  text-decoration: underline;
+  font-weight: bold;
+  background: var(--yellowocher);
+  /* border-left: 3px solid var(--yellowocher); */
+  color: #fff;
+  border-radius: 0 40px 40px 0;
+  transition: all 0.3s ease;
 }
 
-#block-mainnavigation ul {
+#block-mainnavigation a:hover {
+  background: var(--yellowocher);
+  /* border-left: 3px solid var(--yellowocher); */
+  color: #fff;
+  border-radius: 0 40px 40px 0;
+  transition: all 0.3s ease;
+}
+
+/* #block-mainnavigation ul {
   padding-left: 1.25rem;
   padding-right: 1.25rem;
-}
+} */
 
 html.client .add-page-button {
   display: none;
@@ -248,4 +273,83 @@ button#search-inbox {
   width: 100%;
 }
 
+.sidebar-toggle-box {
+  float: left;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-top: 20px;
+}
 
+.sidebar-toggle-box .fa-bars {
+  cursor: pointer;
+  display: inline-block;
+  font-size: 20px;
+}
+
+.navbar-inbox-icon {
+  margin: 19px 35px;
+}
+
+.navbar-inbox-icon svg {
+  font-size: 20px;
+}
+
+.badge {
+  position: absolute;
+  right: -17px;
+  top: -8px;
+  z-index: 100;
+  color: #fff;
+  border-radius: 30px;
+  padding: .25em .4em;
+  font-size: 75%;
+  font-weight: 700;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: 100%;
+  transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+.badge.badge-danger {
+  background: #ff6c60;
+}
+
+table {
+  background-color: var(--white);
+}
+
+table header {
+  margin-bottom: 25px;
+}
+
+table th {
+  padding: 15px;
+}
+
+table thead {
+  border-bottom: 2px solid var(--gray-light);
+}
+
+table tr {
+  border-bottom: 1px solid var(--gray-light);
+}
+
+table td {
+  padding: 15px;
+}
+
+table th a {
+  color: var(--black);
+}
+
+.table-wrapper {
+  overflow-x: scroll;
+}
+
+@media (min-width: 768px) {
+  .table-wrapper {
+    overflow-x: initial;
+  }
+}

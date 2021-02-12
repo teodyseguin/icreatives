@@ -9,11 +9,6 @@
 
 .clients-table th {
   padding: 15px;
-  border: 1px solid var(--gray-light);
-}
-
-.clients-table thead {
-  border-bottom: 2px solid var(--gray-light);
 }
 
 .clients-table tr {
@@ -22,7 +17,6 @@
 
 .clients-table td {
   padding: 15px;
-  border: 1px solid var(--gray-light);
 }
 
 .clients-table td a {
