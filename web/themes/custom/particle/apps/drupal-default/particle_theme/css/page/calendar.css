@@ -3,6 +3,10 @@
  * calendar.css
  */
 
+.calendar-page {
+  margin-top: 20px;
+}
+
 .calendar-page .views-exposed-form {
   display: none;
 }

@@ -43,8 +43,8 @@ html {
 
 html aside a {
   color: var(--white);
-  @apply block;
-  @apply mb-5;
+  display: block;
+  margin-bottom: 10px;
 }
 
 html #block-mainnavigation {
@@ -232,3 +232,13 @@ button#search-inbox {
   width: 30px;
   height: 30px;
 }
+
+.pro-img-box {
+  position: relative;
+}
+
+.pro-img-box img {
+  width: 100%;
+}
+
+

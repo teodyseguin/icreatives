@@ -28,13 +28,6 @@
   margin-right: 0;
 }
 
-@media screen and (min-width: 1024px) {
-  .product-lists .rows-wrapper {
-    margin-left: -25px;
-    margin-right: -25px;
-  }
-}
-
 .pager {
   width: 100%;
   padding: 0 25px;
@@ -42,4 +35,9 @@
 
 .pager .pager__items {
   display: inline;
+}
+
+.product-lists .card-body {
+  display: flex;
+  flex-wrap: wrap;
 }
