@@ -134,6 +134,7 @@ class IcFbService {
     $client = \Drupal::request()->query->get('client');
     $insights = [
       'total_facebook_followers' => 0,
+      'total_facebook_followers_raw' => NULL,
       'total_facebook_reach' => 0,
       'total_facebook_impressions' => 0,
       'link_clicks' => 0,
@@ -170,6 +171,7 @@ class IcFbService {
       foreach ($body->data as $data) {
         switch ($data->name) {
           case 'page_fans':
+            $insights['total_facebook_followers_raw'] = $this->totalFacebookFollowersRaw($data);
             $insights['total_facebook_followers'] += $this->totalFacebookFollowers($data);
           break;
 
@@ -320,6 +322,10 @@ class IcFbService {
    */
   public function totalFacebookFollowers($data) {
     return $data->values[count($data->values) - 1]->value;
+  }
+
+  public function totalFacebookFollowersRaw($data) {
+    return $data->values;
   }
 
   /**
