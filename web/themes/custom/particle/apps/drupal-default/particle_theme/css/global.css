@@ -131,7 +131,7 @@ button#search-inbox {
   height: 1rem;
   overflow: hidden;
   font-size: .75rem;
-  background-color: #e9ecef;
+  background-color: #a0aec0;
   border-radius: .25rem;
 }
 
@@ -156,7 +156,7 @@ button#search-inbox {
 .card-header {
   border-color: #eff2f7;
   background: #fff;
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 300;
 }
 
@@ -190,4 +190,43 @@ button#search-inbox {
   background-clip: border-box;
   border: 1px solid rgba(0,0,0,.125);
   border-radius: .25rem;
+}
+
+.btn {
+  display: inline-block;
+  font-weight: 400;
+  color: #212529;
+  text-align: center;
+  vertical-align: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  background-color: transparent;
+  border: 1px solid transparent;
+      border-top-color: transparent;
+      border-right-color: transparent;
+      border-bottom-color: transparent;
+      border-left-color: transparent;
+  padding: .375rem .75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  border-radius: .25rem;
+  transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+.btn-primary, .btn-primary.disabled, .btn-primary[disabled], .btn-primary.disabled.active, .btn-primary.active[disabled] {
+  background-color: #41cac0;
+  border-color: #41cac0;
+  color: #FFFFFF;
+}
+
+.stats-icon .svg-inline--fa {
+  width: 100px;
+  height: 100px;
+}
+
+.top-contents-icon .svg-inline--fa {
+  width: 30px;
+  height: 30px;
 }

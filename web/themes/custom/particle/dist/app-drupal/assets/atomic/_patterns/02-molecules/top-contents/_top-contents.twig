@@ -9,16 +9,20 @@
  */
 #}
 
-{% for content in contents %}
-  <a href="{{ content['link'] }}" target="_blank" class="flex flex-grow flex-wrap mx-2 mb-2">
-    {% if content['picture'] %}
-      <div class="w-full overflow-hidden top-post-picture">
-        <div style="background-image: url({{ content['picture'] }})"></div>
+{% if contents %}
+  {% for content in contents %}
+    <a href="{{ content['link'] }}" target="_blank" class="flex flex-wrap mx-2 mb-2 w-1/5">
+      {% if content['picture'] %}
+        <div class="w-full overflow-hidden top-post-picture">
+          <div style="background-image: url({{ content['picture'] }})"></div>
+        </div>
+      {% endif %}
+      <div class="w-full text-gray-900 font-bold font-sansserif text-left">
+        {{ content['created'] }}
+        <p>{{ content['message'] }}</p>
       </div>
-    {% endif %}
-    <div class="w-full text-gray-900 font-bold font-sansserif text-left">
-      {{ content['created'] }}
-      <p>{{ content['message'] }}</p>
-    </div>
-  </a>
-{% endfor %}
+    </a>
+  {% endfor %}
+{% else %}
+  <p>There are no data to display at the moment ...</p>
+{% endif %}

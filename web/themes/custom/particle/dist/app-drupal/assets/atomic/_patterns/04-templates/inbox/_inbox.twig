@@ -31,7 +31,11 @@
       } %}
 
       <div class="layout-content w-5/6 ">
-        <div class="top-details flex w-full justify-end border-b border-gray-400 shadow-lg">
+        <div class="bg-white top-details flex w-full justify-end border-b border-gray-400 shadow-lg">
+          <h5 class="text-yelloworange text-left lg:text-center ml-10 lg:ml-0 font-sansserif font-bold uppercase m-5 pl-10">
+            Imaginarium Creatives
+          </h5>
+
           {% if display_filter %}
             <div class="filter flex flex-row flex-grow ml-4">
               {% include '@atoms/selectbox/_selectbox.twig' with {

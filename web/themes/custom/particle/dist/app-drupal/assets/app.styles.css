@@ -96469,6 +96469,14 @@ select {
   right:0
 }
 
+div[data-name] {
+  font-size: 14px;
+}
+
+div.data-count {
+  font-size: 14px;
+}
+
 
 
 .product-card {

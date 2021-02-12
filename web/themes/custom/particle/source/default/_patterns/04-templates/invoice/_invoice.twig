@@ -27,17 +27,17 @@
     {{ breadcrumb }}
     <section class="row flex flex-row">
       <aside class="layout-sidebar-first bg-yelloworange min-h-screen w-1/6 font-sansserif text-white" role="complementary">
-        <h5 class="text-white text-center font-sansserif font-bold uppercase mt-10 mb-1">
-          Imaginarium Creatives
-        </h5>
-
         <div class="ml-5 mr-5 border-b border-white"></div>
 
         {{ sidebar_first }}
       </aside>
 
       <div class="layout-content w-5/6 ">
-        <div class="top-details flex w-full justify-end border-b border-gray-400 shadow-lg">
+        <div class="bg-white top-details flex w-full justify-end border-b border-gray-400 shadow-lg">
+          <h5 class="text-yelloworange text-left lg:text-center ml-10 lg:ml-0 font-sansserif font-bold uppercase m-5 pl-10">
+            Imaginarium Creatives
+          </h5>
+
           {% if display_filter %}
             <div class="filter flex flex-row flex-grow ml-4">
               {% include '@atoms/selectbox/_selectbox.twig' with {

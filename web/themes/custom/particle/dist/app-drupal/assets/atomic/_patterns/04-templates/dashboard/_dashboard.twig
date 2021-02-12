@@ -9,7 +9,7 @@
  */
 #}
 
-<div class="dashboard layout-container">
+<div class="dashboard layout-container" style="background-color: #f1f2f7;">
   {{ primary_menu }}
 
   {{ highlighted }}
@@ -28,8 +28,13 @@
     <section class="row flex flex-row relative">
 
       <div class="layout-content w-full"> <!-- lg:w-5/6 -->
-        <div class="top-details flex flex-wrap w-full justify-left lg:justify-end border-b border-gray-400 shadow-lg">
+        <div class="bg-white top-details flex flex-wrap w-full justify-left lg:justify-end border-b border-gray-400 shadow-lg">
           {% include '@atoms/hamburger-menu/_hamburger-menu.twig' %}
+
+          <h5 class="text-yelloworange text-left lg:text-center ml-10 lg:ml-0 font-sansserif font-bold uppercase m-5 pl-10">
+            Imaginarium Creatives
+          </h5>
+
           {% if display_filter %}
             <div class="filter flex flex-row flex-grow lg:ml-4">
               {% include '@atoms/selectbox/_selectbox.twig' with {
@@ -78,8 +83,8 @@
             <div class="flex m-5">
               {% include '@molecules/follower-count-graph/_follower-count-graph.twig' with {
                 title: 'Total Follower Count',
-                fb_followers: page_insights['total_facebook_followers'],
-                ig_followers: ig_insights['total_instagram_followers'],
+                fb_followers: page_insights['total_facebook_followers']|number_format,
+                ig_followers: ig_insights['total_instagram_followers']|number_format,
                 id: 'line'
               } %}
             </div>
@@ -91,14 +96,17 @@
                 <section class="card">
                   <header class="card-header">Total Reach</header>
                   <div class="card-body flex flex-row">
+                    <div class="flex-grow stats-icon">
+                      <i class="text-8xl text-yelloworange fas fa-users"></i>
+                    </div>
                     <div class="flex-grow">
                       <div class="block font-bold">Facebook</div>
-                      {{ page_insights['total_facebook_reach'] }}
+                      <div class="text-8xl">{{ page_insights['total_facebook_reach']|number_format }}</div>
                     </div>
 
                     <div class="flex-grow">
                       <div class="block font-bold">Instagram</div>
-                      {{ ig_insights['reach'] }}
+                      <div class="text-8xl">{{ ig_insights['reach']|number_format }}</div>
                     </div>
                   </div>
                 </section>
@@ -106,14 +114,17 @@
                 <section class="card">
                   <header class="card-header">Engagement Rate</header>
                   <div class="card-body flex flex-row">
+                    <div class="flex-grow stats-icon">
+                      <i class="text-8xl text-yelloworange fas fa-percentage"></i>
+                    </div>
                     <div class="flex-grow">
                       <div class="block font-bold">Facebook</div>
-                      {{ engagement_rate }}
+                      <div class="text-8xl">{{ engagement_rate|number_format(2, '.', ',') }}%</div>
                     </div>
 
                     <div class="flex-grow">
                       <div class="block font-bold">Instagram</div>
-                      {{ ig_insights['engagementRate'] }}
+                      <div class="text-8xl">{{ ig_insights['engagementRate']|number_format(2, '.', ',') }}%</div>
                     </div>
                   </div>
                 </section>
@@ -123,14 +134,17 @@
                 <section class="card">
                   <header class="card-header">Link Clicks</header>
                   <div class="card-body flex flex-row">
+                    <div class="flex-grow stats-icon">
+                      <i class="text-8xl text-yelloworange fas fa-mouse-pointer"></i>
+                    </div>
                     <div class="flex-grow">
                       <div class="block font-bold">Facebook</div>
-                      {{ page_insights['link_clicks'] }}
+                      <div class="text-8xl">{{ page_insights['link_clicks']|number_format }}</div>
                     </div>
 
                     <div class="flex-grow">
                       <div class="block font-bold">Instagram</div>
-                      {{ ig_insights['link_clicks'] }}
+                      <div class="text-8xl">{{ ig_insights['link_clicks']|number_format }}</div>
                     </div>
                   </div>
                 </section>
@@ -138,14 +152,17 @@
                 <section class="card">
                   <header class="card-header">Total Impressions</header>
                   <div class="card-body flex flex-row">
+                    <div class="flex-grow stats-icon">
+                      <i class="text-8xl text-yelloworange fas fa-poll-h"></i>
+                    </div>
                     <div class="flex-grow">
                       <div class="block font-bold">Facebook</div>
-                      {{ page_insights['total_facebook_impressions'] }}
+                      <div class="text-8xl">{{ page_insights['total_facebook_impressions']|number_format }}</div>
                     </div>
 
                     <div class="flex-grow">
                       <div class="block font-bold">Instagram</div>
-                      {{ ig_insights['impressions'] }}
+                      <div class="text-8xl">{{ ig_insights['impressions']|number_format }}</div>
                     </div>
                   </div>
                 </section>
@@ -155,14 +172,14 @@
 
             <!-- Facebook and Instagram messages count -->
             <div class="flex flex-row flex-no-wrap mb-10">
-              <div class="flex-grow">
+              <div class="flex-grow w-1/2">
                 {% include '@molecules/messages-count/_messages-count.twig' with {
                   title: 'Facebook message count',
                   conversations: conversations
                 } %}
               </div>
 
-              <div class="flex-grow">
+              <div class="flex-grow w-1/2">
                 {% include '@molecules/messages-count/_messages-count.twig' with {
                   title: 'Instagram message count',
                   conversations: ig_conversations
@@ -175,10 +192,22 @@
             <div class="flex flex-row m-5">
               <div class="card w-full">
                 <header class="card-header">Top 5 Contents</header>
-                <section class="card-body flex flex-row -mx-2">
-                  {% include '@molecules/top-contents/_top-contents.twig' with {
-                    contents: ig_insights['topFive']
-                  } %}
+                <section class="card-body flex flex-row flex-wrap -mx-2">
+                  <div class="flex w-full p-2 top-contents-icon text-right">
+                    <i class="fab fa-facebook-square mr-1 text-yelloworange cursor-pointer"></i>
+                    <i class="fab fa-instagram-square ml-1 text-yelloworange cursor-pointer"></i>
+                  </div>
+
+                  <div class="flex w-full fb-top-contents">
+                    {% include '@molecules/top-contents/_top-contents.twig' with {
+                      contents: top_five_contents
+                    } %}
+                  </div>
+                  <div class="w-full hidden ig-top-contents">
+                    {% include '@molecules/top-contents/_top-contents.twig' with {
+                      contents: ig_insights['topFive']
+                    } %}
+                  </div>
                 </section>
               </div>
             </div>
@@ -186,69 +215,85 @@
 
             <!-- Facebook and Instagram audiences -->
             <div class="flex flex-row m-5">
-              <div class="flex flex-wrap">
+              <div class="flex flex-wrap mr-5">
                 <h4 class="flex w-full">Facebook audience</h4>
                 <div class="flex w-full">
                   {% include '@molecules/doughnut-graph-box/_doughnut-graph-box.twig' with {
                     title: 'Gender and Age of Followers',
                     contents: page_insights['gender_age_followers'],
+                    prop: 'gender_age',
+                    sn: 'fb',
                     id: 'doughnut1',
-                    additional_class: 'w-1/2'
+                    additional_class: 'w-1/2 gender-age-followers'
                   } %}
-  
+                  <div class="px-5"></div>
                   {% include '@molecules/doughnut-graph-box/_doughnut-graph-box.twig' with {
                     title: 'Gender and Age of Audience Reached',
                     contents: page_insights['gender_age_followers'],
+                    prop: 'gender_age',
+                    sn: 'fb',
                     id: 'doughnut2',
-                    additional_class: 'w-1/2'
+                    additional_class: 'w-1/2 gender-age-followers'
                   } %}
                 </div>
                 <div class="flex w-full">
                   {% include '@molecules/doughnut-graph-box/_doughnut-graph-box.twig' with {
                     title: 'Location of Followers',
                     contents: page_insights['location_followers'],
+                    prop: 'location',
+                    sn: 'fb',
                     id: 'doughnut3',
-                    additional_class: 'w-1/2'
+                    additional_class: 'w-1/2 location-followers'
                   } %}
-
+                  <div class="px-5"></div>
                   {% include '@molecules/doughnut-graph-box/_doughnut-graph-box.twig' with {
                     title: 'Location of Audience Reached',
                     contents: page_insights['location_followers'],
+                    prop: 'location',
+                    sn: 'fb',
                     id: 'doughnut4',
-                    additional_class: 'w-1/2'
+                    additional_class: 'w-1/2 location-followers'
                   } %}
                 </div>
               </div>
-              <div class="flex flex-wrap">
+              <div class="flex flex-wrap ml-5">
                 <h4 class="flex w-full">Instagram audience</h4>
                 <div class="flex w-full">
                   {% include '@molecules/doughnut-graph-box/_doughnut-graph-box.twig' with {
                     title: 'Gender and Age of Followers',
                     contents: ig_insights['gender_age_followers'],
+                    prop: 'gender_age',
+                    sn: 'ig',
                     id: 'ig_doughnut1',
-                    additional_class: 'w-1/2'
+                    additional_class: 'w-1/2 ig-gender-age-followers'
                   } %}
-
+                  <div class="px-5"></div>
                   {% include '@molecules/doughnut-graph-box/_doughnut-graph-box.twig' with {
                     title: 'Gender and Age of Audience Reached',
                     contents: ig_insights['gender_age_followers'],
+                    prop: 'gender_age',
+                    sn: 'ig',
                     id: 'ig_doughnut2',
-                    additional_class: 'w-1/2'
+                    additional_class: 'w-1/2 ig-gender-age-followers'
                   } %}
                 </div>
                 <div class="flex w-full">
                   {% include '@molecules/doughnut-graph-box/_doughnut-graph-box.twig' with {
                     title: 'Location of Followers',
                     contents: ig_insights['location_followers'],
+                    prop: 'location',
+                    sn: 'ig',
                     id: 'ig_doughnut3',
-                    additional_class: 'w-1/2'
+                    additional_class: 'w-1/2 ig-location-followers'
                   } %}
-
+                  <div class="px-5"></div>
                   {% include '@molecules/doughnut-graph-box/_doughnut-graph-box.twig' with {
                     title: 'Location of Audience Reached',
                     contents: ig_insights['location_followers'],
+                    prop: 'location',
+                    sn: 'ig',
                     id: 'ig_doughnut4',
-                    additional_class: 'w-1/2'
+                    additional_class: 'w-1/2 ig-location-followers'
                   } %}
                 </div>
               </div>

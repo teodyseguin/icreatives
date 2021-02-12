@@ -95,6 +95,7 @@ function particle_preprocess_page(&$variables) {
 
     $page_insights = $ic_fb_service->getFbPageInsights($from, $to);
     $variables['page_insights'] = $page_insights;
+    $variables['#attached']['drupalSettings']['ic']['page_insights'] = $page_insights;
 
     $fb_posts = $ic_fb_service->getFbPosts($from, $to);
     $variables['top_five_contents'] = $fb_posts['topFive'];
@@ -103,6 +104,7 @@ function particle_preprocess_page(&$variables) {
 
     $variables['ig_conversations'] = $ic_ig_service->getIgConversations($from, $to);
     $variables['ig_insights'] = $ic_ig_service->getIgPageInsights($from, $to);
+    $variables['#attached']['drupalSettings']['ic']['ig_insights'] = $variables['ig_insights'];
 
     $user_storage = $tools->getStorage('user');
     $user_data = $tools->getUserData();

@@ -62,9 +62,9 @@ all_charts:
     js/all-charts.js:
       minified: true
 
-example:
+top_five:
   js:
-    js/example.js:
+    js/top-five.js:
       minified: true
 
 global:

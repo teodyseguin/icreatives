@@ -9,6 +9,7 @@ import 'protons';
 
 // Module template
 import './_doughnut-graph-box.twig';
+import './index.css';
 
 export const name = 'doughnut-graph-box';
 
