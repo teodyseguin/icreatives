@@ -267,6 +267,11 @@ button#search-inbox {
 
 .pro-img-box {
   position: relative;
+  display: block;
+  height: 312px;
+  background-size: contain;
+  background-position: center center;
+  background-repeat: no-repeat;
 }
 
 .pro-img-box img {

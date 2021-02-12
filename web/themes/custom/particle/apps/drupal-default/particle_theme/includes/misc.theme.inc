@@ -91,7 +91,7 @@ function particle_preprocess_commerce_product_variation(&$variables) {
   $file_storage = $tools->getStorage('file');
   $file = $file_storage->load($field_image[0]['target_id']);
 
-  $style = $image_style_storage->load('product_image_92_94');
+  $style = $image_style_storage->load('large');
 
   if (!empty($file)) {
     $variables['image'] = $style->buildUrl($file->get('uri')->value);

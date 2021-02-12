@@ -37,34 +37,20 @@
     dom_id ? 'js-view-dom-id-' ~ dom_id,
   ]
 %}
-<div{{ attributes.addClass(classes) }}>
-  {{ title_prefix }}
-  {{ title }}
-  {{ title_suffix }}
+{% if id == 'products_page' %}
+  <div{{ attributes.addClass(classes) }}>
+    {{ title_prefix }}
+    {{ title }}
+    {{ title_suffix }}
+    {{ header }}
+    {{ attachment_before }}
+    {{ table_title }}
+    {{ exposed }}
 
-  {% if header %}
-    {% if id == 'inbox' %}
-    <header class="mt-5 flex flex-col lg:flex-row flex-wrap lg:flex-no-wrap">
-    {% else %}
-    <header class="mt-5">
-    {% endif %}
-      {{ header }}
-    </header>
-  {% endif %}
-
-  {{ attachment_before }}
-
-  <section class="card rows-wrapper flex flex-wrap w-full bg-white">
-    <header class="card-header table-title flex w-full text-left font-sansserif p-5 bg-gray-300">
-      {{ table_title }}
-    </header>
-
-    <div class="w-full px-5 pb-0 pt-5">
-      {{ exposed }}
-    </div>
-  
     {% if rows -%}
-      {{ rows }}
+      <div class="rows flex flex-wrap">
+        {{ rows }}
+      </div>
     {% elseif empty -%}
       {{ empty }}
     {% endif %}
@@ -73,13 +59,59 @@
     {{ attachment_after }}
     {{ more }}
 
-  </section>
+    {% if footer %}
+      <footer>
+        {{ footer }}
+      </footer>
+    {% endif %}
 
-  {% if footer %}
-    <footer>
-      {{ footer }}
-    </footer>
-  {% endif %}
+    {{ feed_icons }}
+  </div>
+{% else %}
+  <div{{ attributes.addClass(classes) }}>
+    {{ title_prefix }}
+    {{ title }}
+    {{ title_suffix }}
 
-  {{ feed_icons }}
-</div>
+    {% if header %}
+      {% if id == 'inbox' %}
+      <header class="mt-5 flex flex-col lg:flex-row flex-wrap lg:flex-no-wrap">
+      {% else %}
+      <header class="mt-5">
+      {% endif %}
+        {{ header }}
+      </header>
+    {% endif %}
+
+    {{ attachment_before }}
+
+    <section class="card rows-wrapper flex flex-wrap w-full bg-white">
+      <header class="card-header table-title flex w-full text-left font-sansserif p-5 bg-gray-300">
+        {{ table_title }}
+      </header>
+
+      <div class="w-full px-5 pb-0 pt-5">
+        {{ exposed }}
+      </div>
+    
+      {% if rows -%}
+        {{ rows }}
+      {% elseif empty -%}
+        {{ empty }}
+      {% endif %}
+      {{ pager }}
+    
+      {{ attachment_after }}
+      {{ more }}
+
+    </section>
+
+    {% if footer %}
+      <footer>
+        {{ footer }}
+      </footer>
+    {% endif %}
+
+    {{ feed_icons }}
+  </div>
+{% endif %}

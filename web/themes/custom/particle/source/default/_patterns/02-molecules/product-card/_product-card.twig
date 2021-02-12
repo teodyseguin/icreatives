@@ -9,7 +9,7 @@
  */{
 #}
 
-<div class="relative product-card flex rounded-lg border border-grey-300 cursor-pointer">
+{# <div class="relative product-card flex rounded-lg border border-grey-300 cursor-pointer">
   {% if allow_edit %}
     <a href="/product/{{ product_id }}/edit?destination=/products" class="absolute block top-0 left-0 m-1">
       [edit]
@@ -29,4 +29,20 @@
       {{ product_price }}
     </div>
   </div>
-</div>
+</div> #}
+
+<section class="card cursor-pointer relative">
+  {% if allow_edit %}
+    <a href="/product/{{ product_id }}/edit?destination=/products" class="absolute block top-0 left-0 m-1 z-10 text-yelloworange">
+      [edit]
+    </a>
+  {% endif %}
+  <div class="pro-img-box" style="background-image: url('{{ product_image }}')"></div>
+
+  <div class="card-body text-center">
+    <a href="#" class="pro-title text-black block w-full">
+      {{ product_title }}
+    </a>
+    <p class="price text-center w-full mt-5 text-yelloworange">{{ product_price }}</p>
+  </div>
+</section>
