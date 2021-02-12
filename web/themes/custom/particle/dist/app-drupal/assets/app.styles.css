@@ -96477,6 +96477,27 @@ div.data-count {
   font-size: 14px;
 }
 
+.fb-followers-count::before {
+  content: '';
+  position: relative;
+  top: 5px;
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  background-color: #fed681;
+  margin-right: 10px;
+}
+
+.ig-followers-count::before {
+  content: '';
+  position: relative;
+  top: 5px;
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  background-color: #4daff6;
+  margin-right: 10px;
+}
 
 
 .product-card {

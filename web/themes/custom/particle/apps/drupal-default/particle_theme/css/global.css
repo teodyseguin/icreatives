@@ -43,6 +43,8 @@ html {
 
 html aside a {
   color: var(--white);
+  @apply block;
+  @apply mb-5;
 }
 
 html #block-mainnavigation {
