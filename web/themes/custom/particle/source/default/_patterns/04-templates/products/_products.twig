@@ -27,9 +27,9 @@
     {{ breadcrumb }}
     <section class="row flex flex-row">
       <aside class="layout-sidebar-first bg-yelloworange min-h-screen w-1/6 font-sansserif text-white" role="complementary">
-        <h5 class="text-white text-center font-sansserif font-bold uppercase mt-10 mb-1">
-          Imaginarium Creatives
-        </h5>
+        {% include '@atoms/site-name/_site-name.twig' with {
+          site_name: 'Imaginarium Creatives'
+        } %}
 
         <div class="ml-4 mr-4 border-b border-white"></div>
 

@@ -224,8 +224,15 @@ button#search-inbox {
 }
 
 .stats-icon .svg-inline--fa {
-  width: 100px;
-  height: 100px;
+  width: 50px;
+  height: 50px;
+}
+
+@media (min-width: 400px) {
+  .stats-icon .svg-inline--fa {
+    width: 100px;
+    height: 100px;
+  }
 }
 
 .top-contents-icon .svg-inline--fa {

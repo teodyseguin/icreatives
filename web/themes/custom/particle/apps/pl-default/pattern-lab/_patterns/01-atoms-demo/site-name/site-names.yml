@@ -1,0 +1,9 @@
+site_name_demo_block:
+  title: Site Name Component
+  content:
+    lead: Add a quick description here.
+    summary: Add code examples here using <code>html code syntax</code>
+
+site_name:
+  example_var: This is an example var
+

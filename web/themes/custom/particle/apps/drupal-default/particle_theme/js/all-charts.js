@@ -100,6 +100,10 @@
    * Generate a Line graph.
    */
   const generateLineGraph = () => {
+    if (!drupalSettings.ic.hasOwnProperty('page_insights')) {
+      return;
+    }
+
     if (drupalSettings.ic.page_insights.total_facebook_followers_raw) {
       const totalFbFollowersRaw =
         drupalSettings.ic.page_insights.total_facebook_followers_raw;
