@@ -179,14 +179,16 @@
               <div class="w-full lg:w-1/2">
                 {% include '@molecules/messages-count/_messages-count.twig' with {
                   title: 'Facebook message count',
-                  conversations: conversations
+                  conversations: conversations,
+                  add_tags: '/admin/structure/taxonomy/manage/conversation_tags/add'
                 } %}
               </div>
 
               <div class="flex-grow w-1/2">
                 {% include '@molecules/messages-count/_messages-count.twig' with {
                   title: 'Instagram message count',
-                  conversations: ig_conversations
+                  conversations: ig_conversations,
+                  add_tags: '/admin/structure/taxonomy/manage/ig_conversation_tags/add'
                 } %}
               </div>
             </div>
