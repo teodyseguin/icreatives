@@ -15,13 +15,20 @@
     <div>
       <canvas id="{{ id }}" class="mx-auto" height="80" width="80"></canvas>
     </div>
-    <div class="text-right flex-grow">
-      {% for content in contents %}
-        <div class="flex alright-right">
-          <div class="mr-1 flex-grow text-right" data-name="{{ sn }}:{{ content[prop] }}">{{ content[prop] }}</div>
-          <div class="ml-1 flex-grow data-count text-right">{{ content['count']|number_format }}</div>
-        </div>
-      {% endfor %}
-    </div>
+
+    {% if contents %}
+      <div class="text-right flex-grow">
+        {% for content in contents %}
+          <div class="flex alright-right">
+            <div class="mr-1 flex-grow text-right" data-name="{{ sn }}:{{ content[prop] }}">{{ content[prop] }}</div>
+            <div class="ml-1 flex-grow data-count text-right">{{ content['count']|number_format }}</div>
+          </div>
+        {% endfor %}
+      </div>
+    {% else %}
+      <div class="flex-grow">
+        <p>There are no data to display at the moment ...</p>
+      </div>
+    {% endif %}
   </div>
 </div>
