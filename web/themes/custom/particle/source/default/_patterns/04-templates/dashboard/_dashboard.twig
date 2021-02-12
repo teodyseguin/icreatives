@@ -57,16 +57,15 @@
               } %}
             </div>
           {% endif %}
-          <div class="flex text-right mr-10 align-middle justify-center">
-            {# <svg class="flex h-8 w-8 mt-4" viewBox="0 0 20 20" fill="#ccc" class="mail w-6 h-6"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path></svg> #}
-            <div class="hidden md:block name inline-block ml-4 mr-4 mt-5">{{ full_name }}</div>
-            <div class="hidden md:block overflow-hidden avatar inline-block h-10 w-10 bg-yelloworange rounded-full mt-3">
+          <div class="flex text-right mr-6 align-middle justify-center">
+            <div class="hidden md:block overflow-hidden avatar inline-block bg-yelloworange rounded-full mt-4">
               <a href="/user/{{ user_id }}">
                 {% if user_picture %}
                   <img src={{ file_url(user_picture) }} />
                 {% endif %}
               </a>
             </div>
+            <div class="hidden md:block name inline-block ml-4 mt-5">{{ full_name }}</div>
           </div>
         </div>
 

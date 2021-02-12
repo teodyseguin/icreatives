@@ -353,3 +353,19 @@ table th a {
     overflow-x: initial;
   }
 }
+
+.avatar,
+.avatar a {
+  display: block;
+  width: 29px;
+  height: 29px;
+}
+
+.avatar img {
+  width: 29px;
+  height: 29px;
+}
+
+.name {
+  font-size: 13px;
+}
