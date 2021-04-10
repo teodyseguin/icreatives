@@ -100,13 +100,15 @@
    * Generate a Line graph.
    */
   const generateLineGraph = () => {
-    if (!drupalSettings.ic.hasOwnProperty('page_insights')) {
+    const { ic } = drupalSettings;
+    const { page_insights } = ic;
+
+    if (!page_insights) {
       return;
     }
 
-    if (drupalSettings.ic.page_insights.total_facebook_followers_raw) {
-      const totalFbFollowersRaw =
-        drupalSettings.ic.page_insights.total_facebook_followers_raw;
+    if (page_insights.total_facebook_followers_raw) {
+      const totalFbFollowersRaw = page_insights.total_facebook_followers_raw;
 
       for (let i = 0; i < totalFbFollowersRaw.length; i++) {
         const date = new Date(totalFbFollowersRaw[i].end_time);

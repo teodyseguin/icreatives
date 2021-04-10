@@ -58,14 +58,14 @@
             </div>
           {% endif %}
           <div class="flex text-right mr-6 align-middle justify-center">
-            <div class="hidden md:block overflow-hidden avatar inline-block bg-yelloworange rounded-full mt-4">
+            <div class="hidden lg:block overflow-hidden avatar inline-block bg-yelloworange rounded-full mt-4">
               <a href="/user/{{ user_id }}">
                 {% if user_picture %}
                   <img src={{ file_url(user_picture) }} />
                 {% endif %}
               </a>
             </div>
-            <div class="hidden md:block name inline-block ml-4 mt-5">{{ full_name }}</div>
+            <div class="hidden lg:block name inline-block ml-4 mt-5">{{ full_name }}</div>
           </div>
         </div>
 

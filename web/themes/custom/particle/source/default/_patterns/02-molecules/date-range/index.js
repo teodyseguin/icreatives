@@ -14,6 +14,7 @@ import 'protons';
 
 // Module template
 import './_date-range.twig';
+import './index.css';
 
 export const name = 'date-range';
 

@@ -13,17 +13,17 @@
   <header class="card-header font-sansserif text-gray-900 font-semibold text-base p-3 bg-gray-300 rounded-t-lg">
     Date Range
   </header>
-  <section class="card-body flex p-5">
-    <div class="flex mr-5">
-      <label for="from" class="mr-2">From</label>
+  <section class="card-body flex-none md:flex p-5">
+    <div class="flex flex-wrap w-full mb-5 md:flex-no-wrap md:w-auto mr-0 md:mr-5 md:mb-0">
+      <label for="from" class="mr-2 w-full md:w-auto">From</label>
       <input type="text" value="" class="date-from border flex-grow px-2">
     </div>
-    <div class="flex">
-      <label for="to" class="mr-2">To</label>
+    <div class="flex flex-wrap w-full mb-5 md:mb-0 md:flex-no-wrap md:w-auto">
+      <label for="to" class="w-full mr-2 md:w-auto">To</label>
       <input type="text" value="" class="date-to border flex-grow px-2">
     </div>
     <div class="submit-daterange">
-      <button type="button" class="ml-5 btn btn-primary">
+      <button type="button" class="ml-0 md:ml-5 btn btn-primary">
         Apply
       </button>
     </div>

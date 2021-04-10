@@ -96030,6 +96030,13 @@ tr {
   -o-transition: .5s ease-in-out;
   transition: .5s ease-in-out;
   cursor: pointer; */
+  display: block;
+}
+
+@media screen and (min-width: 768px) {
+  #nav-icon1 {
+    display: none;
+  }
 }
 
 #nav-icon1 span {
@@ -96473,6 +96480,11 @@ select {
   background:#07f;
   bottom:0;
   right:0
+}
+
+.date-from,
+.date-to {
+  height: 38px;
 }
 
 div[data-name] {
