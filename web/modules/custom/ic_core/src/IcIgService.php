@@ -92,7 +92,7 @@ class IcIgService {
     catch (FacebookResponseException $e) {
       $this->tools->loggerFactory()
         ->get('ic_core.ig_service')
-        ->error('Something went wrong retrieving the instagram followers count : @message', ['@message' => json_encode($e)]);
+        ->error('Something went wrong retrieving the instagram followers count : @message', ['@message' => json_encode($e->getMessage())]);
     }
   }
 
@@ -152,7 +152,7 @@ class IcIgService {
     catch (FacebookResponseException $e) {
       $this->tools->loggerFactory()
         ->get('ic_core.ig_service')
-        ->error('Something went wrong retrieving the instagram pages : @message', ['@message' => json_encode($e)]);
+        ->error('Something went wrong retrieving the instagram pages : @message', ['@message' => json_encode($e->getMessage())]);
     }
   }
 
@@ -199,7 +199,7 @@ class IcIgService {
         catch (Exception $e) {
           $this->tools->loggerFactory()
             ->get('ic_core.ig_service')
-            ->error('Something weng wrong while creating IG Page Entity : @message', ['@message' => json_encode($e)]);
+            ->error('Something went wrong while creating IG Page Entity : @message', ['@message' => json_encode($e->getMessage())]);
         }
       }
     }
@@ -301,7 +301,7 @@ class IcIgService {
     catch (FacebookResponseException $e) {
       $this->tools->loggerFactory()
            ->get('ic_core.ig_service')
-           ->error('Something weng wrong while retrieving IG Page data : @message', ['@message' => json_encode($e)]);
+           ->error('Something went wrong while retrieving IG Page data : @message', ['@message' => json_encode($e->getMessage())]);
     }
   }
 
@@ -343,7 +343,7 @@ class IcIgService {
     catch (FacebookResponseException $e) {
       $this->tools->loggerFactory()
            ->get('ic_core.ig_service')
-           ->error('Something weng wrong while retrieving IG Page data : @message', ['@message' => json_encode($e)]);
+           ->error('Something went wrong while retrieving IG Page data : @message', ['@message' => json_encode($e->getMessage())]);
     }
   }
 
@@ -381,7 +381,7 @@ class IcIgService {
     catch (FacebookResponseException $e) {
       $this->tools->loggerFactory()
            ->get('ic_core.ig_service')
-           ->error('Something weng wrong while retrieving IG Page data : @message', ['@message' => json_encode($e)]);
+           ->error('Something went wrong while retrieving IG Page data : @message', ['@message' => json_encode($e->getMessage())]);
     }
   }
 
@@ -414,7 +414,7 @@ class IcIgService {
         $this->tools->loggerFactory()
           ->get('ic_core.fb_service')
           ->error('Something went wrong while retrieving engagement rate : @message', [
-            '@message' => json_encode($e),
+            '@message' => json_encode($e->getMessage()),
           ]);
       }
     }
