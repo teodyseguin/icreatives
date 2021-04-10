@@ -87,7 +87,7 @@ class IcFbService {
     catch (FacebookResponseException $e) {
       $this->tools->loggerFactory()
         ->get('ic_core.fb_service')
-        ->error('Something went wrong retrieving the facebook pages : @message', ['@message' => json_encode($e)]);
+        ->error('Something went wrong retrieving the facebook pages : @message', ['@message' => json_encode($e->getMessage())]);
     }
   }
 
@@ -203,7 +203,7 @@ class IcFbService {
     catch (FacebookResponseException $e) {
       $this->tools->loggerFactory()
         ->get('ic_core.fb_service')
-        ->error('Something went wrong retrieving : @message', ['@message' => json_encode($e)]);
+        ->error('Something went wrong retrieving : @message', ['@message' => json_encode($e->getMessage())]);
     }
   }
 
@@ -268,7 +268,7 @@ class IcFbService {
     catch (FacebookResponseException $e) {
       $this->tools->loggerFactory()
         ->get('ic_core.fb_service')
-        ->error('Something went wrong while retrieving your top five posts : @message', ['@message' => json_encode($e)]);
+        ->error('Something went wrong while retrieving your top five posts : @message', ['@message' => json_encode($e->getMessage())]);
     }
   }
 
@@ -311,7 +311,7 @@ class IcFbService {
           ->get('ic_core.fb_service')
           ->error('Something went wrong while retrieving post: @postid engagement rate : @message', [
             '@postid' => $postId,
-            '@message' => json_encode($e),
+            '@message' => json_encode($e->getMessage()),
           ]);
       }
     }
@@ -481,7 +481,7 @@ class IcFbService {
     catch (FacebookResponseException $e) {
       $this->tools->loggerFactory()
         ->get('ic_core.fb_service')
-        ->error('Something went wrong while retrieving the conversations : @message', ['@message' => json_encode($e)]);
+        ->error('Something went wrong while retrieving the conversations : @message', ['@message' => json_encode($e->getMessage())]);
     }
   }
 
